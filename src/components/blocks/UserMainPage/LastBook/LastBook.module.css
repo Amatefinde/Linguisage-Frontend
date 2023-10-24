@@ -1,0 +1,113 @@
+@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.LastBook {
+    width: 1200px;
+    height: 285px;
+    background: #FFF;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.BookCover {
+    width: 142px;
+    height: 221px;
+    border-radius: 20px;
+    background-color: lightgray;
+}
+
+.pagesRead {
+    white-space: pre-line;
+    color: #7A7A7A;
+    font-family: 'Gilroy-medium', sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
+
+.Title {
+    color: #7A7A7A;
+    font-family: 'Gilroy-medium', sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.Author {
+    color: #7A7A7A;
+    font-family: 'Gilroy-medium', sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.BookInfo {
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 30px;
+}
+
+.ReadSection {
+    display: flex;
+    align-items: center;
+    margin: 40px;
+}
+
+
+.TrainSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 48px;
+}
+
+.Circle {
+    border-radius: 17px;
+    height: 17px;
+    width: 17px;
+    margin: 0 11px;
+}
+
+
+
+.IndicatorAndText {
+    display: flex;
+    align-items: center;
+}
+
+.TextForIndicator {
+    color: #7A7A7A;
+    font-family: 'Gilroy-medium', sans-serif;
+    font-size: 21.838px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.Info {
+}
+
+.InfoAndButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    height: 140px;
+}

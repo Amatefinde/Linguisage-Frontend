@@ -1,0 +1,44 @@
+@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.UploadBooks {
+    height: 285px;
+    width: 590px;
+    background: #FFF;
+    border-radius: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Wrapper {
+    width: 214px;
+    height: 173px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Title {
+    color: #929292;
+    font-family: 'Gilroy-medium', sans-serif;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    transition: color 0.3s;
+}
+
+path {
+    transition: fill 0.3s;
+}
+
+
