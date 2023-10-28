@@ -31,7 +31,7 @@ const user_word = {
 
 
 const Home = () => {
-    return (<div>
+    return (<div className={classes.parent}>
         <Header/>
         <section className={classes.Container}>
             <div className={classes.LastBook}>
@@ -49,7 +49,7 @@ const Home = () => {
             <WordCard/>
         </section>
         <div className={classes.otherContent}>
-            <MotivationBlock/>
+            <MotivationBlock>Павел Воля выучил английский, когда ему было пять, а тебе сто..</MotivationBlock>
             <div className={classes.brandMark}>designed by даня</div>
         </div>
 

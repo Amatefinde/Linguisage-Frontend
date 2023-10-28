@@ -5,7 +5,7 @@ import Profile from "./Profile/Profile";
 
 const Header = () => {
     return (
-        <header>
+        <header className={classes.header}>
             <div className={classes.ContentWrapper}>
                 <div className={classes.Logotype}>
                     <div className={classes.LogoLogo}></div>
