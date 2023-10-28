@@ -22,8 +22,8 @@ const last_opened_book = {
 }
 
 const user_word = {
-    content: "Never been anywhere",
-    meaning: "Never been anywhere",
+    content: "Destroy",
+    meaning: "destroy something to damage something so badly that it no longer exists, works, etc.",
     progress: 0.36,
 
 
@@ -43,10 +43,10 @@ const Home = () => {
             <div className={classes.StartTrain}>
                 <TrainCard/>
             </div>
-            <WordCard/>
-            <WordCard/>
-            <WordCard/>
-            <WordCard/>
+            <WordCard user_word={user_word}/>
+            <WordCard user_word={user_word}/>
+            <WordCard user_word={user_word}/>
+            <WordCard user_word={user_word}/>
         </section>
         <div className={classes.otherContent}>
             <MotivationBlock>Павел Воля выучил английский, когда ему было пять, а тебе сто..</MotivationBlock>

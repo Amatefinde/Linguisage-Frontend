@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import classes from "./WordCard.css"
+import classes from "./WordCard.module.css"
 import OneSizeBlock from "../OneSizeBlock/OneSizeBlock";
-
+import "../../../../fontStyles.css"
 
 
 const WordCard = ({user_word}) => {
@@ -9,11 +9,12 @@ const WordCard = ({user_word}) => {
         <OneSizeBlock>
             <div className={classes.Text}>
                 <div className={classes.Title}>
-                    {/*{user_word.content}*/}
+                    <span className="titleFont">{user_word.content}</span>
                 </div>
-                <div className={classes.SubTitle}>
-                    {/*{user_word.short_meaning}*/}
+                <div className="unimportantFont" style={{textAlign: "center"}}>
+                    {user_word.meaning}
                 </div>
+                <div className={"classes.progress"}></div>
             </div>
         </OneSizeBlock>
     );
