@@ -1,10 +1,13 @@
 import React from 'react';
 import classes from "./Profile.module.css"
+import {useNavigate} from "react-router-dom";
 
 
 const Profile = ({image}) => {
+
+    const navigate= useNavigate()
     return (
-        <div className={classes.Profile}>
+        <div className={classes.Profile} onClick={() => navigate('/')}>
             <div className={classes.Adidas}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="32" viewBox="0 0 36 32" fill="none">
                     <path d="M2 2H33.5" stroke="#C9C9C9" stroke-width="4" stroke-linecap="round"/>

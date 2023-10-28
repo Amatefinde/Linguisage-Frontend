@@ -9,10 +9,10 @@ const WordCard = ({user_word}) => {
         <OneSizeBlock>
             <div className={classes.Text}>
                 <div className={classes.Title}>
-                    {user_word.content}
+                    {/*{user_word.content}*/}
                 </div>
                 <div className={classes.SubTitle}>
-                    {user_word.short_meaning}
+                    {/*{user_word.short_meaning}*/}
                 </div>
             </div>
         </OneSizeBlock>

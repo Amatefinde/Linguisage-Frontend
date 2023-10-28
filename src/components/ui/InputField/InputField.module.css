@@ -1,0 +1,49 @@
+@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.title {
+
+}
+
+.inputField{
+    display: flex;
+    width: 225px;
+    padding: 5px 15px;
+    border-radius: 7px;
+    border: 1px solid #7A7A7A;
+    font-family: 'Gilroy-medium', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+
+}
+
+.inputField:focus {
+    outline: none;
+}
+
+.inputField::placeholder {
+    color: #ADADAD;
+    opacity: 1; /* Firefox */
+}
+
+.parent {
+    display: flex;
+    align-items: center;
+}
+
+.eye {
+    transform: translate(1080%);
+    cursor: pointer;
+    position: absolute;
+}
+
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+}

@@ -1,0 +1,63 @@
+@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.modal {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.0);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 200ms;
+
+}
+
+.modal.active {
+    opacity: 1;
+    transition: opacity 300ms;
+    pointer-events: all;
+}
+
+.modal__content {
+    position: fixed;
+    visibility: visible;
+    background-color: #FFF;
+    border-radius: 20px;
+
+    width: 900px;
+    height: 500px;
+    transform: translate(-50%, -50%) scale(1.15);
+    top: -100%;
+    left: 50%;
+    opacity: 0;
+    transition: top 0ms ease-in-out 200ms,
+                transform 200ms ease-in-out 0ms,
+                opacity 200ms ease-in-out 0ms;
+    z-index: 2;
+    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.1);
+
+
+}
+
+.modal__content.active {
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    transition: top 0ms ease-in-out 0ms,
+                transform 300ms ease-in-out 0ms,
+                opacity 300ms ease-in-out 0ms;
+}
+
+
+

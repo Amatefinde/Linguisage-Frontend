@@ -1,0 +1,58 @@
+@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.HelloHead {
+    height: 100vh;
+    background-color: #5280DB;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.SiteTitle {
+    margin-top: 3.5vh;
+    color: #FFF;
+    font-family: 'Gilroy-regular', sans-serif;
+    font-size: min(35vh, 18vw);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -6.365px;
+}
+
+.Other {
+    height: 100vh;
+    width: auto;
+    background-color: #FFF;
+}
+.SiteLogo {
+    margin-top: 1vh;
+    transition: width;
+    overflow: hidden;
+    background-image: url("./static/logomanHD.png");
+    height: 56vh;
+    width: 70vh;
+    background-repeat:no-repeat;
+    background-position: center top;
+    background-size: 68vh;
+}
+
+.test {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+#q1qa242 {
+    color: blue;
+}

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import classes from "./TrainCard.module.css"
-import YellowButton from "../../../ui/YellowButton/YellowButton";
+import YellowButton from "../../../ui/Buttons/YellowButton/YellowButton";
 
 
 const TrainCard = () => {
