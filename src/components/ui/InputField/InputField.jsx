@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import classes from "./InputField.module.css";
 import * as events from "events";
 
-const InputField = ({text, setText, placeholder="", type}) => {
+const InputField = ({text, register, setText, placeholder="", type}) => {
     const isPassword = type === "password"
     const [fieldType, setFieldType] = useState(type)
 
@@ -10,6 +10,7 @@ const InputField = ({text, setText, placeholder="", type}) => {
 
         <div className={classes.parent}>
             <input
+                {...register}
                 className={classes.inputField}
                 type={fieldType}
                 placeholder={placeholder}

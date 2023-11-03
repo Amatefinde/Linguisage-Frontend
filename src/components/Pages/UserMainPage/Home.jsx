@@ -5,7 +5,7 @@ import UploadBooks from "./UploadBooks/UploadBooks";
 import TrainCard from "./TrainCard/TrainCard";
 import OneSizeBlock from "./OneSizeBlock/OneSizeBlock";
 import WordCard from "./WordCard/WordCard";
-import Header from "../Header/Header";
+import Header from "../../Blocks/Header/Header";
 import MotivationBlock from "./MotivationBlock/MotivationBlock";
 
 const last_opened_book = {

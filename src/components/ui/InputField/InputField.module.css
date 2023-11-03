@@ -13,9 +13,10 @@
 
 .inputField{
     display: flex;
-    width: 225px;
+    height: 33px;
+    width: 300px;
     padding: 5px 15px;
-    border-radius: 7px;
+    border-radius: 10px;
     border: 1px solid #7A7A7A;
     font-family: 'Gilroy-medium', sans-serif;
     font-size: 16px;
@@ -38,7 +39,7 @@
 }
 
 .eye {
-    transform: translate(1080%);
+    transform: translate(1500%);
     cursor: pointer;
     position: absolute;
 }

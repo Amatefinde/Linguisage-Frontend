@@ -2,9 +2,9 @@ import React from 'react';
 import classes from "./AccentButton.module.css";
 
 
-const AccentButton = ({children, callback, }) => {
+const AccentButton = ({children}) => {
     return (
-        <button onClick={callback} className={classes.Button}>{children}</button>
+        <button type={"submit"} className={classes.Button}>{children}</button>
     );
 };
 

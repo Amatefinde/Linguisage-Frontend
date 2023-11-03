@@ -19,14 +19,15 @@
     align-items: center;
     opacity: 1;
     pointer-events: none;
-    transition: opacity 200ms;
+    transition: 200ms;
 
 }
 
 .modal.active {
     opacity: 1;
-    transition: opacity 300ms;
+    transition: 300ms;
     pointer-events: all;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .modal__content {
@@ -35,8 +36,8 @@
     background-color: #FFF;
     border-radius: 20px;
 
-    width: 900px;
-    height: 500px;
+    width: 440px;
+    height: 473px;
     transform: translate(-50%, -50%) scale(1.15);
     top: -100%;
     left: 50%;

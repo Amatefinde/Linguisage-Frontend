@@ -2,7 +2,7 @@
 
 
 .mainFont {
-    font-family: 'Gilroy-regular', sans-serif;
+    font-family: 'Gilroy', sans-serif;
     font-size: 24px;
     font-style: normal;
     font-weight: 500;
@@ -13,7 +13,7 @@
 }
 
 .titleFont {
-    font-family: 'Gilroy-medium', sans-serif;
+    font-family: 'Gilroy', sans-serif;
     font-size: 32px;
     font-style: normal;
     font-weight: 700;
@@ -22,7 +22,7 @@
 }
 
 .unimportantFont {
-    font-family: 'Gilroy-regular', sans-serif;
+    font-family: 'Gilroy', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;

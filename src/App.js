@@ -1,6 +1,6 @@
-import Header from "./components/blocks/Header/Header";
-import Home from "./components/blocks/UserMainPage/Home";
-import HelloPage from "./components/blocks/HelloPage/HelloPage";
+import Header from "./components/Blocks/Header/Header";
+import Home from "./components/Pages/UserMainPage/Home";
+import HelloPage from "./components/Pages/AuthenticationPage/HelloPage";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 

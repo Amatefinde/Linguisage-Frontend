@@ -8,22 +8,21 @@
 }
 
 .Button {
-    margin-top: 20px;
-    width: 225px;
+    width: 300px;
     border-radius: 7.5px;
     background: #7EA2FF;
-    height: 30px;
+    height: 36px;
     outline: none;
     border: none;
     color: #FFF;
     text-align: center;
-    font-family: 'Gilroy-regular', sans-serif;
-    font-size: 14px;
+    text-justify: inter-character;
+    font-family: 'Gilroy', sans-serif;
+    font-size: 18px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
     cursor: pointer;
-
 }
 
 
