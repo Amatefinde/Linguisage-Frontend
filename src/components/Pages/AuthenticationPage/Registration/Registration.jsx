@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import classes from "./Registration.module.css";
 import {useNavigate} from "react-router-dom";
 import InputBlock from "../../../ui/InputBlock/InputBlock";
@@ -6,6 +6,7 @@ import AccentButton from "../../../ui/Buttons/AccentButton/AccentButton";
 import Checkbox from "../../../ui/Checkbox/Checkbox";
 import {registerUser} from "../Action/userCRUD";
 import {useForm} from "react-hook-form";
+import {FormContext} from "../HelloPage";
 
 
 const Registration = () => {
@@ -20,6 +21,7 @@ const Registration = () => {
     const onSubmit = data => {
         console.log("Registration", data);
     }
+    const {form, setForm} = useContext(FormContext)
 
     return (
         <form  className={classes.wrapper} onSubmit={handleSubmit(onSubmit)}>
@@ -27,7 +29,7 @@ const Registration = () => {
                 <div className={classes.title}>Sign Up</div>
                 <InputBlock
 
-                    register ={register("email", {required: "Email is a required parameter", pattern: {value: regexEmail, message: "There is error in email"}})}
+                    register ={register("email", {required: "Email is a required parameter", pattern: {value: regexEmail, message: "Invalid email"}})}
                     placeholder={"ivan@example.com"}
                     text={textEmail}
                     setText={setTextEmail}
@@ -71,7 +73,7 @@ const Registration = () => {
                 </div>
             </div>
 
-            <span className={classes.signInButton}>Sign in</span>
+            <span className={classes.signInButton} onClick={() => setForm("singIn")}>Sign in</span>
         </form>
 
     )

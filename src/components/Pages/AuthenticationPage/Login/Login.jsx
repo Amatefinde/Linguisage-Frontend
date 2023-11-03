@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import classes from "./Login.module.css";
 import {useNavigate} from "react-router-dom";
 import InputBlock from "../../../ui/InputBlock/InputBlock";
@@ -6,6 +6,7 @@ import AccentButton from "../../../ui/Buttons/AccentButton/AccentButton";
 import Checkbox from "../../../ui/Checkbox/Checkbox";
 import {registerUser} from "../Action/userCRUD";
 import {useForm} from "react-hook-form";
+import {FormContext} from "../HelloPage";
 
 
 const Login = () => {
@@ -14,6 +15,8 @@ const Login = () => {
     const [textPassword, setTextPassword] = useState("")
     const [isUserAgree, setIsUserAgree] = useState(false)
     const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    const {form, setForm} = useContext(FormContext)
 
 
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -24,10 +27,10 @@ const Login = () => {
     return (
         <form  className={classes.wrapper} onSubmit={handleSubmit(onSubmit)}>
             <div>
-                <div className={classes.title}>Sign Up</div>
+                <div className={classes.title}>Sign In</div>
                 <InputBlock
 
-                    register ={register("email", {required: "Email is a required parameter", pattern: {value: regexEmail, message: "There is error in email"}})}
+                    register ={register("email", {required: "Email is a required parameter", pattern: {value: regexEmail, message: "Invalid email"}})}
                     placeholder={"ivan@example.com"}
                     text={textEmail}
                     setText={setTextEmail}
@@ -35,7 +38,7 @@ const Login = () => {
                     type={"text"}
                 />
 
-
+                <div className={classes.space}></div>
                 <InputBlock
                     register ={register("password", {required: "Enter your password", minLength: {value: 8, message: "Minimum password length is 8 characters"}})}
                     placeholder={"qwerty123"}
@@ -45,8 +48,8 @@ const Login = () => {
                     type={"password"}
                 />
                 <Checkbox
-                    register={register("agree", {required: "Accept the terms of the agreement"})}
-                    name={"I have agree user agreement"}
+                    register={register("stayInSystem")}
+                    name={"Stay in system"}
                     setIsChecked={setIsUserAgree}
                     isChecked={isUserAgree}
                 />
@@ -63,7 +66,7 @@ const Login = () => {
                 </div>
             </div>
 
-            <span className={classes.signInButton}>Sign in</span>
+            <span className={classes.signInButton} onClick={() => setForm("signUp")}>Sign Up</span>
         </form>
 
     )

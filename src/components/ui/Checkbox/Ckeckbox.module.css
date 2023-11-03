@@ -9,16 +9,6 @@
 }
 
 
-.checkbox {
-    width: 15px;
-    height: 15px;
-    border-radius: 5px;
-    border: 1px solid #ADADAD;
-    pointer-events: all;
-    margin: 5px;
-    cursor: pointer;
-}
-
 
 .wrapper {
     margin-top: 10px;
@@ -45,3 +35,6 @@
     background-color: #7A7A7A;
 }
 
+.my_checkbox {
+    cursor: pointer;
+}

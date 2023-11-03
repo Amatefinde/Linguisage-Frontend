@@ -8,10 +8,9 @@ const Checkbox = ({name, isChecked, register, setIsChecked}) => {
 
     return (
         <label className={classes.wrapper}>
-            {/*<div className={classes.checkbox}></div>*/}
             <div className={isChecked ? classes.active : ""}></div>
             <input
-
+                className={classes.my_checkbox}
                 type="checkbox"
                 {...register}
 
