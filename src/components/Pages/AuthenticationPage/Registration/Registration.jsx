@@ -4,9 +4,10 @@ import {useNavigate} from "react-router-dom";
 import InputBlock from "../../../ui/InputBlock/InputBlock";
 import AccentButton from "../../../ui/Buttons/AccentButton/AccentButton";
 import Checkbox from "../../../ui/Checkbox/Checkbox";
-import {registerUser} from "../Action/userCRUD";
 import {useForm} from "react-hook-form";
 import {FormContext} from "../HelloPage";
+import {AuthContext} from "../../../../App";
+import AuthService from "../../../../services/AuthService";
 
 
 const Registration = () => {
@@ -15,11 +16,22 @@ const Registration = () => {
     const [textPassword, setTextPassword] = useState("")
     const [isUserAgree, setIsUserAgree] = useState(false)
     const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
+    const navigate= useNavigate()
+    const {isLogged, setIsLogged} = useContext(AuthContext)
+    const [serverError, setServerError] = useState()
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        console.log("Registration", data);
+    async function onSubmit(data) {
+        const {email, password, username} = data
+        try {
+            await AuthService.register(email, password, username)
+            const response = await AuthService.login(email, password)
+            setIsLogged(true)
+            localStorage.setItem("token", response["access_token"])
+            navigate("/profile")
+        } catch (e) {
+            setServerError(e.response.data.detail)
+        }
     }
     const {form, setForm} = useContext(FormContext)
 
@@ -64,6 +76,7 @@ const Registration = () => {
                     || errors?.username?.message
                     || errors?.password?.message
                     || errors?.agree?.message
+                    || serverError
                 }</div>
                 <div>
                     <AccentButton

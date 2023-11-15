@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from "./LastBook.module.css"
-import ProgressCircle from "../../../ui/ProgresCircle/ProgressCircle";
+import ProgressCircle from "../../../Blocks/ProgresCircle/ProgressCircle";
 import YellowButton from "../../../ui/Buttons/YellowButton/YellowButton";
 import SkeletonButton from "../../../ui/Buttons/Button/SkeletonButton";
 
