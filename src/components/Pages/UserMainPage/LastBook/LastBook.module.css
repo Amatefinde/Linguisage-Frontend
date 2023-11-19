@@ -9,20 +9,20 @@
 
 .LastBook {
     width: 1200px;
-    height: 285px;
+    height: 0px;
     background: #FFF;
     border-radius: 20px;
     display: flex;
     justify-content: space-between;
-}
+    margin-top: 20px;
 
+}
 
 
 .BookCover {
     width: 142px;
     height: 221px;
     border-radius: 20px;
-    background-color: lightgray;
 }
 
 .pagesRead {
@@ -34,7 +34,6 @@
     font-weight: 500;
     line-height: normal;
 }
-
 
 
 .Title {
@@ -86,7 +85,6 @@
 }
 
 
-
 .IndicatorAndText {
     display: flex;
     align-items: center;
@@ -111,3 +109,24 @@
     flex-direction: column;
     height: 140px;
 }
+
+@keyframes shrinkAnimation {
+    from {
+        height: 0;
+        opacity: 0;
+    }
+    to {
+        height: 285px;
+        opacity: 1;
+    }
+}
+
+
+.smoothAppear{
+    overflow: hidden;
+    animation-name: shrinkAnimation;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+}
+
+

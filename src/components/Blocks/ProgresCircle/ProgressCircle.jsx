@@ -7,7 +7,6 @@ const ProgressCircle = ({green, yellow, total}) => {
     const calculateMetric = metric => (507 - (507 * metric))
     const yellowMetric = calculateMetric((green + yellow) / total)
     const greenMetric = calculateMetric(green / total)
-    console.log(yellowMetric)
 
 
     return (

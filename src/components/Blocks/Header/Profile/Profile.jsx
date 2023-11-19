@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../../../../App";
 import AuthService from "../../../../services/AuthService";
 
-
 const Profile = ({image}) => {
     const {isLogged, setIsLogged} = useContext(AuthContext)
     const navigate = useNavigate()
