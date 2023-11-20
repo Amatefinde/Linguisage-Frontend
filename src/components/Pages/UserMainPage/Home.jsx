@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classes from "./Home.module.css";
 import LastBook from "./LastBook/LastBook";
 import UploadBooks from "./UploadBooks/UploadBooks";
@@ -8,10 +8,12 @@ import WordCard from "./WordCard/WordCard";
 import Header from "../../Blocks/Header/Header";
 import MotivationBlock from "./MotivationBlock/MotivationBlock";
 import BookService from "../../../services/BookService";
+import { AuthContext } from "../../../App";
+import UnAuthorized from "../../Blocks/UnAuthorized/UnAuthorized";
 
 const last_opened_book_template = {
   id: 0,
-  title: "Дизайн для чайников",
+  title: "",
   author: "",
   bookCover:
     "https://www.tarakans.com/static/images/78234" /*Ссылка на изобраение обложки книги*/,
@@ -34,35 +36,43 @@ const Home = () => {
   const [lastOpenedBook, setLastOpenedBook] = useState(
     last_opened_book_template,
   );
-
-  const [isUserLoaded, setIsUserLoaded] = useState();
-
+  const { isLogged, setIsLogged } = useContext(AuthContext);
   const [isLastBookLoaded, setIsLastBookLoaded] = useState(false);
+
   useEffect(() => {
     BookService.get_last_book()
       .then((e) => {
-        setLastOpenedBook({
-          ...lastOpenedBook,
-          title: e.title,
-          bookCover: e.cover.replace("\\", "/").replace("\\", "/"),
-        });
-        console.log(e);
+        if (e === null) {
+          setIsLastBookLoaded(true);
+        } else {
+          setLastOpenedBook({
+            ...lastOpenedBook,
+            title: e.title,
+            bookCover: e.cover.replace("\\", "/").replace("\\", "/"),
+          });
+        }
       })
       .catch((e) => {
         console.log("Ошибка:", e);
       });
   }, []);
 
-  return (
-    <div className={classes.parent}>
+  const home = (
+    <div
+      className={[
+        classes.parent,
+        isLastBookLoaded && classes.smoothAppear,
+      ].join(" ")}
+    >
       <Header />
       <div className={classes.screen}>
-        <LastBook
-          book={lastOpenedBook}
-          isLastBookLoaded={isLastBookLoaded}
-          setIsLastBookLoaded={setIsLastBookLoaded}
-        />
-
+        {!!lastOpenedBook.title && (
+          <LastBook
+            book={lastOpenedBook}
+            isLastBookLoaded={isLastBookLoaded}
+            setIsLastBookLoaded={setIsLastBookLoaded}
+          />
+        )}
         <section className={classes.Container}>
           <div className={classes.UploadBooks}>
             <UploadBooks />
@@ -84,6 +94,8 @@ const Home = () => {
       </div>
     </div>
   );
+
+  return isLogged ? home : <UnAuthorized />;
 };
 
 export default Home;

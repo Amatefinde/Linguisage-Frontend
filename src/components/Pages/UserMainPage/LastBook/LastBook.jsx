@@ -6,7 +6,6 @@ import SkeletonButton from "../../../ui/Buttons/Button/SkeletonButton";
 
 const LastBook = ({ book, isLastBookLoaded, setIsLastBookLoaded }) => {
   const read = `Прочитано:\n${book.pagesRead}/${book.pagesTotal}`;
-  console.log(book.bookCover);
 
   const handleImageLoad = () => {
     console.log("Наруто тут");
@@ -17,7 +16,12 @@ const LastBook = ({ book, isLastBookLoaded, setIsLastBookLoaded }) => {
     <>
       <section className={classes.ReadSection}>
         <div className={classes.BookCover}>
-          <img src={book.bookCover} alt="Book Cover" onLoad={handleImageLoad} />
+          <img
+            className={classes.image}
+            src={book.bookCover}
+            alt="Book Cover"
+            onLoad={handleImageLoad}
+          />
         </div>
         <div className={classes.BookInfo}>
           <div className={classes.TitleAndAuthor}>
@@ -72,17 +76,7 @@ const LastBook = ({ book, isLastBookLoaded, setIsLastBookLoaded }) => {
     </>
   );
 
-  return (
-    <section
-      className={[
-        classes.LastBook,
-        classes.smoothAppear,
-        isLastBookLoaded && classes.appearActive,
-      ].join(" ")}
-    >
-      {book}
-    </section>
-  );
+  return <section className={classes.LastBook}>{book}</section>;
 };
 
 export default LastBook;

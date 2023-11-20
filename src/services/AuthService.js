@@ -17,7 +17,13 @@ export default class AuthService {
   }
 
   static async logout() {
-    localStorage.removeItem("token");
-    return $api.get("users/log_out").then((response) => response.data);
+    return $api.get("users/log_out").then((response) => {
+      localStorage.removeItem("token");
+      return response.data;
+    });
+  }
+
+  static async me() {
+    return $api.get("users/me").then((response) => response.data);
   }
 }
