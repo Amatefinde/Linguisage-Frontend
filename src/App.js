@@ -1,16 +1,21 @@
-import Header from "./components/Blocks/Header/Header";
 import Home from "./components/Pages/UserMainPage/Home";
 import HelloPage from "./components/Pages/AuthenticationPage/HelloPage";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import AuthService from "./services/AuthService";
 import PdfViewer from "./components/PdfViewer";
+import LiteraturePage from "./components/Pages/LiteraturePage/LiteraturePage";
+import Book from "./components/Blocks/Book/Book";
+import TrainingPage from "./components/Pages/DictionaryPage/TrainingPage";
+import DictionaryPage from "./components/Pages/TrainingPage/DictionaryPage";
+import ReaderPage from "./components/Pages/ReaderPage/ReaderPage";
 
-export const AuthContext = createContext(null);
+export const ApplicationContext = createContext(null);
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentBookPages, setCurrentBookPages] = useState([]);
 
   useEffect(() => {
     AuthService.me()
@@ -22,17 +27,28 @@ function App() {
   }, []);
 
   const app = (
-    <AuthContext.Provider value={{ isLogged, setIsLogged }}>
+    <ApplicationContext.Provider
+      value={{
+        isLogged,
+        setIsLogged,
+        currentBookPages,
+        setCurrentBookPages,
+      }}
+    >
       <div className="App">
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<HelloPage />} />
             <Route path="/profile" element={<Home />} />
-            <Route path="/test" element={<PdfViewer />} />
+            <Route path="/literature" element={<LiteraturePage />} />
+            <Route path="/dictionary" element={<DictionaryPage />} />
+            <Route path="/training" element={<TrainingPage />} />
+            <Route path="/reader" element={<ReaderPage />} />
+            <Route path="/test" element={<Book />} />
           </Routes>
         </BrowserRouter>
       </div>
-    </AuthContext.Provider>
+    </ApplicationContext.Provider>
   );
 
   return isLoading || app;

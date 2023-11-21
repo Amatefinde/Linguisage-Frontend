@@ -6,7 +6,7 @@ import AccentButton from "../../../ui/Buttons/AccentButton/AccentButton";
 import Checkbox from "../../../ui/Checkbox/Checkbox";
 import { useForm } from "react-hook-form";
 import { FormContext } from "../HelloPage";
-import { AuthContext } from "../../../../App";
+import { ApplicationContext } from "../../../../App";
 import AuthService from "../../../../services/AuthService";
 
 const Login = () => {
@@ -17,7 +17,7 @@ const Login = () => {
 
   const { form, setForm } = useContext(FormContext);
   const navigate = useNavigate();
-  const { isLogged, setIsLogged } = useContext(AuthContext);
+  const { isLogged, setIsLogged } = useContext(ApplicationContext);
   const {
     register,
     handleSubmit,

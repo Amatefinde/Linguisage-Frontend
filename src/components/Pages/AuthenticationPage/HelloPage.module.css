@@ -14,7 +14,10 @@
     width: auto;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+
+    justify-content: center;
+    align-items: center;
+
 }
 
 .SiteTitle {

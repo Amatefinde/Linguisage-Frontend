@@ -8,7 +8,7 @@ import WordCard from "./WordCard/WordCard";
 import Header from "../../Blocks/Header/Header";
 import MotivationBlock from "./MotivationBlock/MotivationBlock";
 import BookService from "../../../services/BookService";
-import { AuthContext } from "../../../App";
+import { ApplicationContext } from "../../../App";
 import UnAuthorized from "../../Blocks/UnAuthorized/UnAuthorized";
 
 const last_opened_book_template = {
@@ -36,7 +36,7 @@ const Home = () => {
   const [lastOpenedBook, setLastOpenedBook] = useState(
     last_opened_book_template,
   );
-  const { isLogged, setIsLogged } = useContext(AuthContext);
+  const { isLogged, setIsLogged } = useContext(ApplicationContext);
   const [isLastBookLoaded, setIsLastBookLoaded] = useState(false);
 
   useEffect(() => {
@@ -58,41 +58,43 @@ const Home = () => {
   }, []);
 
   const home = (
-    <div
-      className={[
-        classes.parent,
-        isLastBookLoaded && classes.smoothAppear,
-      ].join(" ")}
-    >
+    <>
       <Header />
-      <div className={classes.screen}>
-        {!!lastOpenedBook.title && (
-          <LastBook
-            book={lastOpenedBook}
-            isLastBookLoaded={isLastBookLoaded}
-            setIsLastBookLoaded={setIsLastBookLoaded}
-          />
-        )}
-        <section className={classes.Container}>
-          <div className={classes.UploadBooks}>
-            <UploadBooks />
+      <div
+        className={[
+          classes.parent,
+          isLastBookLoaded && classes.smoothAppear,
+        ].join(" ")}
+      >
+        <div className={classes.screen}>
+          {!!lastOpenedBook.title && (
+            <LastBook
+              book={lastOpenedBook}
+              isLastBookLoaded={isLastBookLoaded}
+              setIsLastBookLoaded={setIsLastBookLoaded}
+            />
+          )}
+          <section className={classes.Container}>
+            <div className={classes.UploadBooks}>
+              <UploadBooks />
+            </div>
+            <div className={classes.StartTrain}>
+              <TrainCard />
+            </div>
+            <WordCard user_word={user_word} />
+            <WordCard user_word={user_word} />
+            <WordCard user_word={user_word} />
+            <WordCard user_word={user_word} />
+          </section>
+          <div className={classes.otherContent}>
+            <MotivationBlock>
+              Павел Воля выучил английский, когда ему было пять, а тебе сто..
+            </MotivationBlock>
+            <div className={classes.brandMark}>designed by даня</div>
           </div>
-          <div className={classes.StartTrain}>
-            <TrainCard />
-          </div>
-          <WordCard user_word={user_word} />
-          <WordCard user_word={user_word} />
-          <WordCard user_word={user_word} />
-          <WordCard user_word={user_word} />
-        </section>
-        <div className={classes.otherContent}>
-          <MotivationBlock>
-            Павел Воля выучил английский, когда ему было пять, а тебе сто..
-          </MotivationBlock>
-          <div className={classes.brandMark}>designed by даня</div>
         </div>
       </div>
-    </div>
+    </>
   );
 
   return isLogged ? home : <UnAuthorized />;

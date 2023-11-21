@@ -48,7 +48,7 @@ export default function useDrawFirstPDFPage(
 
   useEffect(() => {
     if (inputFileRef.current) {
-      inputFileRef.current.addEventListener("input", helper);
+      inputFileRef.current.addEventListener("change", helper);
     }
   }, []);
 }

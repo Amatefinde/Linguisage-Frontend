@@ -3,37 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>PDF Viewer</title>
+    <style>
+        .tabk {
+            height: 5000px;
+            width: 500px;
+            background-color: #7A7A7A;
+        }
+    </style>
 </head>
 <body>
-<input type="file" id="pdf-file" accept=".pdf">
-<canvas id="pdf-canvas"></canvas>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+<div class="tabk"></div>
 <script>
-	const canvas = document.getElementById('pdf-canvas');
-	const ctx = canvas.getContext('2d');
-
-	document.getElementById('pdf-file').addEventListener('change', function() {
-		const file = this.files[0];
-
-		const fileReader = new FileReader();
-		fileReader.onload = function() {
-			const typedarray = new Uint8Array(this.result);
-			pdfjsLib.getDocument(typedarray).promise.then(function(pdf) {
-				pdf.getPage(1).then(function(page) {
-					const viewport = page.getViewport({scale: 1});
-					canvas.width = viewport.width;
-					canvas.height = viewport.height;
-
-					page.render({
-						canvasContext: ctx,
-						viewport: viewport
-					});
-				});
-			});
-		};
-		fileReader.readAsArrayBuffer(file);
-	});
+	const tabk = document.querySelector(".tabk")
+	tabk.addEventListener('wheel', function (event) {
+		if (event.ctrlKey) {
+			event.preventDefault();
+		}
+	}, { passive: false });
 </script>
 </body>
 </html>

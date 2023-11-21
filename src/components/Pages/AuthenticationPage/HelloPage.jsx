@@ -5,7 +5,7 @@ import Registration from "./Registration/Registration";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import Home from "../UserMainPage/Home";
 import Login from "./Login/Login";
-import { AuthContext } from "../../../App";
+import { ApplicationContext } from "../../../App";
 export const FormContext = createContext(null);
 
 const HelloPage = () => {
@@ -14,7 +14,7 @@ const HelloPage = () => {
   const [form, setForm] = useState("signIn");
 
   const navigate = useNavigate();
-  const { isLogged, setLogged } = useContext(AuthContext);
+  const { isLogged, setLogged } = useContext(ApplicationContext);
 
   useEffect(() => {
     if (isLogged) {

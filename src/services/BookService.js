@@ -11,4 +11,18 @@ export default class BookService {
 
     return $api.post("/literature", formData).then((response) => response.data);
   }
+
+  static async get_book_list(book) {
+    return $api.get("/literature/list").then((response) => response.data);
+  }
+
+  static async get_book(id, start_page = 1, end_page = 0) {
+    const config = { params: { literature_id: id, start_page, end_page } };
+    return $api.get("/literature", config).then((response) => response.data);
+  }
+
+  static async delete_book(id) {
+    const config = { params: { literature_id: id } };
+    return $api.delete("/literature", config).then((response) => response.data);
+  }
 }

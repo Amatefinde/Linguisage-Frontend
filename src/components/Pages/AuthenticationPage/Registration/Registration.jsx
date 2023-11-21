@@ -6,7 +6,7 @@ import AccentButton from "../../../ui/Buttons/AccentButton/AccentButton";
 import Checkbox from "../../../ui/Checkbox/Checkbox";
 import { useForm } from "react-hook-form";
 import { FormContext } from "../HelloPage";
-import { AuthContext } from "../../../../App";
+import { ApplicationContext } from "../../../../App";
 import AuthService from "../../../../services/AuthService";
 
 const Registration = () => {
@@ -16,7 +16,7 @@ const Registration = () => {
   const [isUserAgree, setIsUserAgree] = useState(false);
   const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const navigate = useNavigate();
-  const { isLogged, setIsLogged } = useContext(AuthContext);
+  const { isLogged, setIsLogged } = useContext(ApplicationContext);
   const [serverError, setServerError] = useState();
 
   const {

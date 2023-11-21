@@ -7,24 +7,38 @@
     padding: 0px;
 }
 
-.Profile {
+.wrapper {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 115px;
+    width: 150px;
+    height: 100%;
     cursor: pointer;
-
+    align-items: center;
+    justify-content: center;
+    transition: 0.1s ease-in-out;
+}
+.wrapper:hover {
+    background-color: #EDEDED;
 }
 
 .Adidas {
 
 }
 
-.UserImage {
-    background-image: url("img.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    height: 60px;
-    width: 60px;
+.imageWrapper {
+    height: 100%;
+    width: 80%;
     border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.img {
+    width: 120%;
+    height: 120%;
+}
+
+.arrow {
+    transform: translateX(-12px);
 }

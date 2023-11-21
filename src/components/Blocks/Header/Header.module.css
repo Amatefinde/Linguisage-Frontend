@@ -9,17 +9,21 @@
 
 .ContentWrapper {
     width: 100%;
-    margin: 30px 100px;
+    margin: 0 100px;
+    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
 }
 
 .Logotype {
     display: flex;
     justify-content: space-between;
     width: 200px;
+    cursor: pointer;
+    align-items: center;
 }
 
 .LogoLogo {
@@ -40,7 +44,7 @@
 }
 
 
-header {
+.header {
     position: sticky;
     top: 0;
     display: flex;
@@ -48,5 +52,72 @@ header {
     align-items: center;
     height: 100px;
     background: #FFF;
-    width: 100vw;
+    width: 100%;
+    box-shadow: #000000 0px -13px 25px 5px;
+    z-index: 2;
+}
+
+.navButton {
+    cursor: pointer;
+    color: #929292;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.603px;
+    margin: 13px;
+    position: relative;
+}
+
+.navButton:after {
+    content: "";
+    position: absolute;
+    background-color: #929292;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    bottom: -10px;
+    transition: 0.3s ease-in-out;
+    border-radius: 5px;
+    transform: scaleX(0);
+}
+
+.navButton:hover:after {
+    transform: scaleX(1);
+
+}
+
+@keyframes smoothAppearance {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.navButton.active:after {
+    content: "";
+    position: absolute;
+    background-color: #5280DB;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    bottom: -10px;
+    transition: 0.3s ease-in-out;
+    border-radius: 5px;
+    transform: scaleX(1);
+    animation: smoothAppearance 1s ;
+}
+
+
+.navBar {
+    display: flex;
+    margin: 0 100px;
+
+}
+
+.navGeneralBar {
+    display: flex;
+
 }

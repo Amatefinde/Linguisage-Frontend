@@ -7,21 +7,13 @@
     padding: 0px;
 }
 
-.UploadBooks {
-    height: 285px;
-    width: 590px;
-    background: #FFF;
-    border-radius: 20px;
-    box-sizing: border-box;
+.loading {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    justify-items: center;
+    font-size: 70px;
+    color: #FFFFFF;
+    padding: 100px;
 }
-
-
-
-path {
-    transition: fill 0.3s;
-}
-
-
