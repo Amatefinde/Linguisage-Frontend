@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import classes from "./SingleImageCanvas.module.css";
 
-const SingleImageCanvas = ({ link, scale }) => {
+const SingleImageCanvas = ({ obj, scale }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -10,7 +10,7 @@ const SingleImageCanvas = ({ link, scale }) => {
     context.imageSmoothingEnabled = false;
 
     const img = new Image();
-    img.src = link;
+    img.src = obj.img;
     img.onload = () => {
       const scaleFactor = scale / img.width;
       const imgHeight = img.height * scaleFactor;
@@ -18,10 +18,10 @@ const SingleImageCanvas = ({ link, scale }) => {
       canvas.height = imgHeight;
       context.drawImage(img, 0, 0, scale, Math.round(imgHeight));
     };
-  }, [link, scale]);
+  }, [obj, scale]);
 
   return (
-    <div className={classes.canvasWrapper}>
+    <div className={classes.canvasWrapper} id={"page" + obj.number_page}>
       <canvas ref={canvasRef} />
     </div>
   );

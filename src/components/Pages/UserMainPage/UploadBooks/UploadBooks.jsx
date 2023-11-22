@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import classes from "./UploadBooks.module.css";
 import Modal from "../../../ui/Modal/Modal";
 import PopUpUpload from "./PopUpUpload/PopUpUpload";
-import useDrawFirstPDFPage from "../../../hooks/useDrawFirstPDFPage";
+import useDrawFirstPDFPage from "../../../../hooks/useDrawFirstPDFPage";
 import BookService from "../../../../services/BookService";
 import Loading from "../../Loading/Loading";
 import UploadWidget from "./UploadWidget/UploadWidget";

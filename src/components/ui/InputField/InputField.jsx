@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import classes from "./InputField.module.css";
 
-const InputField = ({ text, register, setText, placeholder = "", type }) => {
+const InputField = ({
+  text,
+  register,
+  setText,
+  placeholder = "",
+  type,
+  width,
+}) => {
   const isPassword = type === "password";
   const [fieldType, setFieldType] = useState(type);
 
@@ -13,6 +20,7 @@ const InputField = ({ text, register, setText, placeholder = "", type }) => {
         type={fieldType}
         placeholder={placeholder}
         value={text}
+        style={{ width: !!width ? width.toString() + "px" : "300px" }}
         onChange={(event) => setText(event.target.value)}
       />
       {isPassword ? (

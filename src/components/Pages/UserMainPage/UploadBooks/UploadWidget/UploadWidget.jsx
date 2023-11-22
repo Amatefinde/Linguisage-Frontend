@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import classes from "./UploadWidget.module.css";
 import InputField from "../../../../ui/InputField/InputField";
 import AccentButton from "../../../../ui/Buttons/AccentButton/AccentButton";
-import useDrawFirstPDFPage from "../../../../hooks/useDrawFirstPDFPage";
+import useDrawFirstPDFPage from "../../../../../hooks/useDrawFirstPDFPage";
 
 const UploadWidget = ({ setIsModalActive, setFile, canvasRef }) => {
   const hiddenFileInput = useRef(null);

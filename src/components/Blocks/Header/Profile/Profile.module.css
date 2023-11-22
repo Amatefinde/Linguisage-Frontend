@@ -17,18 +17,15 @@
     transition: 0.1s ease-in-out;
     position: relative;
 }
+
 .wrapper:hover {
     background-color: #EDEDED;
 }
 
-.Adidas {
-
-}
-
 .imageWrapper {
-    height: 100%;
-    width: 80%;
-    border-radius: 30px;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,10 +33,23 @@
 }
 
 .img {
-    width: 120%;
-    height: 120%;
+    width: 140%;
+    height: 140%;
+    background-color: white;
 }
 
 .arrow {
-    transform: translateX(-12px);
+    /*transform: translateX(5px);*/
 }
+
+.profileButton {
+    display: flex;
+    width: 80%;
+    height: 100%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-around;
+    transition: 0.1s ease-in-out;
+    position: relative;
+}
+

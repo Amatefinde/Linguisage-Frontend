@@ -26,7 +26,7 @@ function useZoom(
     const handleWheel = (e) => {
       if (scrollCheck && e.ctrlKey) {
         e.preventDefault();
-        setScale((value) => Math.max(-e.deltaY + value, 200));
+        setScale((value) => Math.max(-e.deltaY * 0.4 + value, 200));
       }
     };
 

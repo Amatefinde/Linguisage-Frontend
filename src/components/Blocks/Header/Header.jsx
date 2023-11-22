@@ -24,8 +24,6 @@ const Header = () => {
     navigate("/training");
   };
 
-  console.log(window.location.pathname);
-
   return (
     <header className={classes.header}>
       <div className={classes.ContentWrapper}>

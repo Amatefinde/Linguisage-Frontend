@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Book = ({ imgLink, title, id }) => {
   const canvasRef = useRef(null);
-  const { currentBookPages, setCurrentBookPages } =
+  const { currentBookAllPages, setCurrentBookAllPages } =
     useContext(ApplicationContext);
   const navigate = useNavigate();
 
@@ -35,9 +35,9 @@ const Book = ({ imgLink, title, id }) => {
   }, [imgLink]);
 
   function toBook() {
-    BookService.get_book(id, 1, 10)
+    BookService.get_book(id, 1, 0)
       .then((e) => {
-        setCurrentBookPages(e);
+        setCurrentBookAllPages(e);
         navigate("/reader");
       })
       .catch((e) => console.log(e));

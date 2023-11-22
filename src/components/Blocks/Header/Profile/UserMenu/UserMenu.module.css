@@ -13,6 +13,7 @@
     height: 56px;
     align-items: center;
     justify-content: start;
+    transition: ease-in-out 0.1s;
 }
 
 .option:hover {
@@ -28,7 +29,9 @@
     background-color: #FFF;
     padding: 20px 0;
     border-radius: 0 0 20px 20px;
-    z-index: -432;
+    z-index: -423;
+    animation: smoothDisappearance 0.18s ease-in-out forwards;
+    pointer-events: none;
 }
 
 .text {
@@ -39,11 +42,49 @@
     line-height: normal;
     letter-spacing: -0.603px;
     opacity: 60%;
+
 }
 
 .img {
     opacity: 80%;
-    padding: 0  15px 0 30px;
+    padding: 0 15px 0 30px;
     transform: scale(0.95) translateY(1px);
 
 }
+
+@keyframes smoothAppearance {
+    from {
+        opacity: 0;
+        scale: 0.95;
+
+    }
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
+
+@keyframes smoothDisappearance {
+    from {
+        opacity: 1;
+        scale: 1;
+    }
+    to {
+        opacity: 0;
+        scale: 0.95;
+
+    }
+}
+
+.wrapper.active {
+    animation: smoothAppearance 0.18s ease-in-out forwards;
+    opacity: 0;
+    pointer-events: all;
+}
+
+.background {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 0;
+ }

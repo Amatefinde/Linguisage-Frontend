@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { getDocument } from "pdfjs-dist/webpack";
-import useDrawFirstPDFPage from "./hooks/useDrawFirstPDFPage";
+import useDrawFirstPDFPage from "../hooks/useDrawFirstPDFPage";
 
 function PDFViewer() {
   const fileRef = useRef();
