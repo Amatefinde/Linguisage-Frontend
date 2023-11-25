@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import { VariableSizeList as List } from "react-window";
 import classes from "./ReaderPage.module.css";
 import Header from "../../Blocks/Header/Header";
@@ -11,7 +11,16 @@ const ReaderPage = () => {
   const { currentBookAllPages, setCurrentBookAllPages } =
     useContext(ApplicationContext);
 
-  const scale = useZoom();
+  // const scale = useZoom();
+  let scale = useZoom();
+
+  const listRef = useRef(); // создаем ссылку на список
+
+  useEffect(() => {
+    if (listRef.current) {
+      listRef.current.resetAfterIndex(0); // перерассчитываем размеры элементов при изменении масштаба
+    }
+  }, [scale]);
 
   function getItemSize(idx) {
     const obj = currentBookAllPages[idx];
@@ -41,8 +50,8 @@ const ReaderPage = () => {
       <AutoSizer>
         {({ height, width }) => (
           <List
+            ref={listRef} // используем ссылку на список
             className="List"
-            key={scale}
             height={window.innerHeight - 100}
             width={width}
             itemCount={currentBookAllPages.length}
