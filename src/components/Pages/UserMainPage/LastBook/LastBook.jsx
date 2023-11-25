@@ -8,7 +8,6 @@ const LastBook = ({ book, isLastBookLoaded, setIsLastBookLoaded }) => {
   const read = `Прочитано:\n${book.pagesRead}/${book.pagesTotal}`;
 
   const handleImageLoad = () => {
-    console.log("Наруто тут");
     setIsLastBookLoaded(true);
   };
 
