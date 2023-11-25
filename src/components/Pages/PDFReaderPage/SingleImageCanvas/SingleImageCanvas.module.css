@@ -8,5 +8,17 @@
 }
 
 .canvasWrapper {
-    height: 1770px;
+    position: relative;
+}
+
+.imageCanvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.drawingCanvas {
+    position: absolute;
+    left: 0;
+    top: 0;
 }
