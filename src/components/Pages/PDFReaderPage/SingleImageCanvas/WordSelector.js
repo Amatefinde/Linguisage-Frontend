@@ -1,6 +1,9 @@
+import WordService from "../../../../services/WordService";
+
 export default class WordSelector {
-  constructor(canvas, pageObj, scale) {
+  constructor(canvas, pageObj, scale, setpopupBottomPosition) {
     this.ctx = canvas.getContext("2d");
+    this.setpopupBottomPosition = setpopupBottomPosition;
     this.pageObj = pageObj;
     this.canvas = canvas;
     this.listen();
@@ -15,18 +18,35 @@ export default class WordSelector {
 
   mouseUpHandler(e) {
     this.mouseDown = false;
+
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    const words = this.findInterception(this.currentSelection, true);
-    console.log(words);
+    if (this.width && this.height) {
+      const words = this.findInterception(this.currentSelection, true);
+      if (words.length === 1) {
+        WordService.getWord(words[0].text).then((data) => {});
+        const position = {
+          x: ((words[0].start + words[0].end) / 2) * this.scale,
+          y: words[0].top * this.scale,
+        };
+        this.setpopupBottomPosition(position);
+        console.log("Позиция установлена", position);
+      } else {
+        //   todo
+      }
+    }
   }
 
   mouseDownHandler(e) {
+    this.setpopupBottomPosition({ x: undefined, y: undefined });
+    this.width = undefined;
+    this.height = undefined;
     this.mouseDown = true;
     this.ctx.beginPath();
     const rect = e.target.getBoundingClientRect();
     this.startX = e.clientX - rect.left;
     this.startY = e.clientY - rect.top;
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    console.log(e.clientX, e.clientY);
   }
 
   mouseMoveHandler(e) {
@@ -34,14 +54,14 @@ export default class WordSelector {
       const rect = e.target.getBoundingClientRect();
       let currentX = e.clientX - rect.left;
       let currentY = e.clientY - rect.top;
-      let width = currentX - this.startX;
-      let height = currentY - this.startY;
-      this.draw(this.startX, this.startY, width, height);
+      this.width = currentX - this.startX;
+      this.height = currentY - this.startY;
+      this.draw(this.startX, this.startY, this.width, this.height);
       this.currentSelection = {
         x: this.startX,
         y: this.startY,
-        width,
-        height,
+        width: this.width,
+        height: this.height,
       };
       this.findInterception(this.currentSelection);
     }
