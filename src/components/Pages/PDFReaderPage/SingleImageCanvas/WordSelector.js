@@ -1,13 +1,14 @@
 import WordService from "../../../../services/WordService";
 
 export default class WordSelector {
-  constructor(canvas, pageObj, scale, setpopupBottomPosition) {
+  constructor(canvas, pageObj, scale, setpopupBottomPosition, setCurrentWord) {
     this.ctx = canvas.getContext("2d");
     this.setpopupBottomPosition = setpopupBottomPosition;
     this.pageObj = pageObj;
     this.canvas = canvas;
     this.listen();
     this.scale = scale;
+    this.setCurrentWord = setCurrentWord;
   }
 
   listen() {
@@ -29,7 +30,6 @@ export default class WordSelector {
           y: words[0].top * this.scale,
         };
         this.setpopupBottomPosition(position);
-        console.log("Позиция установлена", position);
       } else {
         //   todo
       }
@@ -46,7 +46,6 @@ export default class WordSelector {
     this.startX = e.clientX - rect.left;
     this.startY = e.clientY - rect.top;
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    console.log(e.clientX, e.clientY);
   }
 
   mouseMoveHandler(e) {

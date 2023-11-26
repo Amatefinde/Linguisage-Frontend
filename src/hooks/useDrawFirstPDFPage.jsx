@@ -19,8 +19,6 @@ export default function useDrawFirstPDFPage(
           const canvas = canvasRef.current;
           const ctx = canvas.getContext("2d");
 
-          // Установите размер холста
-
           canvas.width = canvasWidth;
           canvas.height = canvasHeight;
 

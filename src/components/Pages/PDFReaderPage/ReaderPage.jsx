@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from "react";
+import React, { useContext, useRef, useEffect, useState } from "react";
 import { VariableSizeList as List } from "react-window";
 import classes from "./ReaderPage.module.css";
 import Header from "../../Blocks/Header/Header";
@@ -6,6 +6,8 @@ import { ApplicationContext } from "../../../App";
 import SingleImageCanvas from "./SingleImageCanvas/SingleImageCanvas";
 import useZoom from "../../../hooks/useZoom";
 import AutoSizer from "react-virtualized-auto-sizer";
+import AddWord from "../../Blocks/AddWord/AddWord";
+import Modal from "../../ui/Modal/Modal";
 
 const ReaderPage = () => {
   const { currentBookAllPages, setCurrentBookAllPages } =
@@ -15,7 +17,7 @@ const ReaderPage = () => {
   let scale = useZoom();
 
   const listRef = useRef(); // создаем ссылку на список
-
+  const [modalActive, setModalActive] = useState(false);
   useEffect(() => {
     if (listRef.current) {
       listRef.current.resetAfterIndex(0); // перерассчитываем размеры элементов при изменении масштаба
@@ -29,6 +31,8 @@ const ReaderPage = () => {
     return value + Math.round(scale / 60);
   }
 
+  const [currentWord, setCurrentWord] = useState("");
+
   const Row = ({ index, style }) => (
     <div style={style}>
       <div
@@ -38,7 +42,13 @@ const ReaderPage = () => {
         <SingleImageCanvas
           key={currentBookAllPages[index].number_page}
           obj={currentBookAllPages[index]}
-          scale={scale}
+          {...{
+            currentWord,
+            setCurrentWord,
+            setModalActive,
+            modalActive,
+            scale,
+          }}
         />
       </div>
     </div>
@@ -47,6 +57,9 @@ const ReaderPage = () => {
   return (
     <>
       <Header />
+      <Modal active={modalActive} setActive={setModalActive}>
+        <AddWord currentWord={currentWord} setCurrentWord={setCurrentWord} />
+      </Modal>
       <AutoSizer>
         {({ height, width }) => (
           <List

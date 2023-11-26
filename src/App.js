@@ -8,6 +8,7 @@ import Book from "./components/Blocks/Book/Book";
 import TrainingPage from "./components/Pages/DictionaryPage/TrainingPage";
 import DictionaryPage from "./components/Pages/TrainingPage/DictionaryPage";
 import ReaderPage from "./components/Pages/PDFReaderPage/ReaderPage";
+import SandboxPage from "./components/Pages/SandboxPage/SandboxPage";
 
 export const ApplicationContext = createContext(null);
 
@@ -43,7 +44,7 @@ function App() {
             <Route path="/dictionary" element={<DictionaryPage />} />
             <Route path="/training" element={<TrainingPage />} />
             <Route path="/reader" element={<ReaderPage />} />
-            <Route path="/test" element={<Book />} />
+            <Route path="/test" element={<SandboxPage />} />
           </Routes>
         </BrowserRouter>
       </div>

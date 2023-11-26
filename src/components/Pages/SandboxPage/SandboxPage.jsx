@@ -1,8 +1,13 @@
 import React from "react";
 import classes from "./SandboxPage.module.css";
+import AddWord from "../../Blocks/AddWord/AddWord";
 
-const WordMenu = ({ coordinates }) => {
-  return <main className={classes.loading}>Loading...</main>;
+const WordMenu = () => {
+  return (
+    <main className={classes.wrapper}>
+      <AddWord query={"soul"} />
+    </main>
+  );
 };
 
 export default WordMenu;
