@@ -3,7 +3,6 @@ import HelloPage from "./components/Pages/AuthenticationPage/HelloPage";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import AuthService from "./services/AuthService";
-import PdfViewer from "./components/PdfViewer";
 import LiteraturePage from "./components/Pages/LiteraturePage/LiteraturePage";
 import Book from "./components/Blocks/Book/Book";
 import TrainingPage from "./components/Pages/DictionaryPage/TrainingPage";
