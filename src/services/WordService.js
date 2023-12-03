@@ -1,23 +1,18 @@
 import $api from "../http";
-
-function cleanText(text) {
-  text = text.toLowerCase();
-  text = text.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
-  return text;
-}
+import cleanText from "../utils/removePunctuationMarks";
 
 export default class WordService {
   static async getWord(word, context = "") {
     word = cleanText(word);
     const params = {
-      word,
+      query: word,
     };
 
     if (!!context) {
       params[context] = context;
     }
 
-    return $api.get("words/meaning", { params }).then((response) => {
+    return $api.get("words/senses", { params }).then((response) => {
       return response.data;
     });
   }

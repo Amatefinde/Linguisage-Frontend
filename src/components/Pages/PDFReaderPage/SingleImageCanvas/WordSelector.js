@@ -23,8 +23,10 @@ export default class WordSelector {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     if (this.width && this.height) {
       const words = this.findInterception(this.currentSelection, true);
-      this.setModalActive(true);
-      this.setCurrentWord(words);
+      if (words.length) {
+        this.setModalActive(true);
+        this.setCurrentWord(words);
+      }
     }
   }
 

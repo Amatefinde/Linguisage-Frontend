@@ -1,0 +1,6 @@
+.columnWrapper {
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 20px;
+}

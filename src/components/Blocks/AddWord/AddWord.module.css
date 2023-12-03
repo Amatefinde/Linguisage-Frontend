@@ -14,14 +14,15 @@
     justify-content: center;
     align-items: center;
     border-radius: 20px;
+    display: flex;
 }
 
 .leftSide {
-    width: 400px;
+    width: 360px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 25px 30px;
+    padding: 25px 0px;
     flex-direction: column;
     grid-gap: 15px;
 
@@ -32,42 +33,15 @@
 .rightSide {
 
 }
-
-.words {
-    overflow-y: scroll;
-    grid-gap: 15px;
-    display: flex;
-    flex-direction: column;
-    height: 500px;
-
-    width: 320px;
-}
-
-/* For Webkit browsers like Chrome and Safari */
-.words::-webkit-scrollbar {
-    width: 12px; /* Adjust the width as needed */
-
-}
-
-.words::-webkit-scrollbar-thumb {
-    background-color: #c7c7c7;
-    border-radius: 20px;
-}
-.words::-webkit-scrollbar-track {
-    background-color: #efefef;
-    border-radius: 20px;
+.imagesListWrapper {
+    width: 800px;
+    height: 490px;
 }
 
 
-.add {
-    position: relative;
-    width: 100px;
-    height: 100px;
-}
 
 .meaningWrapper {
     grid-gap: 15px;
-    height: 1600px;
     width: max-content;
     display: flex;
     flex-direction: column;
