@@ -19,7 +19,7 @@ const Meaning = ({
       content: (
         <ul style={{ marginLeft: "15px" }}>
           {examples.map((elem) => (
-            <li>{elem}</li>
+            <li key={elem.id}>{elem.content}</li>
           ))}
         </ul>
       ),
@@ -28,7 +28,7 @@ const Meaning = ({
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
   return (
-    <motion.div
+    <div
       className={classes.mainWidget}
       onClick={(e) => {
         setActiveMeaningId(id);
@@ -45,18 +45,8 @@ const Meaning = ({
         activeTab={activeTab}
         id={id}
       />
-      <motion.div
-        key={activeTab ? activeTab.id : "empty"}
-        initial={{ y: 10, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: -10, opacity: 0 }}
-        transition={{ duration: 0.2 }}
-        className={classes.definition}
-      >
-        {activeTab.content}
-      </motion.div>
-    </motion.div>
+      <div className={classes.definition}>{activeTab.content}</div>
+    </div>
   );
 };
-
 export default Meaning;

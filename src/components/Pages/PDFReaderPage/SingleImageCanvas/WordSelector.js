@@ -1,14 +1,14 @@
 import WordService from "../../../../services/WordService";
 
 export default class WordSelector {
-  constructor(canvas, pageObj, scale, setpopupBottomPosition, setCurrentWord) {
+  constructor(canvas, pageObj, scale, setCurrentWord, setModalActive) {
     this.ctx = canvas.getContext("2d");
-    this.setpopupBottomPosition = setpopupBottomPosition;
     this.pageObj = pageObj;
     this.canvas = canvas;
     this.listen();
     this.scale = scale;
     this.setCurrentWord = setCurrentWord;
+    this.setModalActive = setModalActive;
   }
 
   listen() {
@@ -23,21 +23,12 @@ export default class WordSelector {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     if (this.width && this.height) {
       const words = this.findInterception(this.currentSelection, true);
-      if (words.length === 1) {
-        WordService.getWord(words[0].text).then((data) => {});
-        const position = {
-          x: ((words[0].start + words[0].end) / 2) * this.scale,
-          y: words[0].top * this.scale,
-        };
-        this.setpopupBottomPosition(position);
-      } else {
-        //   todo
-      }
+      this.setModalActive(true);
+      this.setCurrentWord(words);
     }
   }
 
   mouseDownHandler(e) {
-    this.setpopupBottomPosition({ x: undefined, y: undefined });
     this.width = undefined;
     this.height = undefined;
     this.mouseDown = true;

@@ -7,13 +7,9 @@
     padding: 0px;
 }
 
-.wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    justify-items: center;
-    font-size: 70px;
-    color: #FFFFFF;
-    padding: 100px;
+.main {
+    width: 100vw;
+    height: 100vh;
+    background-color: #78ffef;
+
 }

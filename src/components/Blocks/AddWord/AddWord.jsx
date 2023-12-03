@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classes from "./AddWord.module.css";
 import Meaning from "./Word/Meaning";
 import InputField from "../../ui/InputField/InputField";
 import Search from "../../ui/Search/Search";
+import { motion } from "framer-motion";
+import { ApplicationContext } from "../../../App";
+import WordService from "../../../services/WordService";
 
 const wordExample = {
   title: "communication",
@@ -14,30 +17,39 @@ const wordExample = {
   ],
 };
 
-const AddWord = ({ currentWord, setCurrentWord }) => {
-  const [word, setWord] = useState(currentWord?.content);
+const AddWord = () => {
+  const { currentWord, setCurrentWord } = useContext(ApplicationContext);
+  const [wordContent, setWordContent] = useState({ meanings: [] });
   const [activeMeaningId, setActiveMeaningId] = useState(null);
+  const [query, setQuery] = useState("");
+  useEffect(() => {
+    if (currentWord.length === 1) {
+      WordService.getWord(currentWord[0].text)
+        .then((fetchedWordContent) => {
+          setQuery(fetchedWordContent.content);
+          setWordContent(fetchedWordContent);
+          console.log(fetchedWordContent);
+        })
+        .catch((e) => console.log(e)); // todo
+    }
+  }, [currentWord]);
 
   return (
     <div className={classes.mainWidget}>
       <div className={classes.leftSide}>
-        <Search value={word} setValue={setWord} />
-        <div className={classes.words}>
-          <Meaning
-            {...wordExample}
-            {...{ setActiveMeaningId, activeMeaningId }}
-            id={1}
-          />
-          <Meaning
-            {...wordExample}
-            {...{ setActiveMeaningId, activeMeaningId }}
-            id={2}
-          />
-          <Meaning
-            {...wordExample}
-            {...{ setActiveMeaningId, activeMeaningId }}
-            id={3}
-          />
+        <Search value={query} setValue={setQuery} />
+        <motion.div className={classes.words} layoutScroll>
+          {wordContent?.meanings?.length &&
+            wordContent.meanings.map((meaning) => (
+              <Meaning
+                definition={meaning?.meaning}
+                title={meaning?.short_meaning}
+                id={meaning?.id}
+                examples={meaning?.examples}
+                activeMeaningId={activeMeaningId}
+                setActiveMeaningId={setActiveMeaningId}
+              />
+            ))}
           <svg
             id={classes.add}
             width="26"
@@ -53,7 +65,7 @@ const AddWord = ({ currentWord, setCurrentWord }) => {
               fill="#DEDEDE"
             />
           </svg>
-        </div>
+        </motion.div>
       </div>
       <div className={classes.rightSide}></div>
     </div>

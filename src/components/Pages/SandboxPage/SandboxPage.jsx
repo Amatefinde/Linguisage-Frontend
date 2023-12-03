@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./SandboxPage.module.css";
 import AddWord from "../../Blocks/AddWord/AddWord";
+import ModalFramer from "../../ui/ModalFramer/ModalFramer";
 
-const WordMenu = () => {
+const SandboxPage = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
-    <main className={classes.wrapper}>
-      <AddWord query={"soul"} />
-    </main>
+    <>
+      <ModalFramer showModal={showModal} setShowModal={setShowModal}>
+        <AddWord query={"soul"} />
+      </ModalFramer>
+      <main className={classes.main} onClick={() => setShowModal(true)}>
+        {/*<AddWord />*/}
+      </main>
+    </>
   );
 };
 
-export default WordMenu;
+export default SandboxPage;

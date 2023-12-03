@@ -8,6 +8,7 @@ import useZoom from "../../../hooks/useZoom";
 import AutoSizer from "react-virtualized-auto-sizer";
 import AddWord from "../../Blocks/AddWord/AddWord";
 import Modal from "../../ui/Modal/Modal";
+import ModalFramer from "../../ui/ModalFramer/ModalFramer";
 
 const ReaderPage = () => {
   const { currentBookAllPages, setCurrentBookAllPages } =
@@ -31,8 +32,6 @@ const ReaderPage = () => {
     return value + Math.round(scale / 60);
   }
 
-  const [currentWord, setCurrentWord] = useState("");
-
   const Row = ({ index, style }) => (
     <div style={style}>
       <div
@@ -43,8 +42,6 @@ const ReaderPage = () => {
           key={currentBookAllPages[index].number_page}
           obj={currentBookAllPages[index]}
           {...{
-            currentWord,
-            setCurrentWord,
             setModalActive,
             modalActive,
             scale,
@@ -57,9 +54,9 @@ const ReaderPage = () => {
   return (
     <>
       <Header />
-      <Modal active={modalActive} setActive={setModalActive}>
-        <AddWord currentWord={currentWord} setCurrentWord={setCurrentWord} />
-      </Modal>
+      <ModalFramer showModal={modalActive} setShowModal={setModalActive}>
+        <AddWord />
+      </ModalFramer>
       <AutoSizer>
         {({ height, width }) => (
           <List

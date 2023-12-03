@@ -17,12 +17,8 @@ export default class WordService {
       params[context] = context;
     }
 
-    return $api
-      .get("words/meaning", { params })
-      .then((response) => {
-        console.log(response.data);
-        return response.data;
-      })
-      .catch((e) => {});
+    return $api.get("words/meaning", { params }).then((response) => {
+      return response.data;
+    });
   }
 }

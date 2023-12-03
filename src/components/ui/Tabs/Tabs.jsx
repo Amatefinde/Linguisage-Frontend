@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Tabs.module.css";
-import { motion } from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 
 const Tabs = ({ tabs, activeTab, setActiveTab, id }) => {
   return (
@@ -17,7 +17,7 @@ const Tabs = ({ tabs, activeTab, setActiveTab, id }) => {
         >
           {tab.id === activeTab.id ? (
             <motion.div
-              layoutId={`${id}`}
+              layoutId={`${id}tab`}
               className={classes.active}
             ></motion.div>
           ) : (

@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import AuthService from "./services/AuthService";
 import LiteraturePage from "./components/Pages/LiteraturePage/LiteraturePage";
-import Book from "./components/Blocks/Book/Book";
 import TrainingPage from "./components/Pages/DictionaryPage/TrainingPage";
 import DictionaryPage from "./components/Pages/TrainingPage/DictionaryPage";
 import ReaderPage from "./components/Pages/PDFReaderPage/ReaderPage";
@@ -15,6 +14,7 @@ export const ApplicationContext = createContext(null);
 function App() {
   const [isLogged, setIsLogged] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentWord, setCurrentWord] = useState([]);
   const [currentBookAllPages, setCurrentBookAllPages] = useState([]);
 
   useEffect(() => {
@@ -33,6 +33,8 @@ function App() {
         setIsLogged,
         currentBookAllPages,
         setCurrentBookAllPages,
+        currentWord,
+        setCurrentWord,
       }}
     >
       <div className="App">
