@@ -1,0 +1,32 @@
+.senseCard{
+    background-color: rgba(255, 255, 255, 0);
+    width: 590px;
+    height: 285px;
+    border: 1px solid bisque;
+    padding: 20px;
+}
+.senseBody{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 206px;
+    margin-bottom: 10px;
+}
+.senseWord{
+    font-size: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    font-weight: 700;
+}
+.senseDefinition{
+    font-size: 18px;
+    font-weight: 400;
+}
+.senseImage{
+    height: 206px;
+    width: 206px;
+    border-radius: 20px;
+    border: 2px solid #d2d2d2;
+}
