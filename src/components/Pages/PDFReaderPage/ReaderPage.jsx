@@ -55,7 +55,7 @@ const ReaderPage = () => {
     <>
       <Header />
       <ModalFramer showModal={modalActive} setShowModal={setModalActive}>
-        <AddWord />
+        <AddWord setModalActive={setModalActive} />
       </ModalFramer>
       <AutoSizer>
         {({ height, width }) => (

@@ -1,34 +1,24 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import classes from "./AddWord.module.css";
-import Sense from "./SensesList/Sense/Sense";
-import InputField from "../../ui/InputField/InputField";
 import Search from "../../ui/Search/Search";
-import { motion } from "framer-motion";
 import { ApplicationContext } from "../../../App";
 import WordService from "../../../services/WordService";
 import cleanText from "../../../utils/removePunctuationMarks";
 import SensesList from "./SensesList/SensesList";
 import ImagesList from "./ImagesList/ImagesList";
-import SkeletonButton from "../../ui/Buttons/Button/SkeletonButton";
-import AccentButton from "../../ui/Buttons/AccentButton/AccentButton";
 import Loading from "../../Pages/Loading/Loading";
+import FilledButton from "../../ui/Buttons/FilledButton/FilledButton";
+import EmptyButton from "../../ui/Buttons/EmptyButton/EmptyButton";
+import getTrueFields from "../../../utils/getTrueFileds";
 
-const wordExample = {
-  title: "communication",
-  definition: `the system of communication in speech and writing that is used by people of a particular country or area`,
-  examples: [
-    "a qualification in language teaching",
-    "a study of language acquisition in two-year-olds",
-    "Language is constantly evolving",
-  ],
-};
+export const ActiveImagesContext = createContext(null);
 
-const AddWord = () => {
+const AddWord = ({ setModalActive }) => {
   const { currentWord, setCurrentWord } = useContext(ApplicationContext);
   const [wordContent, setWordContent] = useState({});
   const [activeSenseId, setActiveSenseId] = useState(null);
   const [query, setQuery] = useState("");
-  const [activeImagesId, setActiveImagesId] = useState(null);
+  const [activeImagesId, setActiveImagesId] = useState({});
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -39,7 +29,8 @@ const AddWord = () => {
       WordService.getWord(cleanedText)
         .then((fetchedWordContent) => {
           setWordContent(fetchedWordContent);
-          console.log(fetchedWordContent);
+          console.log(fetchedWordContent.current_sense_id);
+          setActiveSenseId(fetchedWordContent.current_sense_id);
         })
         .catch((e) => console.log(e)) // todo
         .finally(() => setIsLoading(false));
@@ -52,23 +43,43 @@ const AddWord = () => {
       activeSenseId={activeSenseId}
     ></ImagesList>
   );
+
+  function addHandler() {
+    const images_id = getTrueFields(activeImagesId);
+    WordService.addSenseToMe(images_id, activeSenseId).then(
+      setModalActive(false),
+    );
+  }
+
   return (
-    <div className={classes.mainWidget}>
-      <div className={classes.leftSide}>
-        <Search value={query} setValue={setQuery} />
-        <SensesList
-          wordContent={wordContent}
-          activeSenseId={activeSenseId}
-          setActiveSenseId={setActiveSenseId}
-        />
-      </div>
-      <div className={classes.rightSide}>
-        <div className={classes.imagesListWrapper}>
-          {isLoading ? <Loading /> : imageList}
+    <ActiveImagesContext.Provider
+      value={{
+        activeImagesId,
+        setActiveImagesId,
+      }}
+    >
+      <div className={classes.mainWidget}>
+        <div className={classes.leftSide}>
+          <Search value={query} setValue={setQuery} />
+          <SensesList
+            wordContent={wordContent}
+            activeSenseId={activeSenseId}
+            setActiveSenseId={setActiveSenseId}
+          />
         </div>
-        <SkeletonButton />
+        <div className={classes.rightSide}>
+          <div className={classes.imagesListWrapper}>
+            {isLoading ? <Loading /> : imageList}
+          </div>
+          <div className={classes.buttonsWrapper}>
+            <EmptyButton onClick={() => setModalActive(false)}>
+              Cancel
+            </EmptyButton>
+            <FilledButton onClick={addHandler}>Add</FilledButton>
+          </div>
+        </div>
       </div>
-    </div>
+    </ActiveImagesContext.Provider>
   );
 };
 

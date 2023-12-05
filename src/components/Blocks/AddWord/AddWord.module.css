@@ -9,12 +9,13 @@
 
 .mainWidget {
     background-color: #ffffff;
-    width: 1200px;
-    height: 600px;
-    justify-content: center;
+    width: 1250px;
+    height: 620px;
+    justify-content: space-evenly;
     align-items: center;
     border-radius: 20px;
     display: flex;
+    padding: 10px;
 }
 
 .leftSide {
@@ -25,16 +26,26 @@
     padding: 25px 0px;
     flex-direction: column;
     grid-gap: 15px;
+}
 
-
-
+.buttonsWrapper {
+    width: 310px;
+    margin: 0 15px;
+    display: flex;
+    justify-content: space-evenly;
+    height: 70px;
+    align-items: center;
 }
 
 .rightSide {
-
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: end;
+    height: 100%;
 }
 .imagesListWrapper {
-    width: 800px;
+    width: 805px;
     height: 490px;
 }
 

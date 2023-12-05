@@ -40,22 +40,6 @@ const LiteraturePage = () => {
         ) : (
           <div className={classes.wrapper}>{books}</div>
         )}
-        {/*<Book {...bookExample} />*/}
-        {/*<Book {...bookExample} />*/}
-        {/*<Book {...bookExample} />*/}
-        {/*<Book {...bookExample} />*/}
-        {/*<Book {...bookExample} />*/}
-        {/*<Book {...bookExample} />*/}
-        {/*<Book {...bookExample} />*/}
-        {/*<Book {...bookExample} />*/}
-        {/*<Book {...bookExample} />*/}
-        {/*<Book {...bookExample} />*/}
-        {/*<Book {...bookExample} />*/}
-        {/*<Book {...bookExample} />*/}
-        {/*<Book {...bookExample} />*/}
-        {/*<Book {...bookExample} />*/}
-        {/*<Book {...bookExample} />*/}
-        {/*<Book {...bookExample} />*/}
       </div>
     </>
   );

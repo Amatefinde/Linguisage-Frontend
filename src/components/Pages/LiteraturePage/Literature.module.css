@@ -14,9 +14,8 @@
     margin: auto;
     overflow: hidden;
 }
-
-.wrapper {
-    display: flex;
-    justify-content: center;
+.loading {
     width: 100%;
+    justify-content: center;
+    display: flex;
 }

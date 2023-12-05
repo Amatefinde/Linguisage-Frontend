@@ -24,7 +24,11 @@ const LastBook = ({ book, isLastBookLoaded, setIsLastBookLoaded }) => {
         </div>
         <div className={classes.BookInfo}>
           <div className={classes.TitleAndAuthor}>
-            <div className={classes.Title}>{book.title}</div>
+            <div className={classes.Title}>
+              {book.title.length > 70
+                ? book.title.slice(0, 70) + "..."
+                : book.title}
+            </div>
             <div className={classes.Author}>{book.author}</div>
           </div>
           <div className={classes.ReadInfo}>

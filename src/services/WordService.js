@@ -16,4 +16,18 @@ export default class WordService {
       return response.data;
     });
   }
+
+  static async addSenseToMe(images_id, sense_id) {
+    try {
+      console.log("Сенс:", sense_id);
+      const data = {
+        f_sense_id: sense_id,
+        f_images_id: images_id,
+      };
+      const response = await $api.post("words/users/senses", data);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./ImagesList.module.css";
 import Image from "./Image/Image";
 import ImageColumn from "./ImageColumn/ImageColumn";
 import splitListByIndex from "../../../../utils/splitListByIndex";
+import { ActiveImagesContext } from "../AddWord";
 
 const ImagesList = ({ wordContent, activeSenseId }) => {
   let left_images;
@@ -12,6 +13,7 @@ const ImagesList = ({ wordContent, activeSenseId }) => {
   const images = wordContent?.senses?.filter(
     (sense) => sense.id === activeSenseId,
   )[0]?.images;
+
   if (images) {
     [left_images, right_images] = splitListByIndex(images);
     images_or_error = (

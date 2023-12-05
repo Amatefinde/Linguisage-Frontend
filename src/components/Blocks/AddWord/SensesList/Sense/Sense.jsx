@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import classes from "./Sense.module.css";
-import { motion } from "framer-motion";
 import Tabs from "../../../../ui/Tabs/Tabs";
 import "./SenseRowExamples.css";
+import { ActiveImagesContext } from "../../AddWord";
 
 const Sense = ({ sense, activeSenseId, setActiveSenseId }) => {
   let tabs = [
@@ -31,12 +31,21 @@ const Sense = ({ sense, activeSenseId, setActiveSenseId }) => {
   } else {
     title = "";
   }
+
+  const { setActiveImagesId } = useContext(ActiveImagesContext);
+  function senseClickHandler() {
+    setActiveSenseId(sense.id);
+    let activeImages = {};
+    for (let image of sense.images) {
+      activeImages[image.id] = false;
+    }
+    setActiveImagesId(activeImages);
+  }
+
   return (
     <div
       className={classes.mainWidget}
-      onClick={(e) => {
-        setActiveSenseId(sense.id);
-      }}
+      onClick={senseClickHandler}
       style={{
         border:
           activeSenseId === sense.id

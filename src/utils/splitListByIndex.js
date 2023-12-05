@@ -2,7 +2,7 @@ export default function splitListByIndex(list) {
   const oddObjects = [];
   const evenObjects = [];
 
-  list.forEach((object, index) => {
+  list.map((object, index) => {
     if (index % 2 === 0) {
       evenObjects.push(object);
     } else {
