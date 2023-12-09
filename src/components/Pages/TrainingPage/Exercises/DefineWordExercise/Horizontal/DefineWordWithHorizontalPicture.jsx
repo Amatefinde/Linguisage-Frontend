@@ -58,21 +58,24 @@ const sense = {
   },
 };
 
-const DefineWordWithHorizontalPicture = () => {
+const DefineWordWithHorizontalPicture = ({ exerciseContent }) => {
   const [img, setImg] = useState();
   const [examples, setExamples] = useState([]);
+  useEffect(
+    (e) => {
+      if (!!sense.images.length) {
+        const randomIndex = Math.floor(Math.random() * sense.images.length);
+        setImg("http://" + exerciseContent?.images[randomIndex]?.img);
+      } else {
+      }
+      if (!!sense.row_examples.length) {
+        setExamples(pickTwoRandom(exerciseContent.row_examples));
+      } else {
+      }
+    },
+    [exerciseContent],
+  );
 
-  useEffect(() => {
-    if (!!sense.images.length) {
-      const randomIndex = Math.floor(Math.random() * sense.images.length);
-      setImg("http://" + sense.images[randomIndex].img);
-    }
-    if (!!sense.row_examples.length) {
-      setExamples(pickTwoRandom(sense.row_examples));
-    }
-  }, []);
-
-  console.log(img);
   return (
     <main>
       <div className={classes.task}>
