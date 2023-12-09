@@ -3,9 +3,14 @@ import classes from "./SenseCard.module.css";
 import ProgressBar from "../../ui/ProgressBar/ProgressBar";
 import capitalizeFirstLetter from "../../../utils/strings";
 
-const SenseCard = ({ sense }) => {
+const SenseCard = ({ sense, setOpenedSense, setShowModal }) => {
+  function clickHandler() {
+    setOpenedSense(sense);
+    setShowModal(true);
+  }
+
   return (
-    <div className={classes.senseCard}>
+    <div className={classes.senseCard} onClick={clickHandler}>
       <div className={classes.senseBody}>
         <div className={classes.senseWord}>
           {capitalizeFirstLetter(sense.word.word)}
