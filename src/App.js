@@ -4,10 +4,10 @@ import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import AuthService from "./services/AuthService";
 import LiteraturePage from "./components/Pages/LiteraturePage/LiteraturePage";
-import TrainingPage from "./components/Pages/DictionaryPage/TrainingPage";
-import DictionaryPage from "./components/Pages/TrainingPage/DictionaryPage";
+import DictionaryPage from "./components/Pages/DictionaryPage/DictionaryPage";
 import ReaderPage from "./components/Pages/PDFReaderPage/ReaderPage";
 import SandboxPage from "./components/Pages/SandboxPage/SandboxPage";
+import TrainingPage from "./components/Pages/TrainingPage/TrainingPage";
 
 export const ApplicationContext = createContext(null);
 
