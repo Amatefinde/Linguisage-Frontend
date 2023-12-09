@@ -17,6 +17,12 @@ export default class WordService {
     });
   }
 
+  static async getMySenses() {
+    return $api.get("words/users/senses").then((response) => {
+      return response.data;
+    });
+  }
+
   static async addSenseToMe(images_id, sense_id) {
     try {
       console.log("Сенс:", sense_id);
