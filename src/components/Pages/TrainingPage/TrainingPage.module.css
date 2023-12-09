@@ -36,3 +36,8 @@
 .nextButton {
     cursor: pointer;
 }
+
+.wordCardWrapper {
+    border-radius: 20px;
+    box-shadow: 0 3px 5px 0 rgba(255, 0, 0, 0.43);
+}
