@@ -5,10 +5,10 @@ import DefineWordWithHorizontalPicture from "./Horizontal/DefineWordWithHorizont
 import AnswerInput from "./AnswerInput/AnswerInput";
 import ProgressBar from "../../../../ui/ProgressBar/ProgressBar";
 
-const DefineWordExercise = () => {
+const DefineWordExercise = ({ exerciseContent }) => {
   return (
     <div className={classes.wrapper}>
-      <DefineWordWithHorizontalPicture />
+      <DefineWordWithHorizontalPicture exerciseContent={exerciseContent} />
     </div>
   );
 };
