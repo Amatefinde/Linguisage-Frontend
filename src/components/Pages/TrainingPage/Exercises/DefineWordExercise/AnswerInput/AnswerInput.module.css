@@ -8,3 +8,9 @@
     font-size: 20px;
     padding: 0 20px;
 }
+
+.input::placeholder {
+    color: rgb(254, 141, 120);
+    font-weight: 500;
+}
+
