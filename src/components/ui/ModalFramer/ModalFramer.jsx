@@ -14,7 +14,7 @@ const ModalFramer = ({ showModal, setShowModal, children }) => {
         <motion.div
           className={classes.backdrop}
           variants={backdrop}
-          transition={{ ease: "easeOut", duration: 0.2 }}
+          transition={{ ease: "easeOut", duration: 0.18 }}
           initial={"hidden"}
           animate={"visible"}
           exit={"hidden"}
@@ -24,7 +24,7 @@ const ModalFramer = ({ showModal, setShowModal, children }) => {
             initial={{ y: 2, scale: 0.9, opacity: 0 }}
             animate={{ y: 0, scale: 1, opacity: 1 }}
             exit={{ y: -20, scale: 0.9, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.18, ease: "easeInOut" }}
             onClick={(event) => event.stopPropagation()}
           >
             {children}
