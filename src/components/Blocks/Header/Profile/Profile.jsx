@@ -30,7 +30,7 @@ const Profile = ({ image }) => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M2 2L12 10.5L22 2" stroke="#a0d5e2" stroke-width="4" />
+              <path d="M2 2L12 10.5L22 2" stroke="#a0d5e2" strokeWidth="4" />
             </svg>
           </div>
         </div>
