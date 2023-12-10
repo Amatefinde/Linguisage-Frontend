@@ -5,7 +5,7 @@ import { ApplicationContext } from "../../../../App";
 const UseImage = (drawingCanvasRef, obj, scale, setModalActive) => {
   const [img, setImg] = useState(undefined);
   const [imgStyle, setImageStyle] = useState({});
-  const { setCurrentWord } = useContext(ApplicationContext);
+  const { setCurrentWord, setCurrentContext } = useContext(ApplicationContext);
 
   useEffect(() => {
     const drawingCanvas = drawingCanvasRef.current;
@@ -27,6 +27,7 @@ const UseImage = (drawingCanvasRef, obj, scale, setModalActive) => {
         obj,
         scaleFactor,
         setCurrentWord,
+        setCurrentContext,
         setModalActive,
       );
     };

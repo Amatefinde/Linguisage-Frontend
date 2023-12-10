@@ -14,7 +14,8 @@ import getTrueFields from "../../../utils/getTrueFileds";
 export const ActiveImagesContext = createContext(null);
 
 const AddWord = ({ setModalActive }) => {
-  const { currentWord, setCurrentWord } = useContext(ApplicationContext);
+  const { currentWord, setCurrentWord, currentContext } =
+    useContext(ApplicationContext);
   const [wordContent, setWordContent] = useState({});
   const [activeSenseId, setActiveSenseId] = useState(null);
   const [query, setQuery] = useState("");
@@ -30,8 +31,11 @@ const AddWord = ({ setModalActive }) => {
       cleanedText = currentWord.map((e) => cleanText(e.text)).join(" ");
     }
     setQuery(cleanedText);
+    const textContext = currentContext
+      .map((obj) => cleanText(obj.text))
+      .join(" ");
 
-    WordService.getWord(cleanedText)
+    WordService.getWord(cleanedText, textContext)
       .then((fetchedWordContent) => {
         setWordContent(fetchedWordContent);
         console.log(fetchedWordContent.current_sense_id);
