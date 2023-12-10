@@ -23,18 +23,22 @@ const AddWord = ({ setModalActive }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    let cleanedText = cleanText(currentWord[0].text);
-    setQuery(cleanedText);
+    let cleanedText;
     if (currentWord.length === 1) {
-      WordService.getWord(cleanedText)
-        .then((fetchedWordContent) => {
-          setWordContent(fetchedWordContent);
-          console.log(fetchedWordContent.current_sense_id);
-          setActiveSenseId(fetchedWordContent.current_sense_id);
-        })
-        .catch((e) => console.log(e)) // todo
-        .finally(() => setIsLoading(false));
+      cleanedText = cleanText(currentWord[0].text);
+    } else {
+      cleanedText = currentWord.map((e) => cleanText(e.text)).join(" ");
     }
+    setQuery(cleanedText);
+
+    WordService.getWord(cleanedText)
+      .then((fetchedWordContent) => {
+        setWordContent(fetchedWordContent);
+        console.log(fetchedWordContent.current_sense_id);
+        setActiveSenseId(fetchedWordContent.current_sense_id);
+      })
+      .catch((e) => console.log(e)) // todo
+      .finally(() => setIsLoading(false));
   }, [currentWord]);
 
   const imageList = (
