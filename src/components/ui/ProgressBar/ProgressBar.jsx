@@ -1,8 +1,15 @@
 import React from "react";
 import classes from "./ProgressBar.module.css";
-const ProgressBar = ({ value, total, style }) => {
-  const percentage = (value / total) * 100;
 
+const ProgressBar = ({ value, total, style, percent }) => {
+  const percentage = percent !== undefined ? percent : (value / total) * 100;
+
+  const ratioElement = (
+    <span className={classes.titleProgress}>{`${value}/${total}`}</span>
+  );
+  const percentElement = (
+    <span className={classes.titleProgress}>{`${percent}%`}</span>
+  );
   return (
     <div className={classes.progressBar} style={style}>
       <div className={classes.progressBackground}>
@@ -11,7 +18,7 @@ const ProgressBar = ({ value, total, style }) => {
           style={{ width: `${percentage}%` }}
         />
       </div>
-      <span className={classes.titleProgress}>{`${value}/${total}`}</span>
+      {percent !== undefined ? percentElement : ratioElement}
     </div>
   );
 };
