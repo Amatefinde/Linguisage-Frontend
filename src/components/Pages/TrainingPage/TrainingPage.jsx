@@ -8,25 +8,31 @@ import AnswerInput from "./Exercises/DefineWordExercise/AnswerInput/AnswerInput"
 import TrainService from "../../../services/TrainService";
 import Loading from "../Loading/Loading";
 import WordFullCard from "../../Blocks/WordFullCard/WordFullCard";
+import TrainingEnd from "./TrainingEnd/TrainingEnd";
 
 const TrainingPage = () => {
   const [userAnswer, setUserAnswer] = useState("");
-  const [exercisesNumber, setExercisesNumber] = useState(10);
+  const [exercisesNumber, setExercisesNumber] = useState(5);
   const [tasksContent, setTasksContent] = useState([]);
   const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [answerPlaceholder, setAnswerPlaceholder] = useState("");
   const [wordCard, setWordCard] = useState(false);
   const [isInputDisabled, setIsInputDisabled] = useState(false);
+  const [trainStrike, setTrainStrike] = useState(0);
   useEffect(() => {
-    TrainService.getTrain(exercisesNumber).then((e) => {
-      setTasksContent(e);
-      setIsLoading(false);
-    });
-  }, []);
+    setIsLoading(true);
+    TrainService.getTrain(exercisesNumber)
+      .then((e) => {
+        setTasksContent(e);
+
+        setCurrentTaskIndex(0);
+      })
+      .finally(() => setIsLoading(false));
+  }, [trainStrike]);
 
   function submitAnswer(e) {
-    if (!(e.key === "Enter") && e?.key) {
+    if (e?.key && !(e.key === "Enter")) {
       return;
     }
 
@@ -38,12 +44,18 @@ const TrainingPage = () => {
   }
 
   function handleCorrectAnswer() {
+    TrainService.addAnswer(tasksContent[currentTaskIndex].id, true).then(
+      (e) => {},
+    );
     setCurrentTaskIndex((prevState) => prevState + 1);
     setUserAnswer("");
     setAnswerPlaceholder("");
   }
 
   function handleInCorrectAnswer() {
+    TrainService.addAnswer(tasksContent[currentTaskIndex].id, false).then(
+      (e) => {},
+    );
     if (userAnswer === "" && !wordCard) {
       setAnswerPlaceholder("Please enter your answer");
       setUserAnswer("");
@@ -64,6 +76,7 @@ const TrainingPage = () => {
       });
     }
   }
+
   const wordFullCard = (
     <div className={classes.wordCardWrapper}>
       <WordFullCard sense={tasksContent[currentTaskIndex]} />
@@ -74,7 +87,7 @@ const TrainingPage = () => {
   );
 
   const main = (
-    <div className={classes.trainContent}>
+    <>
       {wordCard ? wordFullCard : exercise}
       <AnswerInput
         userAnswer={userAnswer}
@@ -95,13 +108,22 @@ const TrainingPage = () => {
           className={classes.nextButton}
         />
       </div>
-    </div>
+    </>
   );
+
+  let page;
+  if (isLoading) {
+    page = <Loading style={{ color: "#7EA2FF" }} />;
+  } else if (exercisesNumber === currentTaskIndex) {
+    page = <TrainingEnd setTrainStrike={setTrainStrike} />;
+  } else {
+    page = main;
+  }
 
   return (
     <>
       <Header />
-      {isLoading ? <Loading /> : main}
+      <div className={classes.trainContent}>{page}</div>
     </>
   );
 };
