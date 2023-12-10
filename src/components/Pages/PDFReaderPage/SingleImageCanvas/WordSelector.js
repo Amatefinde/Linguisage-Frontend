@@ -1,7 +1,14 @@
 import WordService from "../../../../services/WordService";
 
 export default class WordSelector {
-  constructor(canvas, pageObj, scale, setCurrentWord, setModalActive) {
+  constructor(
+    canvas,
+    pageObj,
+    scale,
+    setCurrentWord,
+    setCurrentContext,
+    setModalActive,
+  ) {
     this.ctx = canvas.getContext("2d");
     this.pageObj = pageObj;
     this.canvas = canvas;
@@ -9,6 +16,7 @@ export default class WordSelector {
     this.scale = scale;
     this.setCurrentWord = setCurrentWord;
     this.setModalActive = setModalActive;
+    this.setCurrentContext = setCurrentContext;
   }
 
   listen() {
@@ -26,6 +34,7 @@ export default class WordSelector {
       if (words.length) {
         this.setModalActive(true);
         this.setCurrentWord(words);
+        this.setCurrentContext(this.pageObj.text_info.words);
       }
     }
   }

@@ -9,7 +9,7 @@ export default class WordService {
     };
 
     if (!!context) {
-      params[context] = context;
+      params["context"] = context;
     }
 
     return $api.get("words/senses", { params }).then((response) => {
