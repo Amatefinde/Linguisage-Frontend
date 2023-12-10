@@ -8,7 +8,7 @@ const SenseCard = ({ sense, setOpenedSense, setShowModal }) => {
     setOpenedSense(sense);
     setShowModal(true);
   }
-
+  console.log(sense.score);
   return (
     <div className={classes.senseCard} onClick={clickHandler}>
       <div className={classes.senseBody}>
@@ -22,10 +22,7 @@ const SenseCard = ({ sense, setOpenedSense, setShowModal }) => {
           alt={"Тут должна быть изображения"}
         />
       </div>
-      <ProgressBar
-        value={50 /*sense.progress.value*/}
-        total={100 /*sense.progress.total*/}
-      />
+      <ProgressBar percent={Math.round(sense.score * 100)} />
     </div>
   );
 };
