@@ -90,7 +90,7 @@ const Home = () => {
             <MotivationBlock>
               Павел Воля выучил английский, когда ему было пять, а тебе сто..
             </MotivationBlock>
-            <div className={classes.brandMark}>designed by даня</div>
+            <div className={classes.brandMark}>designed by ??????</div>
           </div>
         </div>
       </div>
