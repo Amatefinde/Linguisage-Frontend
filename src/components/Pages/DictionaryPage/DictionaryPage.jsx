@@ -24,15 +24,17 @@ const DictionaryPage = () => {
       <ModalFramer showModal={showModal} setShowModal={setShowModal}>
         <WordFullCard sense={openedSense} />
       </ModalFramer>
-      <div className={classes.wrapper}>
-        {userSenses.map((sense) => (
-          <SenseCard
-            key={sense.id}
-            sense={sense}
-            setOpenedSense={setOpenedSense}
-            setShowModal={setShowModal}
-          />
-        ))}
+      <div className={classes.contentBackground}>
+        <div className={classes.senseCardWrapper}>
+          {userSenses.map((sense) => (
+            <SenseCard
+              key={sense.id}
+              sense={sense}
+              setOpenedSense={setOpenedSense}
+              setShowModal={setShowModal}
+            />
+          ))}
+        </div>
       </div>
     </>
   );
