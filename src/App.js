@@ -15,6 +15,7 @@ function App() {
   const [isLogged, setIsLogged] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [currentWord, setCurrentWord] = useState([]);
+  const [currentContext, setCurrentContext] = useState("");
   const [currentBookAllPages, setCurrentBookAllPages] = useState([]);
 
   useEffect(() => {
@@ -35,6 +36,8 @@ function App() {
         setCurrentBookAllPages,
         currentWord,
         setCurrentWord,
+        currentContext,
+        setCurrentContext,
       }}
     >
       <div className="App">
