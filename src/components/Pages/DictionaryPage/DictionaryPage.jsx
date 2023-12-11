@@ -5,22 +5,24 @@ import SenseCard from "../../Blocks/SenceCard/SenseCard";
 import WordService from "../../../services/WordService";
 import ModalFramer from "../../ui/ModalFramer/ModalFramer";
 import WordFullCard from "../../Blocks/WordFullCard/WordFullCard";
+import Loading from "../Loading/Loading";
 
 const DictionaryPage = () => {
   const [userSenses, setUserSenses] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    WordService.getMySenses().then((data) => {
-      setUserSenses(data);
-    });
+    WordService.getMySenses()
+      .then((data) => {
+        setUserSenses(data);
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   const [showModal, setShowModal] = useState(false);
   const [openedSense, setOpenedSense] = useState(null);
 
-  return (
+  const main = (
     <>
-      <Header />
       <ModalFramer showModal={showModal} setShowModal={setShowModal}>
         <WordFullCard sense={openedSense} />
       </ModalFramer>
@@ -36,6 +38,13 @@ const DictionaryPage = () => {
           ))}
         </div>
       </div>
+    </>
+  );
+
+  return (
+    <>
+      <Header />
+      {isLoading ? <Loading /> : main}
     </>
   );
 };
