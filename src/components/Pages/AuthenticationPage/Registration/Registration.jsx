@@ -97,7 +97,7 @@ const Registration = () => {
               serverError}
           </div>
           <div>
-            <AccentButton>Log in</AccentButton>
+            <AccentButton>Sign Up</AccentButton>
           </div>
         </div>
 
