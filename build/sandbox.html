@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Viewer</title>
+    <style>
+        .tabk {
+            height: 5000px;
+            width: 500px;
+            background-color: #7A7A7A;
+        }
+    </style>
+</head>
+<body>
+<div class="tabk"></div>
+<script>
+	const tabk = document.querySelector(".tabk")
+	tabk.addEventListener('wheel', function (event) {
+		if (event.ctrlKey) {
+			event.preventDefault();
+		}
+	}, { passive: false });
+</script>
+</body>
+</html>
