@@ -17,7 +17,7 @@ const SenseCard = ({ sense, setOpenedSense, setShowModal }) => {
           <div className={classes.senseDefinition}>{sense.definition}</div>
         </div>
         <img
-          src={"http://" + sense.images[0].img}
+          src={"http://" + sense?.images[0]?.img}
           className={classes.senseImage}
           alt={"Тут должна быть изображения"}
         />
