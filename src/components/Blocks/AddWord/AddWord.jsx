@@ -61,7 +61,7 @@ const AddWord = ({setModalActive}) => {
         );
     }
 
-    return (
+    const component = (
         <ActiveImagesContext.Provider
             value={{
                 activeImagesId,
@@ -89,7 +89,8 @@ const AddWord = ({setModalActive}) => {
                 </div>
             </div>
         </ActiveImagesContext.Provider>
-    );
+    )
+    return isLoading ? <Loading/> : component;
 };
 
 export default AddWord;
