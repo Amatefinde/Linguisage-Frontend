@@ -35,8 +35,8 @@ const TrainingPage = () => {
     if (e?.key && !(e.key === "Enter")) {
       return;
     }
-
-    if (userAnswer === tasksContent[currentTaskIndex].word.word) {
+    const right_answer = tasksContent[currentTaskIndex].word.word
+    if (userAnswer.toLowerCase().trim() === right_answer.toLowerCase().trim()) {
       handleCorrectAnswer();
     } else {
       handleInCorrectAnswer();
