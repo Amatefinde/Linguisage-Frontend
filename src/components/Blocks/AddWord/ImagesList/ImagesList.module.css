@@ -6,8 +6,14 @@
     overflow-y: scroll;
     height: 480px;
     border-radius: 20px;
+}
 
-
+.separator {
+    margin-top: 5px;
+    width: 780px;
+    height: 3px;
+    background: #c7c7c7;
+    border-radius: 5px;
 }
 
 /* For Webkit browsers like Chrome and Safari */
