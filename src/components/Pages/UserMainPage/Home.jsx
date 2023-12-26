@@ -48,6 +48,7 @@ const Home = () => {
           setLastOpenedBook({
             ...lastOpenedBook,
             title: e.title,
+            id: e.id,
             bookCover: e.cover.replace("\\", "/").replace("\\", "/"),
           });
         }

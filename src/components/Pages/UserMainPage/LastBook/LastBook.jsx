@@ -3,6 +3,7 @@ import classes from "./LastBook.module.css";
 import ProgressCircle from "../../../Blocks/ProgresCircle/ProgressCircle";
 import YellowButton from "../../../ui/Buttons/YellowButton/YellowButton";
 import SkeletonButton from "../../../ui/Buttons/Button/SkeletonButton";
+import {useNavigate} from "react-router-dom";
 
 const LastBook = ({ book, isLastBookLoaded, setIsLastBookLoaded }) => {
   const read = `Прочитано:\n${book.pagesRead}/${book.pagesTotal}`;
@@ -10,11 +11,16 @@ const LastBook = ({ book, isLastBookLoaded, setIsLastBookLoaded }) => {
   const handleImageLoad = () => {
     setIsLastBookLoaded(true);
   };
+  const navigate = useNavigate()
+  const openBook = () => {
+    localStorage.setItem("currentLiteratureID", book.id)
+    navigate("/reader")
+  }
 
-  book = (
+  const component = (
     <>
       <section className={classes.ReadSection}>
-        <div className={classes.BookCover}>
+        <div className={classes.BookCover} onClick={openBook}>
           <img
             className={classes.image}
             src={book.bookCover}
@@ -79,7 +85,7 @@ const LastBook = ({ book, isLastBookLoaded, setIsLastBookLoaded }) => {
     </>
   );
 
-  return <section className={classes.LastBook}>{book}</section>;
+  return <section className={classes.LastBook}>{component}</section>;
 };
 
 export default LastBook;
