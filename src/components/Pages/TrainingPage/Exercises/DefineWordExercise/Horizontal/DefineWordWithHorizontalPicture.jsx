@@ -15,8 +15,8 @@ const DefineWordWithHorizontalPicture = ({ exerciseContent }) => {
         setImg("http://" + exerciseContent?.images[randomIndex]?.img);
       } else {
       }
-      if (!!exerciseContent.row_examples.length) {
-        setExamples(pickTwoRandom(exerciseContent.row_examples));
+      if (!!exerciseContent.row_examples_hidden_word.length) {
+        setExamples(pickTwoRandom(exerciseContent.row_examples_hidden_word));
       } else {
       }
     },
