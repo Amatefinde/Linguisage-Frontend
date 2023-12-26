@@ -28,14 +28,7 @@
     grid-gap: 15px;
 }
 
-.buttonsWrapper {
-    width: 310px;
-    margin: 0 15px;
-    display: flex;
-    justify-content: space-evenly;
-    height: 70px;
-    align-items: center;
-}
+
 
 .rightSide {
     display: flex;
