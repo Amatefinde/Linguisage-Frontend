@@ -35,12 +35,8 @@ const Book = ({ imgLink, title, id }) => {
   }, [imgLink]);
 
   function toBook() {
-    BookService.get_book(id, 1, 0)
-      .then((e) => {
-        setCurrentBookAllPages(e);
-        navigate("/reader");
-      })
-      .catch((e) => console.log(e));
+    localStorage.setItem("currentLiteratureID", id)
+    navigate("/reader")
   }
 
   const component = (
