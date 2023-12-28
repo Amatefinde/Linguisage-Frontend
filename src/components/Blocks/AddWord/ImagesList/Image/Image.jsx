@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import classes from "./Image.module.css";
 
 import { ActiveImagesContext } from "../../AddWord";
+import {protocol} from "../../../../../config";
 
 const Image = ({ images, imageId }) => {
   const { activeImagesId, setActiveImagesId } = useContext(ActiveImagesContext);
@@ -22,7 +23,7 @@ const Image = ({ images, imageId }) => {
       }}
     >
       <img
-        src={"http://" + image.img}
+        src={protocol + image.img}
         className={classes.img}
         onClick={imageClickHandler}
       />
