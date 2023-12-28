@@ -1,1 +1,1 @@
-Prototype version - https://lenya.papiros.volsk.cloudns.biz/reader
+Prototype version - https://lenya.papiros.volsk.cloudns.biz
