@@ -2,6 +2,7 @@ import classes from "./DefineWordWithHorizontalPicture.module.css";
 
 import React, { useEffect, useState } from "react";
 import pickTwoRandom from "../utils";
+import {protocol} from "../../../../../../config";
 
 const DefineWordWithHorizontalPicture = ({ exerciseContent }) => {
   const [img, setImg] = useState();
@@ -12,7 +13,7 @@ const DefineWordWithHorizontalPicture = ({ exerciseContent }) => {
         const randomIndex = Math.floor(
           Math.random() * exerciseContent.images.length,
         );
-        setImg("http://" + exerciseContent?.images[randomIndex]?.img);
+        setImg(protocol + exerciseContent?.images[randomIndex]?.img);
       } else {
       }
       if (!!exerciseContent.row_examples_hidden_word.length) {
