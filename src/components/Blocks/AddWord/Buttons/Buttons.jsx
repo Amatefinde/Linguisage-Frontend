@@ -4,7 +4,6 @@ import EmptyButton from "../../../ui/Buttons/EmptyButton/EmptyButton";
 import FilledButton from "../../../ui/Buttons/FilledButton/FilledButton";
 
 const Buttons = ({addHandler, setModalActive, isAlreadyInDictionary}) => {
-    console.log(isAlreadyInDictionary)
     return (<div className={classes.wrapper}>
             <span className={classes.warning}>
                 {isAlreadyInDictionary ? "This sense already in your dictionary" : " "}
