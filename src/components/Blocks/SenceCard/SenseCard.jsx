@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./SenseCard.module.css";
 import ProgressBar from "../../ui/ProgressBar/ProgressBar";
 import capitalizeFirstLetter from "../../../utils/strings";
+import {protocol} from "../../../config";
 
 const SenseCard = ({ sense, setOpenedSense, setShowModal }) => {
   function clickHandler() {
@@ -17,7 +18,7 @@ const SenseCard = ({ sense, setOpenedSense, setShowModal }) => {
           <div className={classes.senseDefinition}>{sense.definition}</div>
         </div>
         <img
-          src={"http://" + sense?.images[0]?.img}
+          src={protocol + sense?.images[0]?.img}
           className={classes.senseImage}
           alt={"Тут должна быть изображения"}
         />
