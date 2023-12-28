@@ -1,17 +1,16 @@
 import React, {createContext, useContext, useEffect, useState} from "react";
 import classes from "./AddWord.module.css";
-import Search from "../../ui/Search/Search";
+import SenseSearch from "./Search/SenseSearch";
 import {ApplicationContext} from "../../../App";
 import WordService from "../../../services/WordService";
 import cleanText from "../../../utils/removePunctuationMarks";
 import SensesList from "./SensesList/SensesList";
 import ImagesList from "./ImagesList/ImagesList";
 import Loading from "../../Pages/Loading/Loading";
-import FilledButton from "../../ui/Buttons/FilledButton/FilledButton";
-import EmptyButton from "../../ui/Buttons/EmptyButton/EmptyButton";
 import getTrueFields from "../../../utils/getTrueFileds";
 import Buttons from "./Buttons/Buttons";
 import {get_sense_from_wordContent_by_id} from "./utils";
+
 
 export const ActiveImagesContext = createContext(null);
 
@@ -22,6 +21,25 @@ const AddWord = ({setModalActive}) => {
     const [query, setQuery] = useState("");
     const [activeImagesId, setActiveImagesId] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+
+
+    const fetchWord = (querySearch=null, context=null) => {
+        if (querySearch === null) {
+            querySearch = query
+        }
+        if (querySearch !== "") {
+            WordService.getWord(querySearch, context ? context : undefined)
+                .then((fetchedWordContent) => {
+                    setWordContent(fetchedWordContent);
+                    setActiveSenseId(fetchedWordContent.current_sense_id);
+                })
+                .catch((e) => console.log(e))
+                .finally(() => setIsLoading(false))
+        } else {
+            // setIsLoading(false)
+        }
+    }
+
 
     useEffect(() => {
         let cleanedText;
@@ -35,15 +53,9 @@ const AddWord = ({setModalActive}) => {
             .map((obj) => cleanText(obj.text))
             .join(" ");
 
-        WordService.getWord(cleanedText, textContext)
-            .then((fetchedWordContent) => {
-                setWordContent(fetchedWordContent);
-                setActiveSenseId(fetchedWordContent.current_sense_id);
-
-            })
-            .catch((e) => console.log(e)) // todo
-            .finally(() => setIsLoading(false));
+        fetchWord(cleanedText, textContext)
     }, [currentWord]);
+
 
     const imageList = (
         <ImagesList
@@ -70,7 +82,7 @@ const AddWord = ({setModalActive}) => {
         >
             <div className={classes.mainWidget}>
                 <div className={classes.leftSide}>
-                    <Search value={query} setValue={setQuery}/>
+                    <SenseSearch value={query} setValue={setQuery} doSearch={fetchWord}/>
                     <SensesList
                         wordContent={wordContent}
                         activeSenseId={activeSenseId}
