@@ -1,14 +1,34 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import "./DictionarySearch.module.css"
 import classes from "./DictionarySearch.module.css"
-const DictionarySearch = ({value, setValue, doSearch}) => {
+
+const DictionarySearch = ({setSearchedUserSenses, userSenses}) => {
+    const [searchQuery, setSearchQuery] = useState("")
+
+    useEffect(() => {
+        filterSenses()
+    }, [userSenses, searchQuery]);
+
+    function filterSenses() {
+        if (!searchQuery) {
+            setSearchedUserSenses(userSenses)
+        } else {
+            setSearchedUserSenses(userSenses.filter(
+                sense => (
+                    sense.word.word.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    sense.definition.toLowerCase().includes(searchQuery.toLowerCase())
+                )
+            ))
+        }
+    }
+
     async function changeValue(e) {
-        setValue(e.target.value);
+        setSearchQuery(e.target.value);
     }
 
     const handleEnterPress = (event) => {
-        if (event.key === 'Enter' && !!doSearch) {
-            doSearch()
+        if (event.key === 'Enter') {
+            filterSenses()
         }
     };
     return (
@@ -28,7 +48,7 @@ const DictionarySearch = ({value, setValue, doSearch}) => {
                     />
                 </svg>
             </div>
-            <input onChange={changeValue} value={value} className={classes.input} onKeyDown={handleEnterPress}/>
+            <input onChange={changeValue} value={searchQuery} className={classes.input} onKeyDown={handleEnterPress}/>
         </div>
     );
 };

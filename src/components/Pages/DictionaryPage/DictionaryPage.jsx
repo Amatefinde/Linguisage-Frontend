@@ -8,7 +8,7 @@ import WordFullCard from "../../Blocks/WordFullCard/WordFullCard";
 import Loading from "../Loading/Loading";
 import CompactSearch from "../../ui/Search/CompactSearch";
 import DictionarySearch from "./SearchAndSort/DictionarySearch/DictionarySearch";
-import Sort from "./SearchAndSort/Management/Sort/Sort";
+import DropDownMenu from "./SearchAndSort/ManageBlock/DropDownMenu/DropDownMenu";
 
 const DictionaryPage = () => {
     const [userSenses, setUserSenses] = useState([]);
@@ -17,13 +17,25 @@ const DictionaryPage = () => {
         WordService.getMySenses()
             .then((data) => {
                 setUserSenses(data);
+                console.log(data)
             })
             .finally(() => setIsLoading(false));
     }, []);
 
     const [showModal, setShowModal] = useState(false);
     const [openedSense, setOpenedSense] = useState(null);
-    const [search, setSearch] = useState("")
+    const [searchedUserSenses, setSearchedUserSenses] = useState(userSenses)
+
+    const sortConfig = {
+        defaultValue: "Sort by",
+        options: [
+            {
+                optionName: "date added",
+                value: "date_add",
+            }
+        ]
+    }
+
     const main = (
         <>
             <ModalFramer showModal={showModal} setShowModal={setShowModal}>
@@ -32,15 +44,17 @@ const DictionaryPage = () => {
             <div className={classes.contentBackground}>
 
                 <div className={classes.searchWrapper}>
-                    <DictionarySearch value={search} setValue={setSearch}/>
+                    <DictionarySearch
+                        setSearchedUserSenses={setSearchedUserSenses}
+                        userSenses={userSenses}
+                    />
                 </div>
                 <div className={classes.manageBlock}>
-                    <Sort/>
-                    <Sort/>
+                    <DropDownMenu/>
                 </div>
 
                 <div className={classes.senseCardWrapper}>
-                    {userSenses.map((sense) => (
+                    {searchedUserSenses.map((sense) => (
                         <SenseCard
                             key={sense.id}
                             sense={sense}
