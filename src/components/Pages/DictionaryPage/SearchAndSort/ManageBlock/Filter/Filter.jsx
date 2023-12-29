@@ -87,19 +87,19 @@ export default function Filter() {
                             <motion.li
                                 className={classes.li}
                                 variants={itemVariants}
-                                onClick={() => handleClick("DropDownMenu by alphabetically")}
+                                onClick={() => handleClick("Sort by alphabetically")}
                             >
                                 alphabetically
                             </motion.li>
                             <motion.li
-                                onClick={() => handleClick("DropDownMenu by date added")}
+                                onClick={() => handleClick("Sort by date added")}
                                 className={classes.li}
                                 variants={itemVariants}
                             >
                                 date added
                             </motion.li>
                             <motion.li
-                                onClick={() => handleClick("DropDownMenu by progress")}
+                                onClick={() => handleClick("Sort by progress")}
                                 className={classes.li}
                                 variants={itemVariants}
                             >
