@@ -1,6 +1,7 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {motion, Variants} from "framer-motion";
-import classes from "./Sort.module.css"
+import classes from "./DropDownMenu.module.css"
+import useClickOutside from "../../../../../../hooks/useClickOutside";
 
 const itemVariants = {
     open: {
@@ -12,22 +13,28 @@ const itemVariants = {
 };
 
 const sortDefineObj = {
-    defaultPlaceHolder: "Sort by",
-    
+    defaultPlaceHolder: "DropDownMenu by",
+
 }
 
-export default function Sort() {
+export default function DropDownMenu() {
     const [isOpen, setIsOpen] = useState(false);
-    const [currentOption, setCurrentOption] = useState("Sort by");
+    const [currentOption, setCurrentOption] = useState("DropDownMenu by");
+    const menuRef = useRef()
 
     function handleClick(name) {
         setCurrentOption(name);
         setIsOpen(false);
     }
 
+    useClickOutside(menuRef, () => {
+        console.log("Закрыли сортировку")
+        setIsOpen(false)
+    })
+
     return (
         <div className={classes.outerWrapper}>
-            <div className={classes.innerWrapper}>
+            <div className={classes.innerWrapper}  ref={menuRef}>
                 <motion.nav
                     initial={false}
                     animate={isOpen ? "open" : "closed"}
@@ -52,7 +59,7 @@ export default function Sort() {
                             </svg>
                         </motion.div>
                     </motion.button>
-                    <div className={classes.ulWrapper}>
+                    <div className={[classes.ulWrapper, isOpen ? "" : classes.disabled].join(" ")}>
                         <motion.ul
                             className={classes.ul}
                             variants={{
@@ -84,11 +91,19 @@ export default function Sort() {
                             >
                                 alphabetically
                             </motion.li>
-                            <motion.li onClick={() => handleClick("Sort by date added")} className={classes.li}
-                                       variants={itemVariants}>date added
+                            <motion.li
+                                onClick={() => handleClick("Sort by date added")}
+                                className={classes.li}
+                                variants={itemVariants}
+                            >
+                                date added
                             </motion.li>
-                            <motion.li onClick={() => handleClick("Sort by progress")} className={classes.li}
-                                       variants={itemVariants}>progress
+                            <motion.li
+                                onClick={() => handleClick("Sort by progress")}
+                                className={classes.li}
+                                variants={itemVariants}
+                            >
+                                progress
                             </motion.li>
                         </motion.ul>
                     </div>
