@@ -9,7 +9,6 @@ const SenseCard = ({ sense, setOpenedSense, setShowModal }) => {
     setOpenedSense(sense);
     setShowModal(true);
   }
-  console.log(sense.score);
   return (
     <div className={classes.senseCard} onClick={clickHandler}>
       <div className={classes.senseBody}>
