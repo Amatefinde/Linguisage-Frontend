@@ -22,11 +22,10 @@
     width: 1200px;
 }
 
-.searchWrapper {
-    margin: 20px;
-}
 
 .contentBackground {
+    grid-gap: 20px;
+    margin: 25px;
     display: flex;
     justify-content: center;
     align-items: center;

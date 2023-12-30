@@ -16,23 +16,36 @@ const DictionaryPage = () => {
     useEffect(() => {
         WordService.getMySenses()
             .then((data) => {
+                data.forEach(obj => obj.created_at = new Date(obj.created_at))
                 setUserSenses(data);
-                console.log(data)
             })
             .finally(() => setIsLoading(false));
     }, []);
 
     const [showModal, setShowModal] = useState(false);
     const [openedSense, setOpenedSense] = useState(null);
-    const [searchedUserSenses, setSearchedUserSenses] = useState(userSenses)
+    const [filteredUserSenses, setFilteredUserSenses] = useState(userSenses)
+    const [searchedUserSenses, setSearchedUserSenses] = useState(filteredUserSenses)
 
     const sortConfig = {
-        defaultValue: "Sort by",
+        defaultValue: {
+            optionName: "date added",
+            value: "created_at"
+        },
         options: [
             {
                 optionName: "date added",
-                value: "date_add",
-            }
+                value: "created_at",
+            },
+            {
+                optionName: "alphabetically",
+                value: "word.word",
+            },
+            {
+                optionName: "progress",
+                value: "score",
+            },
+
         ]
     }
 
@@ -46,11 +59,17 @@ const DictionaryPage = () => {
                 <div className={classes.searchWrapper}>
                     <DictionarySearch
                         setSearchedUserSenses={setSearchedUserSenses}
-                        userSenses={userSenses}
+                        userSenses={filteredUserSenses}
                     />
                 </div>
                 <div className={classes.manageBlock}>
-                    <DropDownMenu/>
+                    <DropDownMenu
+                        label={"Sorted by:"}
+                        defaultValue={sortConfig.defaultValue}
+                        options={sortConfig.options}
+                        list={userSenses}
+                        setSortedList={setFilteredUserSenses}
+                    />
                 </div>
 
                 <div className={classes.senseCardWrapper}>
