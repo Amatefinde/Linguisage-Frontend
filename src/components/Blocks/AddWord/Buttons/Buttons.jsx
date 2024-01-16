@@ -3,7 +3,7 @@ import classes from "./Buttons.module.css";
 import EmptyButton from "../../../ui/Buttons/EmptyButton/EmptyButton";
 import FilledButton from "../../../ui/Buttons/FilledButton/FilledButton";
 
-const Buttons = ({addHandler, setModalActive, isAlreadyInDictionary}) => {
+const Buttons = ({addHandler, setModalActive, isAlreadyInDictionary, isDisabled}) => {
     return (<div className={classes.wrapper}>
             <span className={classes.warning}>
                 {isAlreadyInDictionary ? "This sense already in your dictionary" : " "}
@@ -12,7 +12,7 @@ const Buttons = ({addHandler, setModalActive, isAlreadyInDictionary}) => {
             <EmptyButton onClick={() => setModalActive(false)}>
                 Cancel
             </EmptyButton>
-            {isAlreadyInDictionary ?
+            {isAlreadyInDictionary || isDisabled ?
                 <FilledButton onClick={addHandler} disabled={true} style={{
                     background: "none",
                     border: "solid 3px #bebebe",
