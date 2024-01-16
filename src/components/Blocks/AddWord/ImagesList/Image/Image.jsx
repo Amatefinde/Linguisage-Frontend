@@ -10,7 +10,6 @@ const Image = ({ images, imageId }) => {
 
   function imageClickHandler() {
     setActiveImagesId((e) => ({ ...e, [imageId]: !e?.[imageId] }));
-    console.log(activeImagesId);
   }
 
   return (
