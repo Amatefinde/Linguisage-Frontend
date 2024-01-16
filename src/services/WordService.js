@@ -23,13 +23,16 @@ export default class WordService {
     });
   }
 
-  static async addSenseToMe(images_id, sense_id) {
+  static async addSenseToMe(images_id, sense_id, literature_id) {
     try {
       console.log("Сенс:", sense_id);
       const data = {
         f_sense_id: sense_id,
         f_images_id: images_id,
       };
+      if (literature_id) {
+        data["literature_id"] = literature_id
+      }
       const response = await $api.post("words/users/senses", data);
       return response.data;
     } catch (error) {
