@@ -3,20 +3,20 @@ import classes from "./WordCard.module.css";
 import OneSizeBlock from "../OneSizeBlock/OneSizeBlock";
 import "../../../../fontStyles.css";
 
-const WordCard = ({ user_word }) => {
+const WordCard = ({ sense }) => {
   return (
+
     <OneSizeBlock>
       <div className={classes.Text}>
         <div className={classes.Title}>
-          <span className="titleFont">{user_word.content}</span>
+          <span className="titleFont">{sense.word.word}</span>
         </div>
         <div
           className="unimportantFont"
           style={{ textAlign: "center", padding: "20px" }}
         >
-          {user_word.meaning}
+          {sense.definition}
         </div>
-        <div className={"classes.progress"}></div>
       </div>
     </OneSizeBlock>
   );
