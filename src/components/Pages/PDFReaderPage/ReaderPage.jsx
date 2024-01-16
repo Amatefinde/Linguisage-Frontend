@@ -10,7 +10,7 @@ import AddWord from "../../Blocks/AddWord/AddWord";
 import Modal from "../../ui/Modal/Modal";
 import ModalFramer from "../../ui/ModalFramer/ModalFramer";
 import BookService from "../../../services/BookService";
-import Loading from "../Loading/Loading";
+import Loading from "../../Blocks/Loading/Loading";
 
 const ReaderPage = () => {
     const [currentBookAllPages, setCurrentBookAllPages] = useState(null);
