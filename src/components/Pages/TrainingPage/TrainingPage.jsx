@@ -6,7 +6,7 @@ import ProgressBar from "../../ui/ProgressBar/ProgressBar";
 import next_icon from "../../icons/next_arrow.svg";
 import AnswerInput from "./Exercises/DefineWordExercise/AnswerInput/AnswerInput";
 import TrainService from "../../../services/TrainService";
-import Loading from "../Loading/Loading";
+import Loading from "../../Blocks/Loading/Loading";
 import WordFullCard from "../../Blocks/WordFullCard/WordFullCard";
 import TrainingEnd from "./TrainingEnd/TrainingEnd";
 
@@ -25,7 +25,6 @@ const TrainingPage = () => {
     TrainService.getTrain(exercisesNumber)
       .then((e) => {
         setTasksContent(e);
-
         setCurrentTaskIndex(0);
       })
       .finally(() => setIsLoading(false));
@@ -120,10 +119,17 @@ const TrainingPage = () => {
     page = main;
   }
 
+  const not_words = <div className={classes.notWordsWrapper}><div className={classes.notWords}>
+    Looks like you don't have any more
+    words in your dictionary that need practicing.
+  </div></div>
+
+
   return (
     <>
       <Header />
-      <div className={classes.trainContent}>{page}</div>
+      {tasksContent.length || isLoading ? <div className={classes.trainContent}>{page}</div> : not_words}
+
     </>
   );
 };
