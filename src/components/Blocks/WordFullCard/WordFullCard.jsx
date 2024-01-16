@@ -2,13 +2,17 @@ import React from "react";
 import classes from "./WordFullCard.module.css";
 import capitalizeFirstLetter from "../../../utils/strings";
 import {protocol} from "../../../config";
+import KebabMenu from "./KebabMenu/KebabMenu";
 
-const WordFullCard = ({sense}) => {
+const WordFullCard = ({sense, inUserProfile}) => {
     return (
         <div className={classes.block}>
             <div className={classes.content}>
-                <div className={classes.wordTitle}>
-                    {capitalizeFirstLetter(sense.word.word)}
+                <div className={classes.topLine}>
+                    <div className={classes.wordTitle}>
+                        {capitalizeFirstLetter(sense.word.word)}
+                    </div>
+                    {/*{inUserProfile && <KebabMenu sense={sense}/>}*/}
                 </div>
                 <div className={classes.wordDefinition}>{sense.definition}</div>
                 <div className={classes.separatorWrapper}>
