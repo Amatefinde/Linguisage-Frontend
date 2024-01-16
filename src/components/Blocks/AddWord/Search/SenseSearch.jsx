@@ -13,14 +13,14 @@ const SenseSearch = ({value, setValue, doSearch}) => {
         } else {
             timeoutId = setTimeout(() => {
                 doSearch()
-            }, 300);
+            }, 1000);
         }
         return () => clearTimeout(timeoutId);
     }, [value]);
 
 
     return (
-        <CompactSearch setValue={setValue} value={value} doSearch={doSearch}/>
+        <CompactSearch placeholder={"start typing here"} setValue={setValue} value={value} doSearch={doSearch}/>
     );
 };
 
