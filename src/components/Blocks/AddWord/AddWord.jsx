@@ -6,54 +6,70 @@ import WordService from "../../../services/WordService";
 import cleanText from "../../../utils/removePunctuationMarks";
 import SensesList from "./SensesList/SensesList";
 import ImagesList from "./ImagesList/ImagesList";
-import Loading from "../../Pages/Loading/Loading";
+import Loading from "../Loading/Loading";
 import getTrueFields from "../../../utils/getTrueFileds";
 import Buttons from "./Buttons/Buttons";
 import {get_sense_from_wordContent_by_id} from "./utils";
+import {useLocation} from "react-router-dom";
 
 
 export const ActiveImagesContext = createContext(null);
 
 const AddWord = ({setModalActive}) => {
-    const {currentWord, setCurrentWord, currentContext} = useContext(ApplicationContext);
+    const location = useLocation()
+    let {currentWord, setCurrentWord, currentContext} = useContext(ApplicationContext);
     const [wordContent, setWordContent] = useState({});
     const [activeSenseId, setActiveSenseId] = useState(null);
     const [query, setQuery] = useState("");
     const [activeImagesId, setActiveImagesId] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+    const [wordError, setWordError] = useState(false)
 
-
-    const fetchWord = (querySearch=null, context=null) => {
+    const fetchWord = (querySearch = null, context = null) => {
+        setActiveSenseId(null)
+        setWordError(false)
         if (querySearch === null) {
             querySearch = query
         }
         if (querySearch !== "") {
+            setIsLoading(true)
+
             WordService.getWord(querySearch, context ? context : undefined)
                 .then((fetchedWordContent) => {
+                    setActiveSenseId(null)
                     setWordContent(fetchedWordContent);
                     setActiveSenseId(fetchedWordContent.current_sense_id);
                 })
-                .catch((e) => console.log(e))
+                .catch((e) => {
+                    setWordError(true)
+                    console.log(e)
+                })
                 .finally(() => setIsLoading(false))
         } else {
-            // setIsLoading(false)
+            setIsLoading(false)
         }
     }
 
 
     useEffect(() => {
-        let cleanedText;
-        if (currentWord.length === 1) {
-            cleanedText = cleanText(currentWord[0].text);
-        } else {
-            cleanedText = currentWord.map((e) => cleanText(e.text)).join(" ");
-        }
-        setQuery(cleanedText);
-        const textContext = currentContext
-            .map((obj) => cleanText(obj.text))
-            .join(" ");
 
-        fetchWord(cleanedText, textContext)
+        let cleanedText;
+        if (location.pathname === "/reader") {
+            if (currentWord.length === 1) {
+                cleanedText = cleanText(currentWord[0].text);
+            } else {
+                cleanedText = currentWord.map((e) => cleanText(e.text)).join(" ");
+            }
+            setQuery(cleanedText);
+        } else {
+            cleanedText = query
+        }
+
+
+        const textContext = location.pathname === "/reader" ? currentContext
+            .map((obj) => cleanText(obj.text))
+            .join(" ") : "";
+
     }, [currentWord]);
 
 
@@ -64,15 +80,20 @@ const AddWord = ({setModalActive}) => {
         ></ImagesList>
     );
 
-    const isAlreadyInDictionary = get_sense_from_wordContent_by_id(wordContent, activeSenseId)?.user_have
+    const isAlreadyInDictionary = isLoading ? false : get_sense_from_wordContent_by_id(wordContent, activeSenseId)?.user_have
 
     function addHandler() {
+        let literature_id = null
+        if (location.pathname === "/reader") {
+            literature_id = localStorage.getItem("currentLiteratureID")
+        }
         const images_id = getTrueFields(activeImagesId);
-        WordService.addSenseToMe(images_id, activeSenseId).then(
+        WordService.addSenseToMe(images_id, activeSenseId, literature_id).then(
             setModalActive(false),
         );
     }
 
+    const wordErrorMessage = <div>простите но мы не знаем такого слова</div>
     const component = (
         <ActiveImagesContext.Provider
             value={{
@@ -83,26 +104,28 @@ const AddWord = ({setModalActive}) => {
             <div className={classes.mainWidget}>
                 <div className={classes.leftSide}>
                     <SenseSearch value={query} setValue={setQuery} doSearch={fetchWord}/>
-                    <SensesList
+                    {isLoading ? <Loading style={{color: "#0b569c"}}/> : (wordError ? wordErrorMessage : !activeSenseId || < SensesList
                         wordContent={wordContent}
                         activeSenseId={activeSenseId}
                         setActiveSenseId={setActiveSenseId}
-                    />
-                </div>
-                <div className={classes.rightSide}>
+                        />) }
+
+                        </div>
+                        <div className={classes.rightSide}>
                     <div className={classes.imagesListWrapper}>
-                        {isLoading ? <Loading/> : imageList}
+                        {isLoading ? <Loading/> : wordError || !activeSenseId || imageList}
                     </div>
                     <Buttons
                         setModalActive={setModalActive}
                         addHandler={addHandler}
                         isAlreadyInDictionary={isAlreadyInDictionary}
+                        isDisabled={!activeSenseId || isLoading || wordError}
                     />
                 </div>
             </div>
         </ActiveImagesContext.Provider>
     )
-    return isLoading ? <Loading/> : component;
+    return component;
 };
 
 export default AddWord;
