@@ -19,3 +19,15 @@
     justify-content: center;
     display: flex;
 }
+
+.notLiterature {
+    color: white;
+    font-size: 25px;
+}
+
+.notLiteratureWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
