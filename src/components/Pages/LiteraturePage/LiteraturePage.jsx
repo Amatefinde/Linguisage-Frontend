@@ -3,7 +3,7 @@ import Book from "../../Blocks/Book/Book";
 import Header from "../../Blocks/Header/Header";
 import classes from "./Literature.module.css";
 import BookService from "../../../services/BookService";
-import Loading from "../Loading/Loading";
+import Loading from "../../Blocks/Loading/Loading";
 
 const LiteraturePage = () => {
   const [books, setBooks] = useState(null);
@@ -22,6 +22,8 @@ const LiteraturePage = () => {
     });
   }, []);
 
+  const not_loaded_literature = <div className={classes.notLiteratureWrapper}><div className={classes.notLiterature}>Looks like you haven't added literature yet</div></div>
+
   return (
     <>
       <Header />
@@ -31,7 +33,7 @@ const LiteraturePage = () => {
             <Loading />
           </div>
         ) : (
-          <div className={classes.wrapper}>{books}</div>
+            books.length ? <div className={classes.wrapper}>{books}</div> : not_loaded_literature
         )}
       </div>
     </>
