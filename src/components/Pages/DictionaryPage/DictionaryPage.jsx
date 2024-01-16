@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import classes from "./DictionaryPage.module.css";
 import Header from "../../Blocks/Header/Header";
 import SenseCard from "../../Blocks/SenceCard/SenseCard";
 import WordService from "../../../services/WordService";
 import ModalFramer from "../../ui/ModalFramer/ModalFramer";
 import WordFullCard from "../../Blocks/WordFullCard/WordFullCard";
-import Loading from "../Loading/Loading";
-import CompactSearch from "../../ui/Search/CompactSearch";
+import Loading from "../../Blocks/Loading/Loading";
 import DictionarySearch from "./SearchAndSort/DictionarySearch/DictionarySearch";
 import DropDownMenu from "./SearchAndSort/ManageBlock/DropDownMenu/DropDownMenu";
+import AddWord from "../../Blocks/AddWord/AddWord";
+import {ApplicationContext} from "../../../App";
 
 const DictionaryPage = () => {
     const [userSenses, setUserSenses] = useState([]);
@@ -22,7 +23,8 @@ const DictionaryPage = () => {
             .finally(() => setIsLoading(false));
     }, []);
 
-    const [showModal, setShowModal] = useState(false);
+    const [showModalSense, setShowModalSense] = useState(false);
+    const [showModalAddWord, setShowModalAddWord] = useState(false)
     const [openedSense, setOpenedSense] = useState(null);
     const [filteredUserSenses, setFilteredUserSenses] = useState(userSenses)
     const [searchedUserSenses, setSearchedUserSenses] = useState(filteredUserSenses)
@@ -49,10 +51,20 @@ const DictionaryPage = () => {
         ]
     }
 
+    const not_words = <div className={classes.notWordsWrapper}>
+        <div className={classes.notWordsHeader}>Looks like your dictionary is still empty</div>
+        <div className={classes.notWords}>You can add unfamiliar words while reading literature by simply highlighting
+            them, or use the manual addition button on this page
+        </div>
+    </div>
+
     const main = (
         <>
-            <ModalFramer showModal={showModal} setShowModal={setShowModal}>
-                <WordFullCard sense={openedSense}/>
+            <ModalFramer showModal={showModalSense} setShowModal={setShowModalSense}>
+                <WordFullCard sense={openedSense} inUserProfile/>
+            </ModalFramer>
+            <ModalFramer showModal={showModalAddWord} setShowModal={setShowModalAddWord}>
+                <AddWord setModalActive={setShowModalAddWord}/>
             </ModalFramer>
             <div className={classes.contentBackground}>
 
@@ -70,21 +82,27 @@ const DictionaryPage = () => {
                         list={userSenses}
                         setSortedList={setFilteredUserSenses}
                     />
+                    <div
+                        className={classes.addWord}
+                        onClick={() => setShowModalAddWord(true)}
+                    >Add word manually
+                    </div>
                 </div>
-
-                <div className={classes.senseCardWrapper}>
+                {userSenses.length ? <div className={classes.senseCardWrapper}>
                     {searchedUserSenses.map((sense) => (
                         <SenseCard
                             key={sense.id}
                             sense={sense}
                             setOpenedSense={setOpenedSense}
-                            setShowModal={setShowModal}
+                            setShowModal={setShowModalSense}
                         />
                     ))}
-                </div>
+                </div> : not_words}
+
             </div>
         </>
     );
+
 
     return (
         <>

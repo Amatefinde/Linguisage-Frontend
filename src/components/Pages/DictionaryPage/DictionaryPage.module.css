@@ -20,6 +20,8 @@
 .manageBlock {
     display: flex;
     width: 1200px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 
@@ -31,4 +33,31 @@
     align-items: center;
     flex-direction: column;
     position: relative;
+}
+
+.addWord {
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.notWordsHeader {
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.notWordsWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    flex-direction: column;
+    grid-gap: 10px;
+    align-items: center;
+}
+
+.notWords {
+    color: white;
+    font-size: 18px;
 }
