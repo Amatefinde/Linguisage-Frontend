@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import classes from "./CompactSearch.module.css";
 
-const CompactSearch = ({value, setValue, doSearch}) => {
+const CompactSearch = ({value, setValue, doSearch, ...props}) => {
 
     async function changeValue(e) {
         setValue(e.target.value);
@@ -29,7 +29,7 @@ const CompactSearch = ({value, setValue, doSearch}) => {
                     />
                 </svg>
             </div>
-            <input onChange={changeValue} value={value} className={classes.input} onKeyDown={handleEnterPress}/>
+            <input {...props} onChange={changeValue} value={value} className={classes.input} onKeyDown={handleEnterPress}/>
         </div>
     );
 };
