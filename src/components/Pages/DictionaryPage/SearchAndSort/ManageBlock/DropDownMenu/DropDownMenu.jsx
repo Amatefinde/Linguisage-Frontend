@@ -34,6 +34,9 @@ export default function DropDownMenu({label, defaultValue, options, setSortedLis
     const [isOpen, setIsOpen] = useState(false);
     const [currentOption, setCurrentOption] = useState(defaultValue);
     const menuRef = useRef()
+    useClickOutside(menuRef, () => {
+        setIsOpen(false)
+    })
 
     function sortByField() {
         const arr = [...list]
@@ -64,9 +67,7 @@ export default function DropDownMenu({label, defaultValue, options, setSortedLis
         setIsOpen(false);
     }
 
-    useClickOutside(menuRef, () => {
-        setIsOpen(false)
-    })
+
 
     return (
         <div className={classes.wrapper}>
