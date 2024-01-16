@@ -17,6 +17,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .Wrapper {
@@ -26,6 +27,7 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
+
 }
 
 .Title {
