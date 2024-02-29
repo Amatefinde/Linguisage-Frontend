@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import classes from "./Profile.module.css";
 import { useNavigate } from "react-router-dom";
 import { ApplicationContext } from "../../../../App";
-import AuthService from "../../../../services/AuthService";
+import AuthService from "../../../../http/services/AuthService";
 import ReactLogo from "./profile_icon.svg";
 import UserMenu from "./UserMenu/UserMenu";
 

@@ -1,0 +1,28 @@
+import $api from "../index";
+
+export default class AuthService {
+  static async login(email, password) {
+    const formData = new FormData();
+    formData.append("username", email);
+    formData.append("password", password);
+
+    return $api.post("users/login", formData).then((response) => response.data);
+  }
+
+  static async register(email, password, username) {
+    return $api
+      .post("users", { email, password, name: username })
+      .then((response) => response.data);
+  }
+
+  static async logout() {
+    return $api.get("users/log_out").then((response) => {
+      localStorage.removeItem("token");
+      return response.data;
+    });
+  }
+
+  static async me() {
+    return $api.get("users/me").then((response) => response.data);
+  }
+}

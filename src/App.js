@@ -2,7 +2,7 @@ import Home from "./components/Pages/UserMainPage/Home";
 import HelloPage from "./components/Pages/AuthenticationPage/HelloPage";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
-import AuthService from "./services/AuthService";
+import AuthService from "./http/services/AuthService";
 import LiteraturePage from "./components/Pages/LiteraturePage/LiteraturePage";
 import DictionaryPage from "./components/Pages/DictionaryPage/DictionaryPage";
 import ReaderPage from "./components/Pages/PDFReaderPage/ReaderPage";

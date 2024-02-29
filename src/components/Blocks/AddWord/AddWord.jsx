@@ -2,7 +2,7 @@ import React, {createContext, useContext, useEffect, useState} from "react";
 import classes from "./AddWord.module.css";
 import SenseSearch from "./Search/SenseSearch";
 import {ApplicationContext} from "../../../App";
-import WordService from "../../../services/WordService";
+import WordService from "../../../http/services/WordService";
 import cleanText from "../../../utils/removePunctuationMarks";
 import SensesList from "./SensesList/SensesList";
 import ImagesList from "./ImagesList/ImagesList";

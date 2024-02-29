@@ -1,0 +1,19 @@
+.background {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 80dvh;
+    /*position: relative;*/
+}
+
+.centerWrapper {
+    position: absolute;
+    width: 100%;
+    top: min(120dvh, 100dvh + 30dvw);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: min(4dvw, 4dvh);
+}

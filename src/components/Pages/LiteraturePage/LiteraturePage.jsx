@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import Book from "../../Blocks/Book/Book";
 import Header from "../../Blocks/Header/Header";
 import classes from "./Literature.module.css";
-import BookService from "../../../services/BookService";
+import BookService from "../../../http/services/BookService";
 import Loading from "../../Blocks/Loading/Loading";
 
 const LiteraturePage = () => {

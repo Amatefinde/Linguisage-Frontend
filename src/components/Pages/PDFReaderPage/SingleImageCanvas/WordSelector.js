@@ -1,4 +1,4 @@
-import WordService from "../../../../services/WordService";
+import WordService from "../../../../http/services/WordService";
 
 export default class WordSelector {
   constructor(

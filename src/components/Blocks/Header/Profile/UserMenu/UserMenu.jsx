@@ -4,7 +4,7 @@ import userLogo from "../../../../icons/user.svg";
 import helpLogo from "../../../../icons/help.svg";
 import settingsLogo from "../../../../icons/settings.svg";
 import exitLogo from "../../../../icons/exit.svg";
-import AuthService from "../../../../../services/AuthService";
+import AuthService from "../../../../../http/services/AuthService";
 import { useNavigate } from "react-router-dom";
 import { ApplicationContext } from "../../../../../App";
 

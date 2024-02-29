@@ -1,0 +1,19 @@
+@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.unAuthorized {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    justify-items: center;
+    font-size: 70px;
+    color: #FFFFFF;
+    padding: 100px;
+}

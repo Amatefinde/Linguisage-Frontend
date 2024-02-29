@@ -3,7 +3,7 @@ import classes from "./UploadBooks.module.css";
 import Modal from "../../../ui/Modal/Modal";
 import PopUpUpload from "./PopUpUpload/PopUpUpload";
 import useDrawFirstPDFPage from "../../../../hooks/useDrawFirstPDFPage";
-import BookService from "../../../../services/BookService";
+import BookService from "../../../../http/services/BookService";
 import Loading from "../../../Blocks/Loading/Loading";
 import UploadWidget from "./UploadWidget/UploadWidget";
 

@@ -7,10 +7,10 @@ import OneSizeBlock from "./OneSizeBlock/OneSizeBlock";
 import WordCard from "./WordCard/WordCard";
 import Header from "../../Blocks/Header/Header";
 import MotivationBlock from "./MotivationBlock/MotivationBlock";
-import BookService from "../../../services/BookService";
+import BookService from "../../../http/services/BookService";
 import {ApplicationContext} from "../../../App";
 import UnAuthorized from "../../Blocks/UnAuthorized/UnAuthorized";
-import TrainService from "../../../services/TrainService";
+import TrainService from "../../../http/services/TrainService";
 import words from "./WordCard/DifficultWords";
 import Loading from "../../Blocks/Loading/Loading";
 

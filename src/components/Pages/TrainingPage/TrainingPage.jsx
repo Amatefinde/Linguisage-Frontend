@@ -5,7 +5,7 @@ import DefineWordExercise from "./Exercises/DefineWordExercise/DefineWordExercis
 import ProgressBar from "../../ui/ProgressBar/ProgressBar";
 import next_icon from "../../icons/next_arrow.svg";
 import AnswerInput from "./Exercises/DefineWordExercise/AnswerInput/AnswerInput";
-import TrainService from "../../../services/TrainService";
+import TrainService from "../../../http/services/TrainService";
 import Loading from "../../Blocks/Loading/Loading";
 import WordFullCard from "../../Blocks/WordFullCard/WordFullCard";
 import TrainingEnd from "./TrainingEnd/TrainingEnd";

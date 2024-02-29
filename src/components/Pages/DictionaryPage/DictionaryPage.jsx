@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import classes from "./DictionaryPage.module.css";
 import Header from "../../Blocks/Header/Header";
 import SenseCard from "../../Blocks/SenceCard/SenseCard";
-import WordService from "../../../services/WordService";
+import WordService from "../../../http/services/WordService";
 import ModalFramer from "../../ui/ModalFramer/ModalFramer";
 import WordFullCard from "../../Blocks/WordFullCard/WordFullCard";
 import Loading from "../../Blocks/Loading/Loading";

@@ -7,7 +7,7 @@ import Checkbox from "../../../ui/Checkbox/Checkbox";
 import { useForm } from "react-hook-form";
 import { FormContext } from "../HelloPage";
 import { ApplicationContext } from "../../../../App";
-import AuthService from "../../../../services/AuthService";
+import AuthService from "../../../../http/services/AuthService";
 
 const Login = () => {
   const [textEmail, setTextEmail] = useState("");
