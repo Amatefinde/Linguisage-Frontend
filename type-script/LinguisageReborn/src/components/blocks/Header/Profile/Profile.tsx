@@ -13,7 +13,7 @@ const Profile = ({ image }) => {
   return (
     <>
       <div className={classes.wrapper} onClick={() => {
-        AuthService.logout().then(
+        AuthService.logout().finally(
             () => navigate("/")
         )
       }}>

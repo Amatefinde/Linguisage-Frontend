@@ -50,7 +50,7 @@ const SignUp: React.FC<YourComponentProps> = ({ setCurrentForm }) => {
             localStorage.setItem("email", email)
             const loginResponse = await AuthService.login(email, password)
             localStorage.setItem("token", loginResponse.access_token)
-            navigate("/confirm-email")
+            navigate("/confirm-email-request")
         // @ts-ignore
         } catch (error: AxiosError) {
             if (error.response && error.response.status === 400) {

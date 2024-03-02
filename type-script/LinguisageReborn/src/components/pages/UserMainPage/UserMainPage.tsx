@@ -1,40 +1,16 @@
-import Header from "../../blocks/Header/Header.tsx";
+import Header from "../../blocks/Header/Header";
 import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
+import User from "../../../types/User";
+import AuthService from "../../../http/services/AuthService.ts";
 
 
 const UserMainPage = () => {
-    // const [lastOpenedBook, setLastOpenedBook] = useState(
-    //     last_opened_book_template,
-    // );
-    // const {isLogged, setIsLogged} = useContext(ApplicationContext);
-    // const [isLastBookLoaded, setIsLastBookLoaded] = useState(false);
-    // const [problemWords, setProblemWords] = useState([])
-    // const [isProblemWordsLoaded, setIsProblemWordsLoaded] = useState(false)
-    //
-    // useEffect(() => {
-    //     BookService.get_last_book()
-    //         .then((e) => {
-    //             if (e !== null) {
-    //                 setLastOpenedBook({
-    //                     ...lastOpenedBook,
-    //                     title: e.literature.title,
-    //                     id: e.literature.id,
-    //                     bookCover: e.literature.cover.replace("\\", "/").replace("\\", "/"),
-    //                     wordLearned: e.stats.complete,
-    //                     wordTotal: e.stats.total,
-    //                     wordInProcess: e.stats.in_process,
-    //                     wordInQueue: e.stats.in_queue,
-    //
-    //                 });
-    //             }
-    //         })
-    //         .catch((e) => {
-    //             console.log("Ошибка:", e);
-    //         })
-    //         .finally(e => {
-    //             setIsLastBookLoaded(true)
-    //         });
-    // }, []);
+    const [user, setUser] = useState<User>(null)
+    
+    useEffect(() => {
+        AuthService.me().then(fetchedUser => setUser(fetchedUser))
+    }, []);
     //
     //
     // useEffect(() => {
@@ -83,8 +59,13 @@ const UserMainPage = () => {
     //     </div>
     // </div>
     
-
-    return <Header/>
+    
+    return (
+        <>
+            <Header/>
+            {user && (user.email)}
+        </>
+    )
 };
 
 export default UserMainPage;

@@ -1,6 +1,5 @@
 import $api from "../index.js";
 import User from "../../types/User";
-import profile from "../../components/blocks/Header/Profile/Profile.tsx";
 
 
 interface LoginResponse {
@@ -38,8 +37,13 @@ export default class AuthService {
     
     
     static async requestEmailConfirm(email: string): Promise<void> {
-        return $api.post("/auth/request-verify-token", {email,}).then((response) => {
+        return $api.post("auth/request-verify-token", {email,}).then((response) => {
             return response.data;
+        })
+    }
+    static async emailConfirm(token: string): Promise<User> {
+        return $api.post("auth/verify", {token,}).then(response => {
+            return response.data
         })
     }
 }

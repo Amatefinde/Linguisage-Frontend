@@ -49,7 +49,7 @@ const SignIn: React.FC<YourComponentProps> = ({ setCurrentForm }) => {
             if (user.is_verified) {
                 navigate("/application")
             } else {
-                navigate("/confirm-email")
+                navigate("/confirm-email-request")
             }
             
         // @ts-ignore

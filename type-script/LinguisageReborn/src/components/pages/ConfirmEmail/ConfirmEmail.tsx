@@ -1,43 +1,46 @@
-import {useSelector} from "react-redux";
-import {RootState} from "../../../store";
-import User from "../../../types/User";
-import classes from "./ConfirmEmail.module.css"
-import useAutoAuth from "../../../hooks/useAutoAuth";
-import ButtonGroup from "@mui/joy/ButtonGroup";
-import Button from "@mui/joy/Button";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import AuthService from "../../../http/services/AuthService";
-import {useNavigate} from "react-router-dom";
-import EmailResend from "../../blocks/EmailResend/EmailResend";
+import { setUser } from "../../../store/user/userSlice";
+import classes from "./ConfirmEmail.module.css";
 
 const ConfirmEmail = () => {
-    useAutoAuth()
+    const [searchParams] = useSearchParams();
+    const token = searchParams.get("token");
+    const navigate = useNavigate();
+    const [redirectTimer, setRedirectTimer] = useState(5); // Set initial timer value
     
-    
-    async function resendEmail() {
-        const email = localStorage.getItem("email")
-        if (email){
-            await AuthService.requestEmailConfirm(email)
+    useEffect(() => {
+        if (token) {
+            console.log("Пытаемся подтвердить токен)");
+            
+            const countdown = setInterval(() => {
+                setRedirectTimer((prevTimer) => prevTimer - 1);
+            }, 1000);
+            
+            AuthService.emailConfirm(token).then((user) => {
+                setUser(user);
+                
+                // Clear the interval and navigate to "/profile" when the timer reaches 0
+                clearInterval(countdown);
+                navigate("/application");
+            });
+            
+            // Clean up the interval when the component is unmounted
+            return () => clearInterval(countdown);
         }
-    }
+    }, [token, navigate]);
     
-    const user: User = useSelector((state: RootState) => state.user.userData)
-    const navigate = useNavigate()
-    return (
-        <div className={classes.container}>
-            <header className={classes.title}>Confirm your email</header>
+    const success = (
+        <main className={classes.container}>
+            <section className={classes.title}>Email confirmed successfully</section>
             <section className={classes.text}>
-                We have sent an email to <span className={classes.userEmail}>{localStorage.getItem("email")}</span>.<br/>
-                Please follow the link in the email to confirm your account.<br/>
-                If you haven't received the email, please check your spam folder.
+                You will be redirected to the Linguisage home page in {redirectTimer} seconds.
             </section>
-            <section className={classes.buttons}>
-                <ButtonGroup variant={"soft"} size="lg" spacing={4} aria-label="soft button group">
-                    <Button sx={{width: "305px"}} onClick={() => AuthService.logout().finally(() => navigate("/"))}>Use another email</Button>
-                    <EmailResend sx={{width: "305px"}} sendEmail={resendEmail}/>
-                </ButtonGroup>
-            </section>
-        </div>
+        </main>
     );
+    
+    return success;
 };
 
 export default ConfirmEmail;

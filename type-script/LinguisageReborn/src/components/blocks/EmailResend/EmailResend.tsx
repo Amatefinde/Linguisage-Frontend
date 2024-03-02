@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import Button from "@mui/joy/Button";
+import {SxProps} from "@mui/joy/styles/types/theme";
 
 interface EmailSenderProps {
     sendEmail: () => Promise<void>;
     timeout?: number;
-    props?: any;
+    sx?: SxProps;
 }
 
-const EmailSender: React.FC<EmailSenderProps> = ({sendEmail, timeout = 60, ...props}) => {
+
+const EmailSender: React.FC<EmailSenderProps> = ({sendEmail, sx, timeout = 60}) => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [countdown, setCountdown] = useState(timeout);
     
@@ -48,7 +50,7 @@ const EmailSender: React.FC<EmailSenderProps> = ({sendEmail, timeout = 60, ...pr
     }, []);
     
     return (
-        <Button {...props} onClick={handleClick} disabled={isButtonDisabled}>
+        <Button sx={sx} onClick={handleClick} disabled={isButtonDisabled}>
             {isButtonDisabled ? `Send again after ${countdown} s` : 'Resend Email'}
         </Button>
     );
