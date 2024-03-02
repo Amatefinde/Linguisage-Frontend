@@ -1,5 +1,6 @@
 import $api from "../index.js";
 import User from "../../types/User";
+import profile from "../../components/blocks/Header/Profile/Profile.tsx";
 
 
 interface LoginResponse {
@@ -24,13 +25,21 @@ export default class AuthService {
     }
     
     static async logout(): Promise<void> {
-        return $api.get("auth/log_out").then((response) => {
+        return $api.post("auth/logout").then((response) => {
             localStorage.removeItem("token");
+            localStorage.removeItem("email");
             return response.data;
         });
     }
     
     static async me(): Promise<User> {
         return $api.get("auth/me").then((response) => response.data);
+    }
+    
+    
+    static async requestEmailConfirm(email: string): Promise<void> {
+        return $api.post("/auth/request-verify-token", {email,}).then((response) => {
+            return response.data;
+        })
     }
 }

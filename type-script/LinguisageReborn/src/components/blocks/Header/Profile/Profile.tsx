@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import classes from "./Profile.module.css";
 import { useNavigate } from "react-router-dom";
-import { ApplicationContext } from "../../../../App";
 import AuthService from "../../../../http/services/AuthService";
 import ReactLogo from "./profile_icon.svg";
 
@@ -13,10 +12,13 @@ const Profile = ({ image }) => {
 
   return (
     <>
-      <div className={classes.wrapper}>
+      <div className={classes.wrapper} onClick={() => {
+        AuthService.logout().then(
+            () => navigate("/")
+        )
+      }}>
         <div
           className={classes.profileButton}
-          onClick={() => setIsMenuActive((e) => !e)}
         >
           <div className={classes.imageWrapper}>
             <img src={ReactLogo} alt={"profile img"} className={classes.img} />

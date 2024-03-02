@@ -26,6 +26,11 @@ const theme = extendTheme({
 
             },
         },
+        JoyButtonGroup: {
+            defaultProps: {
+                variant: globalVariant, // Здесь укажите желаемый вариант
+            },
+        },
     },
 });
 

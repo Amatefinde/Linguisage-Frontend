@@ -42,8 +42,9 @@ const SignIn: React.FC<YourComponentProps> = ({ setCurrentForm }) => {
             console.log("Логинимся на сервер...")
             const loginResponse = await AuthService.login(email, password)
             localStorage.setItem("token", loginResponse.access_token)
+            localStorage.setItem("email", email)
             const user: User = await AuthService.me()
-            
+            console.log(user)
             dispatch(setUser(user))
             if (user.is_verified) {
                 navigate("/application")
@@ -103,7 +104,7 @@ const SignIn: React.FC<YourComponentProps> = ({ setCurrentForm }) => {
             </FormControl>
 
             <Button type="submit" onClick={handleSignIn}>
-                Log in
+                Log In
             </Button>
             <Typography
                 endDecorator={<Link onClick={() => setCurrentForm("signUp")}>Sign up</Link>}

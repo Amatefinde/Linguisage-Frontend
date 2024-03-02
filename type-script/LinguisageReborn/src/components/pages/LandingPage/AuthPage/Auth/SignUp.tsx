@@ -7,7 +7,7 @@ import Button from "@mui/joy/Button";
 import Link from "@mui/joy/Link";
 import React, {useState} from "react";
 import {formState} from "./authWidget";
-import {EmailErrorType, PasswordErrorType, UsernameErrorType, EmailErrorEnum} from "./types";
+import {EmailErrorEnum, EmailErrorType, PasswordErrorType, UsernameErrorType} from "./types";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {validateEmail, validatePassword, validateUsername} from "./validations";
@@ -47,13 +47,17 @@ const SignUp: React.FC<YourComponentProps> = ({ setCurrentForm }) => {
             console.log("Создаём аккаунт...")
             const user = await AuthService.register(email, username, password)
             dispatch(setUser(user))
+            localStorage.setItem("email", email)
+            const loginResponse = await AuthService.login(email, password)
+            localStorage.setItem("token", loginResponse.access_token)
             navigate("/confirm-email")
         // @ts-ignore
         } catch (error: AxiosError) {
             if (error.response && error.response.status === 400) {
                if (error.response?.data?.detail === "REGISTER_USER_ALREADY_EXISTS") {
                    setEmailError(EmailErrorEnum.alreadyExists)
-                   
+               } else if (error.response?.data?.detail === "UNSUPPORTED_EMAIL_ADDRESS") {
+                   setEmailError(EmailErrorEnum.notSupport)
                }
             } else {
                 console.error('Ошибка при входе в аккаунт:', error.message);
@@ -124,7 +128,7 @@ const SignUp: React.FC<YourComponentProps> = ({ setCurrentForm }) => {
                 fontSize="sm"
                 sx={{alignSelf: 'center'}}
             >
-                Don't have an account?
+                Already have an account?
             </Typography>
         </>
     );

@@ -11,6 +11,7 @@ export enum EmailErrorEnum {
     alreadyExists = "Account with this email already exists",
     notValid = "Entered email is not valid",
     noEmail = "Please enter the email",
+    notSupport = "Entered email is not supported"
 }
 
 export type EmailErrorType = EmailErrorEnum | null
