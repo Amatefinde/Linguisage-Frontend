@@ -1,13 +1,11 @@
 import React, { useRef, useState } from "react";
 import classes from "./UploadWidget.module.css";
-import InputField from "../../../../ui/InputField/InputField";
-import AccentButton from "../../../../ui/Buttons/AccentButton/AccentButton";
-import useDrawFirstPDFPage from "../../../../../hooks/useDrawFirstPDFPage";
 
-const UploadWidget = ({ setIsModalActive, setFile, canvasRef }) => {
+
+
+const UploadWidget = ({ setIsModalActive, setFile, setFileName }) => {
   const hiddenFileInput = useRef(null);
 
-  useDrawFirstPDFPage(hiddenFileInput, canvasRef, 142, 221);
 
   const handleClick = (event) => {
     hiddenFileInput.current.click();
@@ -18,6 +16,7 @@ const UploadWidget = ({ setIsModalActive, setFile, canvasRef }) => {
 
     setIsModalActive(true);
     setFile(fileUploaded);
+    setFileName(fileUploaded.name)
   }
 
   const [logoColor, setLogoColor] = useState("#929292");
@@ -58,7 +57,7 @@ const UploadWidget = ({ setIsModalActive, setFile, canvasRef }) => {
       </div>
       <input
         type="file"
-        accept=".pdf"
+        accept=".epub, .fb2"
         onChange={handleChange}
         ref={hiddenFileInput}
         style={{ display: "none" }}

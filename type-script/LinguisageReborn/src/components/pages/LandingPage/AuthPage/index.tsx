@@ -1,6 +1,6 @@
 import classes from "./index.module.css"
-import LogInWidget from "./Auth/authWidget.tsx";
-import TagLine from "./TagLine/TagLine.tsx";
+import LogInWidget from "./Auth/authWidget";
+import TagLine from "./TagLine/TagLine";
 
 const Index = () => {
     return (

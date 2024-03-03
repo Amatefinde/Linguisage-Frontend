@@ -1,5 +1,5 @@
 import $api from "../index.js";
-import User from "../../types/User";
+import UserInterface from "../../types/UserInterface.ts";
 
 
 interface LoginResponse {
@@ -17,7 +17,7 @@ export default class AuthService {
     }
     
     
-    static async register(email: string, username: string, password: string): Promise<User> {
+    static async register(email: string, username: string, password: string): Promise<UserInterface> {
         return $api
             .post("auth/register", {email, password, username})
             .then((response) => response.data);
@@ -31,7 +31,7 @@ export default class AuthService {
         });
     }
     
-    static async me(): Promise<User> {
+    static async me(): Promise<UserInterface> {
         return $api.get("auth/me").then((response) => response.data);
     }
     
@@ -41,7 +41,7 @@ export default class AuthService {
             return response.data;
         })
     }
-    static async emailConfirm(token: string): Promise<User> {
+    static async emailConfirm(token: string): Promise<UserInterface> {
         return $api.post("auth/verify", {token,}).then(response => {
             return response.data
         })

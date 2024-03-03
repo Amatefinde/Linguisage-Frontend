@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import classes from "./Book.module.css";
-import BookService from "../../../http/services/BookService";
+import BookService from "../../../http/services/BookService.js";
 import { ApplicationContext } from "../../../App";
 import { useNavigate } from "react-router-dom";
 

@@ -1,4 +1,4 @@
-@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+    @import url('https://fonts.cdnfonts.com/css/gilroy-bold');
 
 
 * {
@@ -54,11 +54,13 @@
 .parent {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     position: relative;
     transition: height;
     opacity: 0;
+    background: #5f8eed;
+    height: calc(100dvh - 100px);
 }
 
 
