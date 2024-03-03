@@ -32,8 +32,10 @@ const SignUp: React.FC<YourComponentProps> = ({ setCurrentForm }) => {
     const [password, setPassword] = useState<string>("")
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [isResponseWaiting, setIsResponseWaiting] = useState<boolean>(false)
     
     async function handleSignUp() {
+        setIsResponseWaiting(true)
         setEmailError(validateEmail(email))
         setPasswordError(validatePassword(password))
         setUsernameError(validateUsername(username))
@@ -53,6 +55,7 @@ const SignUp: React.FC<YourComponentProps> = ({ setCurrentForm }) => {
             navigate("/confirm-email-request")
         // @ts-ignore
         } catch (error: AxiosError) {
+            setIsResponseWaiting(false)
             if (error.response && error.response.status === 400) {
                if (error.response?.data?.detail === "REGISTER_USER_ALREADY_EXISTS") {
                    setEmailError(EmailErrorEnum.alreadyExists)
@@ -120,7 +123,7 @@ const SignUp: React.FC<YourComponentProps> = ({ setCurrentForm }) => {
                 </FormHelperText>
             </FormControl>
             
-            <Button type="submit" onClick={handleSignUp}>
+            <Button type="submit" onClick={handleSignUp} loading={isResponseWaiting} loadingPosition="end">
                 Sign Up
             </Button>
             <Typography
