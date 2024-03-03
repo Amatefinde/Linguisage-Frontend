@@ -11,7 +11,7 @@ const UploadBooks = () => {
     const [file, setFile] = useState<File | null>(null);
     const [fileName, setFileName] = useState<string | null>(null)
     const [isFileLoading, setIsFileLoading] = useState<boolean>(false);
-    
+    const hiddenFileInput = useRef(null);
     
     async function uploadFile() {
         // try {
@@ -27,12 +27,15 @@ const UploadBooks = () => {
     
     return (
         <>
+            <div style={{zIndex: "20"}}>
             <Modal showModal={isModalActive} setShowModal={setIsModalActive}>
                 <PopUpUpload
                     file={file}
                     fileName={fileName}
                     setFileName={setFileName}
                     callback={uploadFile}
+                    hiddenFileInput={hiddenFileInput}
+                    setIsModalActive={setIsModalActive}
                 />
             </Modal>
             {isFileLoading ? (
@@ -42,8 +45,10 @@ const UploadBooks = () => {
                     setIsModalActive={setIsModalActive}
                     setFile={setFile}
                     setFileName={setFileName}
+                    hiddenFileInput={hiddenFileInput}
                 />
             )}
+            </div>
         </>
     );
 };

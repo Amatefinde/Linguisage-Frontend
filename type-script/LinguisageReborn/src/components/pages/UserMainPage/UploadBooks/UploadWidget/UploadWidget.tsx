@@ -3,8 +3,8 @@ import classes from "./UploadWidget.module.css";
 
 
 
-const UploadWidget = ({ setIsModalActive, setFile, setFileName }) => {
-  const hiddenFileInput = useRef(null);
+const UploadWidget = ({ hiddenFileInput, setIsModalActive, setFile, setFileName }) => {
+  
 
 
   const handleClick = (event) => {

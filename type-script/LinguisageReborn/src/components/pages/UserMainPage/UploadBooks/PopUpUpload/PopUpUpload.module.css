@@ -26,13 +26,13 @@
 
 }
 
-.management {
+.forms {
     display: flex;
     flex-direction: column;
     align-items: end;
-    justify-content: start;
-    height: 70%;
-    gap: 10px;
+    justify-content: space-between;
+    height: 80%;
+    width: 300px;
 }
 
 .checkbox {
@@ -42,4 +42,10 @@
     margin-bottom: 40px;
 }
 
+.management {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 20px;
+}
 

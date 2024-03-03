@@ -1,12 +1,16 @@
 import React from 'react';
 import classes from "./ProgressCircle.module.css";
 
+interface ProgressCircleInterface {
+    success: number;
+    waiting: number;
+    total: number;
+}
 
-
-const ProgressCircle = ({green, yellow, total}) => {
-    const calculateMetric = metric => (507 - (507 * metric))
-    const yellowMetric = calculateMetric((green + yellow) / total)
-    const greenMetric = calculateMetric(green / total)
+const ProgressCircle: React.FC<ProgressCircleInterface> = ({success, waiting, total}) => {
+    const calculateMetric = (metric_coef: number) => (507 - (507 * metric_coef))
+    const yellowMetric = calculateMetric((success + waiting) / total)
+    const greenMetric = calculateMetric(success / total)
 
 
     return (
