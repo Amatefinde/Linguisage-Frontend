@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import classes from "./LastBook.module.css";
-import {useNavigate} from "react-router-dom";
+// import {useNavigate} from "react-router-dom";
 import BookInterface from "../../../../types/BookInterface";
 import SkeletonButton from "../../../ui/Buttons/SkeletonButton/SkeletonButton";
 import BookService from "../../../../http/services/BookService";
-import ProgressCircle from "../../../blocks/ProgresCircle/ProgressCircle.tsx";
+import ProgressCircle from "../../../blocks/ProgresCircle/ProgressCircle";
 
 
-const LastBook: React.FC<BookInterface> = () => {
+const LastBook = () => {
     const mockFieldMixin = {
         wordLearned: 30,
         wordInProcess: 15,
@@ -25,7 +25,7 @@ const LastBook: React.FC<BookInterface> = () => {
     const read = `Прочитано:\n${60}/${240}`;
     
     
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const openBook = () => {
         // localStorage.setItem("currentLiteratureID", String(book.id))
         // navigate("/reader")
@@ -58,8 +58,8 @@ const LastBook: React.FC<BookInterface> = () => {
             
             <section className={classes.TrainSection}>
                 <ProgressCircle
-                    green={book?.wordLearned}
-                    yellow={book?.wordInProcess}
+                    success={book?.wordLearned}
+                    waiting={book?.wordInProcess}
                     total={book?.wordTotal}
                 />
                 <div className={classes.InfoAndButton}>

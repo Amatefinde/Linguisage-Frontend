@@ -9,7 +9,7 @@
 
 .wrapper {
     height: 240px;
-    width: 450px;
+    width: 430px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -17,10 +17,12 @@
 }
 
 .bookCover {
-    width: 180px;
+    width: 160px;
     min-height: 20px;
     overflow: hidden;
-
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .forms {
@@ -29,7 +31,7 @@
     align-items: end;
     justify-content: space-between;
     height: 100%;
-    width: 300px;
+
 }
 
 .checkbox {

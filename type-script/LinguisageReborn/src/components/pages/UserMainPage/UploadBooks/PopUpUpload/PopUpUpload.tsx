@@ -26,7 +26,7 @@ const PopUpUpload: React.FC<PopUpUploadProps> = ({
     const [coverUrl, setCoverUrl] = useState<string | null>(null);
     const book: Book = ePub(file);
     
-    book.coverUrl().then((cover) => setCoverUrl(cover));
+    book.coverUrl().then((cover) => setCoverUrl(cover)).catch(() => setCoverUrl(null));
     
     const handleFileNameChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFileName(e.target.value);
@@ -34,7 +34,9 @@ const PopUpUpload: React.FC<PopUpUploadProps> = ({
     
     return (
         <div className={classes.wrapper}>
-            {coverUrl && <img src={coverUrl} alt={file.name} className={classes.bookCover}/>}
+            <div className={classes.bookCover}>
+                {coverUrl && <img src={coverUrl} alt={file.name} className={classes.bookCover}/>}
+            </div>
             <div className={classes.forms}>
                 <section className={classes.management}>
                     <FormControl>

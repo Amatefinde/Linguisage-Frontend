@@ -6,9 +6,7 @@ import UploadWidget from "./UploadWidget/UploadWidget";
 import {Transition} from 'react-transition-group';
 import Modal from '@mui/joy/Modal';
 import ModalDialog from '@mui/joy/ModalDialog';
-import DialogTitle from '@mui/joy/DialogTitle';
 import DialogContent from '@mui/joy/DialogContent';
-import {current} from "@reduxjs/toolkit";
 
 
 const UploadBooks = () => {
@@ -83,9 +81,7 @@ const UploadBooks = () => {
                     </Modal>
                 )}
             </Transition>
-            {/*<Modal showModal={isModalActive} setShowModal={setIsModalActive}>*/}
 
-            {/*</Modal>*/}
             {isFileLoading ? (
                 <Loading/>
             ) : (

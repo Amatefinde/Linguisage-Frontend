@@ -1,7 +1,4 @@
 import Header from "../../blocks/Header/Header";
-import {useEffect, useState} from "react";
-import UserInterface from "../../../types/UserInterface";
-
 import classes from "./UserMainPage.module.css"
 import LastBook from "./LastBook/LastBook";
 import UploadBooks from "./UploadBooks/UploadBooks";

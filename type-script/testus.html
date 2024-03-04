@@ -3,86 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-
-        #fileInput {
-            margin-bottom: 20px;
-        }
-
-        #coverImage {
-            max-width: 100%;
-            margin-top: 20px;
-        }
-    </style>
-    <title>FB2/EPUB Cover Extractor</title>
+    <title>FB2 Book Cover Extractor</title>
 </head>
 <body>
-<input type="file" id="fileInput" accept=".fb2, .epub">
-<img id="coverImage" alt="Cover Image">
-<script src="https://cdn.jsdelivr.net/npm/fb2-metadata@1.3.0/dist/fb2-metadata.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/epub-metadata@0.7.0/dist/epub-metadata.js"></script>
+<input type="file" id="fb2FileInput" accept=".fb2">
+<button onclick="extractCover()">Extract Cover</button>
+<div id="bookCoverContainer"></div>
+
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const fileInput = document.getElementById('fileInput');
-        const coverImage = document.getElementById('coverImage');
+    function extractCover() {
+        const fileInput = document.getElementById('fb2FileInput');
+        const coverContainer = document.getElementById('bookCoverContainer');
 
-        fileInput.addEventListener('change', handleFileSelection);
-
-        async function handleFileSelection(event) {
-            const target = event.target;
-            const file = target.files?.[0];
-
-            if (file) {
-                const reader = new FileReader();
-
-                reader.onload = async (e) => {
-                    const contents = e.target?.result;
-                    await extractCover(contents);
-                };
-
-                reader.readAsText(file);
-            }
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const fb2Content = e.target.result;
+                extractCoverUrl(fb2Content, coverContainer);
+            };
+            reader.readAsText(file);
+        } else {
+            coverContainer.innerHTML = '<p>Please select an FB2 file.</p>';
         }
+    }
 
-        async function extractCover(fileContents) {
-            let imageUrl = '';
+    function extractCoverUrl(fb2Content, container) {
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(fb2Content, 'application/xml');
 
-            try {
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(fileContents, 'text/xml');
+        try {
+            const coverBinary = xmlDoc.querySelector('coverpage image').textContent;
+            const coverUrl = `data:image/jpeg;base64,${coverBinary}`;
 
-                if (xmlDoc.documentElement.nodeName === 'FictionBook') {
-                    const fb2Metadata = await FB2Metadata.parse(fileContents);
-                    imageUrl = fb2Metadata.cover || fb2Metadata.annotation?.coverpage || fb2Metadata.titleInfo?.coverpage;
-                } else if (xmlDoc.documentElement.nodeName === 'package') {
-                    const epubMetadata = await EPUBMetadata.parse(fileContents);
-                    const cover = epubMetadata.coverImage;
-
-                    if (cover) {
-                        imageUrl = `data:${cover.mime};base64,${cover.data}`;
-                    }
-                }
-            } catch (error) {
-                console.error('Error extracting cover:', error);
-            }
-
-            displayCover(imageUrl);
+            container.innerHTML = `<img src="${coverUrl}" alt="Book Cover">`;
+        } catch (err) {
+            container.innerHTML = '<p>No cover found in the FB2 file.</p>';
         }
-
-        function displayCover(imageUrl) {
-            if (imageUrl) {
-                coverImage.src = imageUrl;
-                coverImage.style.display = 'block';
-            } else {
-                console.log('No cover found in the FB2 or EPUB file.');
-            }
-        }
-    });
+    }
 </script>
 </body>
 </html>
