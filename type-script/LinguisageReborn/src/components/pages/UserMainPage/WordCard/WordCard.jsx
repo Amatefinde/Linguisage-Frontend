@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import classes from "./WordCard.module.css";
-import OneSizeBlock from "../OneSizeBlock/OneSizeBlock";
+import OneSizeBlock from "../OneSizeBlock/OneSizeBlock.js";
 import "../../../../fontStyles.css";
 
 const WordCard = ({ sense }) => {

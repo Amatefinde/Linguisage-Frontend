@@ -3,6 +3,7 @@ import classes from "./UserMainPage.module.css"
 import LastBook from "./LastBook/LastBook";
 import UploadBooks from "./UploadBooks/UploadBooks";
 import TrainCard from "./TrainCard/TrainCard";
+import AddWordBlock from "./AddWordBlock/AddWordBlock.tsx";
 
 
 const UserMainPage = () => {
@@ -24,6 +25,7 @@ const UserMainPage = () => {
                     <TrainCard/>
                 </div>
                 {/*{problemWords.map(e => <WordCard key={e.id} sense={e}/>)}*/}
+                <AddWordBlock/>
             </section>
             <div className={classes.otherContent}>
                 {/*<MotivationBlock>*/}

@@ -5,19 +5,24 @@ export default class BookService {
     static async get_last_book(): Promise<BookInterface> {
         return $api.get("/literature/last").then((response) => response.data);
     }
+    
+    
+    static async add_book(book: File,
+                          filename: string,
+                          setFileLoadPercent: (value: number) => void,
+    ) {
+        const formData = new FormData();
+        formData.append("book", book);
+        formData.append("filename", filename);
 
-    // static async add_book(book) {
-    //     const formData = new FormData();
-    //     formData.append("file", book);
-    //
-    //     return $api.post("/literature", formData, {
-    //         onUploadProgress: (progressEvent) => {
-    //             const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-    //             console.log("Загруженный процент:", percentCompleted);
-    //             // Update your UI with the upload progress
-    //         },
-    //     }).then((response) => response.data);
-    // }
+        return $api.post("/literature", formData, {
+            onUploadProgress: (progressEvent) => {
+                const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                setFileLoadPercent(percentCompleted)
+                console.log(percentCompleted)
+            },
+        }).then((response) => response.data);
+    }
     //
     // static async get_book_list(book) {
     //     return $api.get("/literature/list").then((response) => response.data);

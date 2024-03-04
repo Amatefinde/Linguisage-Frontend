@@ -14,7 +14,7 @@ import {setUser} from "../../../../../store/user/userSlice";
 import AuthService from "../../../../../http/services/AuthService";
 import {useNavigate} from "react-router-dom";
 import {EmailErrorType, PasswordErrorType, PasswordErrorEnum} from "./types";
-import UserInterface from "../../../../../types/UserInterface.ts";
+import UserInterface from "../../../../../types/UserInterface";
 
 interface YourComponentProps {
     setCurrentForm: React.Dispatch<React.SetStateAction<formState>>;

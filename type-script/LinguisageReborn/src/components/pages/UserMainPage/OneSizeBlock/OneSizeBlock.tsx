@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
 import classes from "./OneSizeBlock.module.css"
+import React from "react";
 
+interface OneSizeBlockInterface {
+    children: React.ReactNode;
+}
 
-
-const OneSizeBlock = ({children}) => {
+const OneSizeBlock: React.FC<OneSizeBlockInterface> = ({children}) => {
     return (
         <div className={classes.OneSizeBlock}>
             {children}

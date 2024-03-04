@@ -25,6 +25,16 @@
     box-sizing: border-box;
 }
 
+.noCover {
+    width: 160px;
+    height: 230px;
+    border: #7A7A7A 2px solid;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
 .forms {
     display: flex;
     flex-direction: column;

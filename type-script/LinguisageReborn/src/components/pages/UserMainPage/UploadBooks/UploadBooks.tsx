@@ -1,32 +1,20 @@
-import React, {useEffect, useRef, useState} from "react";
-import classes from "./UploadBooks.module.css";
+import React, { useRef, useState} from "react";
 import PopUpUpload from "./PopUpUpload/PopUpUpload";
-import Loading from "../../../blocks/Loading/Loading.js";
 import UploadWidget from "./UploadWidget/UploadWidget";
 import {Transition} from 'react-transition-group';
 import Modal from '@mui/joy/Modal';
 import ModalDialog from '@mui/joy/ModalDialog';
 import DialogContent from '@mui/joy/DialogContent';
+import BookLoading from "./BookLoading/BookLoading.tsx";
 
 
 const UploadBooks = () => {
     const [open, setOpen] = useState<boolean>(false);
     const [file, setFile] = useState<File | null>(null);
     const [fileName, setFileName] = useState<string | null>(null)
-    const [isFileLoading, setIsFileLoading] = useState<boolean>(false);
+    const [fileLoadPercent, setFileLoadPercent] = useState<null | number>(null);
     const hiddenFileInput = useRef(null);
     
-    async function uploadFile() {
-        // try {
-        //     setIsModalActive(false);
-        //     setIsFileLoading(true);
-        //     await BookService.add_book(file);
-        // } catch (e) {
-        //     console.log("Ошибка при загрузке файла: ", e);
-        // } finally {
-        //     setIsFileLoading(false);
-        // }
-    }
     
     return (
         <>
@@ -37,6 +25,7 @@ const UploadBooks = () => {
                         open={!['exited', 'exiting'].includes(state)}
                         onClose={() => {
                             setOpen(false)
+                            hiddenFileInput.current.value = "";
                         }}
                         slotProps={{
                             backdrop: {
@@ -45,8 +34,16 @@ const UploadBooks = () => {
                                     backdropFilter: 'none',
                                     transition: `opacity 200ms, backdrop-filter 400ms`,
                                     ...{
-                                        entering: {opacity: 1, backdropFilter: 'blur(8px)', background: "rgba(0,0,0,0.5)"},
-                                        entered: {opacity: 1, backdropFilter: 'blur(8px)', background: "rgba(0,0,0,0.5)"},
+                                        entering: {
+                                            opacity: 1,
+                                            backdropFilter: 'blur(8px)',
+                                            background: "rgba(0,0,0,0.5)"
+                                        },
+                                        entered: {
+                                            opacity: 1,
+                                            backdropFilter: 'blur(8px)',
+                                            background: "rgba(0,0,0,0.5)"
+                                        },
                                     }[state],
                                 },
                             },
@@ -63,27 +60,27 @@ const UploadBooks = () => {
                                 transition: `opacity 200ms`,
                                 ...{
                                     entering: {opacity: 1, y: "100"},
-                                    entered: {opacity: 1,  y: "0"},
+                                    entered: {opacity: 1, y: "0"},
                                 }[state],
                             }}
                         >
                             <DialogContent>
-                                    <PopUpUpload
-                                        file={file}
-                                        fileName={fileName}
-                                        setFileName={setFileName}
-                                        callback={uploadFile}
-                                        hiddenFileInput={hiddenFileInput}
-                                        setIsModalActive={setOpen}
-                                    />
+                                <PopUpUpload
+                                    file={file}
+                                    fileName={fileName}
+                                    setFileName={setFileName}
+                                    hiddenFileInput={hiddenFileInput}
+                                    setIsModalActive={setOpen}
+                                    setFileLoadPercent={setFileLoadPercent}
+                                />
                             </DialogContent>
                         </ModalDialog>
                     </Modal>
                 )}
             </Transition>
-
-            {isFileLoading ? (
-                <Loading/>
+            
+            {fileLoadPercent ? (
+                <BookLoading fileLoadPercent={fileLoadPercent}/>
             ) : (
                 <UploadWidget
                     setIsModalActive={setOpen}
