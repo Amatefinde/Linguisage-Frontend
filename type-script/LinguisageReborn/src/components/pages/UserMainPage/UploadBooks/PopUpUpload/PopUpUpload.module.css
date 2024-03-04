@@ -8,21 +8,18 @@
 }
 
 .wrapper {
-    height: 260px;
-    width: 520px;
+    height: 240px;
+    width: 450px;
+    overflow: hidden;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    background: white;
-    border-radius: 20px;
-
+    justify-content: space-between;
 }
 
 .bookCover {
-    height: 221px;
-    width: 142px;
-    background-color: #d7d7d7;
-    border-radius: 20px;
+    width: 180px;
+    min-height: 20px;
+    overflow: hidden;
 
 }
 
@@ -31,7 +28,7 @@
     flex-direction: column;
     align-items: end;
     justify-content: space-between;
-    height: 80%;
+    height: 100%;
     width: 300px;
 }
 
