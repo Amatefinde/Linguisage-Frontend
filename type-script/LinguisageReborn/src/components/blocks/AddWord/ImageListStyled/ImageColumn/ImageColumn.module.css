@@ -1,0 +1,10 @@
+.imageColumn {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 20px;
+    width: 48.5%;
+}
+
+.image {
+    border-radius: 20px;
+}

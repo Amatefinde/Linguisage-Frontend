@@ -4,4 +4,6 @@
     background: white;
     border-radius: 20px;
     overflow: hidden;
+    display: flex;
+    grid-gap: 25px;
 }

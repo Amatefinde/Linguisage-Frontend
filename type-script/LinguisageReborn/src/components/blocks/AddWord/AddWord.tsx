@@ -1,48 +1,50 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from "./AddWord.module.css"
 import Sheet from "@mui/joy/Sheet";
 import Input from "@mui/joy/Input";
 import SearchIcon from '@mui/icons-material/Search';
-import {Card, Tab, tabClasses, TabList, Tabs} from "@mui/joy";
-import Typography from "@mui/joy/Typography";
+import WordService from "../../../http/services/WordService";
+import {IWordData} from "../../../types/WordInterface";
+import SenseList from "./SenseList/SenseList.tsx";
+import Search from "./Search/Search.tsx";
+import ImageList from "./ImageListStyled/ImageList.tsx";
+import {Card} from "@mui/joy";
 
-const AddWord = () => {
+
+interface IAddWord {
+    defaultQuery?: string;
+}
+
+const AddWord = ({defaultQuery = ""}) => {
+
+    const [wordData, setWordData] = useState<IWordData | null | "not_found">(null)
+    const [pickedFSenseId, setPickedFSenseId] = useState<number | null>(null)
+    const [pickedFImageIds, setPickedFSenseIds] = useState<number[]>([])
+
     return (
-        <div>
-            <Sheet className={classes.container} sx={{padding: "50px", border: "none"}}>
-                <Sheet sx={{width: 300, border: "none", gap: 2, display: "flex", flexDirection: "column"}}>
-                    <Input
-                        variant={"soft"}
-                        color={"primary"}
-                        sx={{'--Input-radius': `20px`,}}
-                        startDecorator={<SearchIcon />}
-                    />
-                    <Card variant="soft" sx={{'--Card-radius': `20px`,}} >
-                        <Typography level="title-lg">Yosemite National Park</Typography>
-                        <Typography level="body-sm">April 24 to May 02, 2021</Typography>
-                        <Tabs aria-label="tabs" defaultValue={0} sx={{ bgcolor: 'transparent' }}>
-                            <TabList
-                                disableUnderline
-                                sx={{
-                                    p: 0.5,
-                                    gap: 0.5,
-                                    borderRadius: 'xl',
-                                    bgcolor: 'background.level1',
-                                    [`& .${tabClasses.root}[aria-selected="true"]`]: {
-                                        boxShadow: 'sm',
-                                        bgcolor: 'background.surface',
-                                    },
-                                }}
-                            >
-                                <Tab disableIndicator>Definition</Tab>
-                                <Tab disableIndicator>Examples</Tab>
-                            </TabList>
-                        </Tabs>
-                    </Card>
-                </Sheet>
+        <Sheet className={classes.container} sx={{padding: "50px", border: "none"}}>
+            <Sheet sx={{width: 300, border: "none", gap: 2, display: "flex", flexDirection: "column"}}>
+                <Search setWordData={setWordData}/>
+                <div style={{display: "flex"}}>
+                    <Card/>
+                    <Card/>
+                </div>
+                {wordData?.word && < SenseList
+                    wordData={wordData}
+                    pickedFSenseId={pickedFSenseId}
+                    setPickedFSenseId={setPickedFSenseId}
+                />}
             </Sheet>
-        </div>
+            {wordData?.word_images &&
+                <ImageList
+                    wordData={wordData}
+                    pickedFImageIds={pickedFImageIds}
+                    setPickedFSenseIds={setPickedFSenseIds}
+                />
+            }
+        </Sheet>
     );
 };
+
 
 export default AddWord;
