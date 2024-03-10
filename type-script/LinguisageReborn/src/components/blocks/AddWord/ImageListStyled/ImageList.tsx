@@ -1,5 +1,5 @@
 import classes from "./ImageList.module.css"
-import {IWordData} from "../../../../types/WordInterface.ts";
+import {IWordData, IWordImage} from "../../../../types/WordInterface.ts";
 import React from "react";
 import splitArrayInHalf from "../../../../utils/splitArrayInHalf.ts";
 import ImageColumn from "./ImageColumn/ImageColumn.tsx";
@@ -12,7 +12,7 @@ interface ImageListInterface {
 }
 
 const ImageList: React.FC<ImageListInterface> = ({wordData, pickedFImageIds, setPickedFSenseIds}) => {
-    const [leftImages, rightImages] = splitArrayInHalf<IWordData>(wordData.word_images)
+    const [leftImages, rightImages] = splitArrayInHalf<IWordImage>(wordData.word_images)
 
     return (
         <div className={classes.imageList}>

@@ -9,19 +9,21 @@ export type TWordError = null | "NOT_FOUND" | "OTHER"
 interface SearchInterface {
     setWordData: (value: IWordData | null) => void;
     setWordError: (value: TWordError) => void;
+    setIsLoading: (value: boolean) => void;
     defaultQuery: string;
 }
 
-const Search: React.FC<SearchInterface> = ({setWordData, defaultQuery, setWordError}) => {
+const Search: React.FC<SearchInterface> = ({setWordData, defaultQuery, setWordError, setIsLoading}) => {
     const [query, setQuery] = useState<string>(defaultQuery)
     const [isTyping, setIsTyping] = useState<boolean>(false)
     const [isActive, setIsActive] = useState(false);
 
     async function fetchWord() {
         try {
+            setIsLoading(true)
+            setWordError(null)
             const fetchedWordData = await WordService.searchWord(query)
             setWordData(fetchedWordData)
-            setWordError(null)
         } catch (e) {
             setWordData(null)
             if (e?.response?.status === 404) {
@@ -30,6 +32,7 @@ const Search: React.FC<SearchInterface> = ({setWordData, defaultQuery, setWordEr
                 setWordError("OTHER")
             }
         }
+        setIsLoading(false)
     }
 
     useEffect(() => {
@@ -56,6 +59,7 @@ const Search: React.FC<SearchInterface> = ({setWordData, defaultQuery, setWordEr
 
     return (
         <Input
+
             value={query}
             onChange={e => {
                 setQuery(e.target.value)
