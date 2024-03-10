@@ -1,6 +1,5 @@
 .imageList {
-    height: 100%;
-    width: 70%;
+    height: 92%;
     overflow-y: scroll;
 
     display: flex;

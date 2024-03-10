@@ -1,6 +1,6 @@
 
 .senseList {
-    height: 100%;
+    height: 1000px;
     padding-right: 10px;
     overflow-y: scroll;
     display: flex;

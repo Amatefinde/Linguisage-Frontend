@@ -19,8 +19,8 @@ const Sense: React.FC<SenseInterface> = ({sense, pickedFSenseId, setPickedFSense
             setPickedFSenseId(null)
         }
     }
-
     return (
+
         <Card
             variant="soft"
             color={sense.f_sense_id == pickedFSenseId ? "primary" : "neutral"}
@@ -45,7 +45,7 @@ const Sense: React.FC<SenseInterface> = ({sense, pickedFSenseId, setPickedFSense
                         }}
                     >
                         <Tab color={sense.f_sense_id == pickedFSenseId ? "primary" : "neutral"} sx={{width: "50%"}} disableIndicator>Definition</Tab>
-                        <Tab color={sense.f_sense_id == pickedFSenseId ? "primary" : "neutral"} sx={{width: "50%"}} disableIndicator>Examples</Tab>
+                        <Tab disabled={!sense.examples.length} color={sense.f_sense_id == pickedFSenseId ? "primary" : "neutral"} sx={{width: "50%"}} disableIndicator>Examples</Tab>
                     </TabList>
                 </div>
                 <TabPanel value={0} sx={{padding: 0, margin: 0, marginTop: 1}}>
