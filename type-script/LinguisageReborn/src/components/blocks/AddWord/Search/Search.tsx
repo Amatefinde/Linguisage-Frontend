@@ -18,7 +18,15 @@ const Search: React.FC<SearchInterface> = ({setWordData, defaultQuery, setWordEr
     const [isTyping, setIsTyping] = useState<boolean>(false)
     const [isActive, setIsActive] = useState(false);
 
+    let timerId: NodeJS.Timeout;
+
     async function fetchWord() {
+        if (query === "") {
+            setWordData(null)
+            setWordError(null)
+            setIsLoading(false)
+            return
+        }
         try {
             setIsLoading(true)
             setWordError(null)
@@ -36,7 +44,7 @@ const Search: React.FC<SearchInterface> = ({setWordData, defaultQuery, setWordEr
     }
 
     useEffect(() => {
-        let timerId: NodeJS.Timeout;
+
         if (isTyping) {
             timerId = setTimeout(() => {
                 fetchWord()
@@ -58,8 +66,13 @@ const Search: React.FC<SearchInterface> = ({setWordData, defaultQuery, setWordEr
     };
 
     return (
+        <form onSubmit={event => {
+            event.preventDefault()
+            fetchWord()
+            clearTimeout(timerId);
+            setIsTyping(false)
+        }}>
         <Input
-
             value={query}
             onChange={e => {
                 setQuery(e.target.value)
@@ -77,6 +90,7 @@ const Search: React.FC<SearchInterface> = ({setWordData, defaultQuery, setWordEr
             }}
             startDecorator={<SearchIcon/>}
         />
+        </form>
     );
 };
 

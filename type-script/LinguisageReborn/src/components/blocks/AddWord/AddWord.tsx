@@ -57,6 +57,7 @@ const AddWord: React.FC<AddWordInterface> = ({defaultQuery = ""}) => {
             </div>}
             {isLoading && <div className={classes.errorMessage} style={{textAlign: "center", textIndent: 0}}><CircularProgress size="lg" />
             </div>}
+            {!wordData && !wordError && !isLoading && <div className={classes.errorMessage} style={{textAlign: "center", textIndent: 0}}>Enter the word</div>}
         </Sheet>
     );
 };
