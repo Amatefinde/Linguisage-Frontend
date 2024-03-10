@@ -6,4 +6,17 @@
     overflow: hidden;
     display: flex;
     grid-gap: 25px;
+    position: relative;
+}
+
+.errorMessage {
+    /*text-indent: 50px;*/
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    font-size: 24px;
+    width: 800px;
+    transform: translate(-50%, -50%);
+    text-align: justify; /* Выравнивание текста по ширине */
+    text-indent: 40px;
 }

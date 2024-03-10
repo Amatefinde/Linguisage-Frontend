@@ -4,13 +4,16 @@ import Input from "@mui/joy/Input";
 import {IWordData} from "../../../../types/WordInterface.ts";
 import WordService from "../../../../http/services/WordService.ts";
 
-interface SearchInterface {
+export type TWordError = null | "NOT_FOUND" | "OTHER"
 
-    setWordData: (value: IWordData) => void;
+interface SearchInterface {
+    setWordData: (value: IWordData | null) => void;
+    setWordError: (value: TWordError) => void;
+    defaultQuery: string;
 }
 
-const Search: React.FC<SearchInterface> = ({setWordData}) => {
-    const [query, setQuery] = useState<string>("")
+const Search: React.FC<SearchInterface> = ({setWordData, defaultQuery, setWordError}) => {
+    const [query, setQuery] = useState<string>(defaultQuery)
     const [isTyping, setIsTyping] = useState<boolean>(false)
     const [isActive, setIsActive] = useState(false);
 
@@ -18,10 +21,15 @@ const Search: React.FC<SearchInterface> = ({setWordData}) => {
         try {
             const fetchedWordData = await WordService.searchWord(query)
             setWordData(fetchedWordData)
+            setWordError(null)
         } catch (e) {
-            console.log("Произошла ошибка при поиске слова:", e)
+            setWordData(null)
+            if (e?.response?.status === 404) {
+                setWordError("NOT_FOUND")
+            } else {
+                setWordError("OTHER")
+            }
         }
-
     }
 
     useEffect(() => {

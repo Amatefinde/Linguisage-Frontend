@@ -1,39 +1,40 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import classes from "./AddWord.module.css"
 import Sheet from "@mui/joy/Sheet";
-import Input from "@mui/joy/Input";
-import SearchIcon from '@mui/icons-material/Search';
-import WordService from "../../../http/services/WordService";
 import {IWordData} from "../../../types/WordInterface";
 import SenseList from "./SenseList/SenseList.tsx";
-import Search from "./Search/Search.tsx";
-import ImageList from "./ImageListStyled/ImageList.tsx";
-import {Card} from "@mui/joy";
+import Search, {TWordError} from "./Search/Search";
+import ImageList from "./ImageListStyled/ImageList";
+import Pronunciation from "./Pronunciation/Pronunciation";
 
 
-interface IAddWord {
+interface AddWordInterface {
     defaultQuery?: string;
 }
 
-const AddWord = ({defaultQuery = ""}) => {
 
-    const [wordData, setWordData] = useState<IWordData | null | "not_found">(null)
+const AddWord: React.FC<AddWordInterface> = ({defaultQuery = ""}) => {
+    const [wordError, setWordError] = useState<TWordError>(null)
+    const [wordData, setWordData] = useState<IWordData | null>(null)
     const [pickedFSenseId, setPickedFSenseId] = useState<number | null>(null)
     const [pickedFImageIds, setPickedFSenseIds] = useState<number[]>([])
 
     return (
         <Sheet className={classes.container} sx={{padding: "50px", border: "none"}}>
             <Sheet sx={{width: 300, border: "none", gap: 2, display: "flex", flexDirection: "column"}}>
-                <Search setWordData={setWordData}/>
-                <div style={{display: "flex"}}>
-                    <Card/>
-                    <Card/>
-                </div>
-                {wordData?.word && < SenseList
-                    wordData={wordData}
-                    pickedFSenseId={pickedFSenseId}
-                    setPickedFSenseId={setPickedFSenseId}
-                />}
+                <Search setWordData={setWordData} defaultQuery={defaultQuery} setWordError={setWordError}/>
+
+                {wordData?.word &&
+                    <>
+                        <Pronunciation wordData={wordData}/>
+                        < SenseList
+                            wordData={wordData}
+                            pickedFSenseId={pickedFSenseId}
+                            setPickedFSenseId={setPickedFSenseId}
+                        />
+                    </>
+                }
+
             </Sheet>
             {wordData?.word_images &&
                 <ImageList
@@ -42,6 +43,11 @@ const AddWord = ({defaultQuery = ""}) => {
                     setPickedFSenseIds={setPickedFSenseIds}
                 />
             }
+            {wordError === "NOT_FOUND" && <div className={classes.errorMessage}>Sorry, we don't have info about this word.
+                But if this word exists, we already try to search info about it. You may try again after several tens of seconds.
+            </div>}
+            {wordError === "OTHER" && <div className={classes.errorMessage} style={{textAlign: "center", textIndent: 0}}>Sorry, but something go wrong...
+            </div>}
         </Sheet>
     );
 };
