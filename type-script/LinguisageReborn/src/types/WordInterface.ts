@@ -24,6 +24,7 @@ export interface ISense {
     in_user_dictionary: boolean;
 }
 
+
 export interface IExample {
     id: number;
     example: string;

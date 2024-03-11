@@ -12,7 +12,7 @@ export default function() {
                 const user: UserInterface = await AuthService.me()
                 if (user.is_verified) {
                     setUser(user)
-                    navigate("/application")
+                    navigate("/home")
                 } else {
                     navigate("/confirm-email-request")
                 }

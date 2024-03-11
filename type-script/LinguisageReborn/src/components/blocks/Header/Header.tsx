@@ -13,7 +13,7 @@ const Header = () => {
   };
 
   const toProfile = () => {
-    navigate("/profile");
+    navigate("/home");
   };
 
   const toDictionary = () => {

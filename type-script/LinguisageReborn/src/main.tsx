@@ -11,6 +11,7 @@ import App from "./App";
 import ConfirmEmailRequest from "./components/pages/RequestConfirmEmail/RequestConfirmEmail";
 import ConfirmEmail from "./components/pages/ConfirmEmail/ConfirmEmail";
 import AddWord from "./components/blocks/AddWord/AddWord";
+import DictionaryPage from "./components/pages/DictionaryPage/DictionaryPage.tsx";
 
 
 const router = createBrowserRouter([
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
         errorElement: <h1>Not found 404</h1>
     },
     {
-        path: "/application",
+        path: "/home",
         element: <App/>,
     },
     {
@@ -32,8 +33,8 @@ const router = createBrowserRouter([
         element: <ConfirmEmail/>
     },
     {
-        path: "/add_word",
-        element: <div style={{height: "100dvh", justifyContent: "center", alignItems: "center", display: "flex", background: "lightgray"}}><AddWord/></div>
+        path: "/dictionary",
+        element: <DictionaryPage/>
     }
 ]);
 

@@ -47,7 +47,7 @@ const SignIn: React.FC<YourComponentProps> = ({ setCurrentForm }) => {
             console.log(user)
             dispatch(setUser(user))
             if (user.is_verified) {
-                navigate("/application")
+                navigate("/home")
             } else {
                 navigate("/confirm-email-request")
             }

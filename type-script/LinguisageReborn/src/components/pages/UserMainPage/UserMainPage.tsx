@@ -39,7 +39,6 @@ const UserMainPage = () => {
     
     return (
         <>
-            <Header/>
             {content}
 
         </>

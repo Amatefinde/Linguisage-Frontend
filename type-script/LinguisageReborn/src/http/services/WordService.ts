@@ -1,5 +1,6 @@
 import $api from "../index.js";
 import {IWordData} from "../../types/WordInterface.ts";
+import {IUserSenses} from "../../types/UserSensesInterface.ts";
 
 
 interface SearchWordParams {
@@ -23,11 +24,11 @@ export default class WordService {
     });
   }
 
-  // static async getMySenses() {
-  //   return $api.get("words/users/senses").then((response) => {
-  //     return response.data;
-  //   });
-  // }
+  static async getMySenses(): Promise<IUserSenses> {
+    return $api.get("senses").then((response) => {
+      return response.data;
+    });
+  }
 
   static async addPublicSenseToMe(fSenseId: number, fWordImageIds: number[], fSenseImageIds: number[] = []) {
     try {

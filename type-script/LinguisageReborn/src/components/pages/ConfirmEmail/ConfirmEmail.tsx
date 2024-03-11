@@ -23,7 +23,7 @@ const ConfirmEmail = () => {
                 
                 // Clear the interval and navigate to "/profile" when the timer reaches 0
                 clearInterval(countdown);
-                navigate("/application");
+                navigate("/home");
             });
             
             // Clean up the interval when the component is unmounted

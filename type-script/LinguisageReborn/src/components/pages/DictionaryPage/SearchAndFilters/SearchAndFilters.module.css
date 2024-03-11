@@ -1,7 +1,5 @@
-.imageColumn {
+.wrapper {
     display: flex;
     flex-direction: column;
     grid-gap: 20px;
-    width: 48.5%;
 }
-
