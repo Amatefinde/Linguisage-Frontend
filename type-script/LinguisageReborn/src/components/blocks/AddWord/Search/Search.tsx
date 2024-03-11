@@ -74,6 +74,7 @@ const Search: React.FC<SearchInterface> = ({setWordData, defaultQuery, setWordEr
         }}>
         <Input
             value={query}
+            placeholder={"Enter the word"}
             onChange={e => {
                 setQuery(e.target.value)
                 setIsTyping(true)

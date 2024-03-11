@@ -9,6 +9,8 @@ import Pronunciation from "./Pronunciation/Pronunciation";
 import CircularProgress from '@mui/joy/CircularProgress';
 import ButtonGroup from "@mui/joy/ButtonGroup";
 import Button from "@mui/joy/Button";
+import {Tooltip} from "@mui/joy";
+import ManageBlock from "./ManageBlock/ManageBlock.tsx";
 
 
 interface AddWordInterface {
@@ -59,28 +61,7 @@ const AddWord: React.FC<AddWordInterface> = ({defaultQuery = ""}) => {
                         pickedFImageIds={pickedFImageIds}
                         setPickedFSenseIds={setPickedFSenseIds}
                     />
-                    <div className={classes.buttonWrapper}>
-                            <Button
-                                className={classes.cancelButton}
-                                variant="soft"
-                                color="neutral"
-                                sx={{borderRadius: 20, padding: "7px 20px 7px 20px"}}
-
-                            >
-                                Cancel
-                            </Button>
-                            <ButtonGroup
-                                sx={{borderRadius: 20}}
-                                color="primary"
-                                orientation="horizontal"
-                                size="md"
-                                variant="soft"
-                            >
-                                <Button sx={{padding: "7px 20px 7px 20px"}}>Add</Button>
-                                <Button>Customize and add</Button>
-
-                            </ButtonGroup>
-                    </div>
+                    <ManageBlock pickedFSenseId={pickedFSenseId} pickedFImageIds={pickedFImageIds}/>
                 </div>
             }
 
@@ -98,7 +79,7 @@ const AddWord: React.FC<AddWordInterface> = ({defaultQuery = ""}) => {
                     size="lg"/>
                 </div>}
             {!wordData && !wordError && !isLoading &&
-                <div className={classes.errorMessage} style={{textAlign: "center", textIndent: 0}}>Enter the word</div>}
+                <div className={classes.errorMessage} style={{textAlign: "center", textIndent: 0}}></div>}
         </Sheet>
     );
 };

@@ -32,14 +32,3 @@
     width: var(--imagesWidth);
 }
 
-.buttonWrapper {
-    grid-gap: 20px;
-    padding: 25px;
-    display: flex;
-    justify-content: end;
-}
-
-.cancelButton {
-    color: #5f8eed;
-    box-shadow: none;
-}

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence, MotionConfig } from "framer-motion";
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import classes from "./Modal.module.css";
 
 const backdrop = {
