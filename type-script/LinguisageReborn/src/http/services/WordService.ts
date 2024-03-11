@@ -29,20 +29,22 @@ export default class WordService {
   //   });
   // }
 
-  // static async addSenseToMe(images_id, sense_id, literature_id) {
-  //   try {
-  //     console.log("Сенс:", sense_id);
-  //     const data = {
-  //       f_sense_id: sense_id,
-  //       f_images_id: images_id,
-  //     };
-  //     if (literature_id) {
-  //       data["literature_id"] = literature_id
-  //     }
-  //     const response = await $api.post("words/users/senses", data);
-  //     return response.data;
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
+  static async addPublicSenseToMe(fSenseId: number, fWordImageIds: number[], fSenseImageIds: number[] = []) {
+    try {
+      const data = {
+        f_sense_id: fSenseId,
+        f_word_image_ids: fWordImageIds,
+        f_sense_image_ids: fSenseImageIds,
+      };
+
+      // if (literature_id) {
+      //   data["literature_id"] = literature_id
+      // }
+
+      const response = await $api.post("senses/public", data);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

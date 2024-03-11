@@ -21,6 +21,7 @@ export interface ISense {
     lvl: string | null;
     short_cut: string;
     examples: IExample[];
+    in_user_dictionary: boolean;
 }
 
 export interface IExample {

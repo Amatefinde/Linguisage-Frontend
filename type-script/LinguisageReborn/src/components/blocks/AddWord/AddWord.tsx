@@ -11,22 +11,25 @@ import ButtonGroup from "@mui/joy/ButtonGroup";
 import Button from "@mui/joy/Button";
 import {Tooltip} from "@mui/joy";
 import ManageBlock from "./ManageBlock/ManageBlock.tsx";
+import {AddErrorType} from "./AddErrorEnum.ts";
 
 
 interface AddWordInterface {
     defaultQuery?: string;
+    onClose: () => void;
 }
 
 
-const AddWord: React.FC<AddWordInterface> = ({defaultQuery = ""}) => {
+const AddWord: React.FC<AddWordInterface> = ({onClose, defaultQuery = ""}) => {
     const [wordError, setWordError] = useState<TWordError>(null)
     const [wordData, setWordData] = useState<IWordData | null>(null)
     const [pickedFSenseId, setPickedFSenseId] = useState<number | null>(null)
     const [pickedFImageIds, setPickedFSenseIds] = useState<number[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [addError, setAddError] = useState<AddErrorType>(null)
 
     return (
-        <Sheet className={classes.container} sx={{padding: "35px", border: "none"}}>
+        <Sheet className={classes.container} sx={{padding: "15px", border: "none"}}>
             <Sheet sx={{
                 width: 300,
                 border: "none",
@@ -47,6 +50,7 @@ const AddWord: React.FC<AddWordInterface> = ({defaultQuery = ""}) => {
                         <Pronunciation wordData={wordData}/>
                         < SenseList
                             wordData={wordData}
+                            setAddError={setAddError}
                             pickedFSenseId={pickedFSenseId}
                             setPickedFSenseId={setPickedFSenseId}
                         />
@@ -61,7 +65,7 @@ const AddWord: React.FC<AddWordInterface> = ({defaultQuery = ""}) => {
                         pickedFImageIds={pickedFImageIds}
                         setPickedFSenseIds={setPickedFSenseIds}
                     />
-                    <ManageBlock pickedFSenseId={pickedFSenseId} pickedFImageIds={pickedFImageIds}/>
+                    <ManageBlock setAddError={setAddError} pickedFSenseId={pickedFSenseId} pickedFImageIds={pickedFImageIds} onClose={onClose} addError={addError} setWordData={setWordData}/>
                 </div>
             }
 
