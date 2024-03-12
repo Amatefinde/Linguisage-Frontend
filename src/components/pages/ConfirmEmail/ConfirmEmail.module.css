@@ -1,0 +1,31 @@
+.container {
+    width: 1400px;
+    margin: 0 auto;
+}
+
+.text {
+    color: #646464;
+    margin: 35px;
+    text-align: center;
+    font-size: 40px;
+    font-family: Gilroy-medium;
+    font-weight: 500;
+}
+
+.userEmail {
+    font-family: Gilroy-Bold;
+    color: #5f8eed;
+}
+
+.title {
+    margin: 40px;
+    font-size: 90px;
+    text-align: center;
+    font-family: Gilroy-Bold;
+    color: #5f8eed;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
