@@ -9,7 +9,7 @@ const Header = () => {
   // const { currentPage, setCurrentPage } = useContext(ApplicationContext);
 
   const toLiterature = () => {
-    navigate("/literature");
+    // navigate("/literature");
   };
 
   const toProfile = () => {
@@ -21,7 +21,7 @@ const Header = () => {
   };
 
   const toTraining = () => {
-    navigate("/training");
+    // navigate("/training");
   };
 
   return (
