@@ -7,7 +7,7 @@ import {AddErrorType} from "../AddErrorEnum.ts";
 
 interface SensesInterface {
     wordData: IWordData;
-    pickedFSenseId: number;
+    pickedFSenseId: number | null;
     setPickedFSenseId: (value: number) => void;
     setAddError: (value: AddErrorType) => void;
 }

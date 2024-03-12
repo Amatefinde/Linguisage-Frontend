@@ -1,9 +1,6 @@
-import React, {useState} from "react";
 import "./main.css";
 import UserMainPage from "./components/pages/UserMainPage/UserMainPage";
 import useAutoAuth from "./hooks/useAutoAuth";
-import { useRef } from "react";
-import ePub from 'epubjs';
 import Header from "./components/blocks/Header/Header.tsx";
 
 const App = () => {

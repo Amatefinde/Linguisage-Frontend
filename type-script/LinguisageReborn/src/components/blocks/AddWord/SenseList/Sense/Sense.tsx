@@ -10,8 +10,8 @@ import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlin
 
 interface SenseInterface {
     sense: ISense;
-    pickedFSenseId: number;
-    setPickedFSenseId: (value: number) => void;
+    pickedFSenseId: number | null;
+    setPickedFSenseId: (value: number| null) => void;
     setAddError: (value: AddErrorType) => void;
 }
 

@@ -6,6 +6,7 @@ import Sheet from "@mui/joy/Sheet";
 import SenseCardList from "./SenseCardList/SenseCardList.tsx";
 import WordService from "../../../http/services/WordService.ts";
 import {IUserSenses} from "../../../types/UserSensesInterface.ts";
+import ImageCarousel from "./SenseCard/ImageCarousel/ImageCarousel.tsx";
 
 const DictionaryPage = () => {
     const [senses, setSenses] = useState<IUserSenses | null>(null)
