@@ -18,7 +18,7 @@ const LastBook = () => {
     const [book, setBook] = useState<BookInterface | undefined | null>(undefined)
     useEffect(() => {
         BookService.get_last_book()
-            .then(book => setBook({...book, ...mockFieldMixin}))
+            .then(book => setBook({...book, ...mockFieldMixin})).catch()
     }, []);
   
   
@@ -98,7 +98,7 @@ const LastBook = () => {
         </>
     );
     
-    return <section className={classes.LastBook}>{component}</section>;
+    return book && <section className={classes.LastBook}>{component}</section>;
 };
 
 export default LastBook;
