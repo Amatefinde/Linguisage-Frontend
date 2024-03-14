@@ -1,1 +1,1 @@
-Prototype version - https://lenya.papiros.volsk.cloudns.biz
+Prototype version - http//linguisage.ru
