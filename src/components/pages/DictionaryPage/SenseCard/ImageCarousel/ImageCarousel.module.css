@@ -1,3 +1,11 @@
 .carousel {
-    width: 500px;
+    width: 600px;
+    height: 230px;
+    background: #F0F4F8;
+    border-radius: 20px;
+}
+
+.carouselSlide {
+    width: auto;
+
 }

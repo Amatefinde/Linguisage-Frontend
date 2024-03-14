@@ -4,10 +4,12 @@ import Option from '@mui/joy/Option';
 import classes from "./Filters.module.css"
 import {Box, Checkbox, Chip, List, ListItem} from "@mui/joy";
 import Typography from '@mui/material/Typography/Typography';
+import Button from "@mui/joy/Button";
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
 const Filters = () => {
     const sx = {
-        width: 200,
+        width: 215,
         borderRadius: 25,
     }
 
@@ -56,6 +58,8 @@ const Filters = () => {
                     </List>
                 </div>
             </Box>
+            <Button startDecorator={<AddRoundedIcon/>} sx={{borderRadius: 20, width: "250px"}} variant={"soft"}>Add new manually</Button>
+            <Button startDecorator={<AddRoundedIcon/>} sx={{borderRadius: 20, width: "290px"}} variant={"soft"}>Add new by description</Button>
         </div>
     );
 };
