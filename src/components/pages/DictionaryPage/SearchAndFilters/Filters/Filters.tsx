@@ -7,15 +7,16 @@ import Typography from '@mui/material/Typography/Typography';
 import Button from "@mui/joy/Button";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
-const Filters = () => {
+const Filters = ({setIsAddWordOpen}) => {
     const sx = {
-        width: 215,
+        width: 160,
         borderRadius: 25,
     }
 
 
     return (
-        <div className={classes.filters}>
+        <div className={classes.component}>
+            <div className={classes.filters}>
             <Select slotProps={{
                 listbox: {
                     sx: {
@@ -26,7 +27,7 @@ const Filters = () => {
                 <Option value="new">New ones first</Option>
                 <Option value="old">Old ones first</Option>
             </Select>
-            <Box sx={{ width: 800 }}>
+            <Box >
                 <div role="group" aria-labelledby="topping">
                     <List
                         orientation="horizontal"
@@ -46,7 +47,7 @@ const Filters = () => {
                         ].map((item, index) => (
                             <ListItem key={item}>
                                 <Checkbox
-                                    sx={{width: 40, textAlign: "center"}}
+                                    sx={{width: 30, textAlign: "center"}}
                                     defaultChecked
                                     overlay
                                     disableIcon
@@ -58,8 +59,12 @@ const Filters = () => {
                     </List>
                 </div>
             </Box>
-            <Button startDecorator={<AddRoundedIcon/>} sx={{borderRadius: 20, width: "250px"}} variant={"soft"}>Add new manually</Button>
-            <Button startDecorator={<AddRoundedIcon/>} sx={{borderRadius: 20, width: "290px"}} variant={"soft"}>Add new by description</Button>
+            </div>
+            <div className={classes.addButtons}>
+            <Button onClick={() => setIsAddWordOpen(true)} startDecorator={<AddRoundedIcon/>} sx={{borderRadius: 20}} variant={"soft"}>Add one</Button>
+            <Button startDecorator={<AddRoundedIcon/>} sx={{borderRadius: 20}} variant={"soft"}>Add a few</Button>
+            <Button startDecorator={<AddRoundedIcon/>} sx={{borderRadius: 20}} variant={"soft"}>Add according to description</Button>
+            </div>
         </div>
     );
 };

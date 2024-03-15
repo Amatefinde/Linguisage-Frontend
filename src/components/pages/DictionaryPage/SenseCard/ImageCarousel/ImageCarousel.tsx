@@ -10,9 +10,10 @@ import classes from "./ImageCarousel.module.css"
 
 interface SwiperExampleInterface {
     images: IWordImage[];
+    height: number;
 }
 
-const ImageCarousel: React.FC<SwiperExampleInterface> = ({images}) => {
+const ImageCarousel: React.FC<SwiperExampleInterface> = ({images, height}) => {
     return (
         <Swiper
             slidesPerView={"auto"}
@@ -23,11 +24,12 @@ const ImageCarousel: React.FC<SwiperExampleInterface> = ({images}) => {
             centeredSlides={images.length === 1}
             mousewheel={true}
             modules={[Pagination, Mousewheel]}
+            style={{height: height}}
             className={classes.carousel}
         >
             {images.map(image =>
                 <SwiperSlide key={image.f_image_id} className={classes.carouselSlide}>
-                    <img style={{height: "100%", borderRadius: 20}} src={image.img} alt=""/>
+                    <img key={image.f_image_id} style={{height: "100%", borderRadius: 20}} src={image.img} alt=""/>
                 </SwiperSlide>
             )}
         </Swiper>

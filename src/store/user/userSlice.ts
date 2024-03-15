@@ -1,10 +1,10 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import UserData from "../../types/UserInterface.ts";
+import IUser from "../../types/IUser";
 
 
 interface UserState {
     last_book_id: number | null,
-    userData: UserData | null,
+    userData: IUser | null,
 }
 
 
@@ -17,7 +17,7 @@ const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<UserData>) => {state.userData = action.payload},
+        setUser: (state, action: PayloadAction<IUser>) => {state.userData = action.payload},
         logOut: (state) => {state.userData = null},
     },
 })

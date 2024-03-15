@@ -4,6 +4,7 @@ import Sheet from "@mui/joy/Sheet";
 import React from "react";
 import {IUserSense} from "../../../../../types/UserSensesInterface";
 import classes from "./ChipSheet.module.css"
+import {IconButton} from "@mui/joy";
 
 interface ChipSheetInterface {
     sense: IUserSense;

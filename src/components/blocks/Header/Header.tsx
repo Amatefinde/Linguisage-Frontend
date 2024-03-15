@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import classes from "./Header.module.css";
 import Profile from "./Profile/Profile";
 import { useNavigate } from "react-router-dom";
+import Sheet from "@mui/joy/Sheet";
 // import { ApplicationContext } from "../../../App";
 
 const Header = () => {
   const navigate = useNavigate();
-  // const { currentPage, setCurrentPage } = useContext(ApplicationContext);
 
   const toLiterature = () => {
     // navigate("/literature");

@@ -1,43 +1,108 @@
-import React, { useContext, useState } from "react";
-import classes from "./Profile.module.css";
-import { useNavigate } from "react-router-dom";
+import * as React from 'react';
+import Box from '@mui/joy/Box';
+import Typography from '@mui/joy/Typography';
+import Avatar from '@mui/joy/Avatar';
+import Dropdown from '@mui/joy/Dropdown';
+import Menu from '@mui/joy/Menu';
+import MenuButton from '@mui/joy/MenuButton';
+import MenuItem from '@mui/joy/MenuItem';
+import ListDivider from '@mui/joy/ListDivider';
+import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
+import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
+import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import AuthService from "../../../../http/services/AuthService";
-import ReactLogo from "./profile_icon.svg";
+import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../../store";
 
-const Profile = ({ image }) => {
-  // const { isLogged, setIsLogged } = useContext(ApplicationContext);
-  const navigate = useNavigate();
 
-  const [isMenuActive, setIsMenuActive] = useState(false);
+const Profile = () => {
+    const navigate = useNavigate()
 
-  return (
-    <>
-      <div className={classes.wrapper} onClick={() => {
-        AuthService.logout().finally(
-            () => navigate("/")
-        )
-      }}>
-        <div
-          className={classes.profileButton}
-        >
-          <div className={classes.imageWrapper}>
-            <img src={ReactLogo} alt={"profile img"} className={classes.img} />
-          </div>
-          <div className={classes.arrow}>
-            <svg
-              width="24"
-              height="14"
-              viewBox="0 0 24 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M2 2L12 10.5L22 2" stroke="#a0d5e2" strokeWidth="4" />
-            </svg>
-          </div>
+    async function doLogout() {
+        await AuthService.logout()
+        navigate("/")
+    }
+
+    const user = useSelector((state: RootState) => state.user.userData)
+    console.log(user)
+
+    return (
+        <div>
+            <Dropdown>
+                <MenuButton
+                    variant="soft"
+                    size="lg"
+                    sx={{ maxWidth: '32px', maxHeight: '32px', borderRadius: '9999999px' }}
+                >
+                    <Avatar
+                        src=""
+                        srcSet=""
+                        sx={{ maxWidth: '64px', maxHeight: '64px' }}
+                    />
+                </MenuButton>
+                <Menu
+                    placement="bottom-end"
+                    size="sm"
+                    variant={"soft"}
+                    sx={{
+                        zIndex: '99999',
+                        p: 1,
+                        gap: 1,
+                        '--ListItem-radius': '20px',
+                        borderRadius: "20px"
+                    }}
+                >
+                    <MenuItem>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <Avatar
+                                src=""
+                                srcSet=""
+                                sx={{ borderRadius: '50%' }}
+                            />
+                            <Box sx={{ ml: 1.5 }}>
+                                <Typography level="title-sm" textColor="text.primary">
+                                    {user?.username}
+                                </Typography>
+                                <Typography level="body-xs" textColor="text.tertiary">
+                                    {user?.email}
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </MenuItem>
+                    <ListDivider />
+                    <MenuItem>
+                        <HelpRoundedIcon />
+                        Help
+                    </MenuItem>
+                    <MenuItem>
+                        <SettingsRoundedIcon />
+                        Settings
+                    </MenuItem>
+                    <ListDivider />
+
+                    <MenuItem
+                        component="a"
+                        href="https://google.com"
+                    >
+                        Support us
+                        <OpenInNewRoundedIcon />
+                    </MenuItem>
+                    <ListDivider />
+                    <MenuItem onClick={doLogout}>
+                        <LogoutRoundedIcon />
+                        Log out
+                    </MenuItem>
+                </Menu>
+            </Dropdown>
         </div>
-      </div>
-    </>
-  );
+    );
 };
 
 export default Profile;

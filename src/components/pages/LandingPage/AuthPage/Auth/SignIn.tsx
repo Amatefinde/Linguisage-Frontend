@@ -14,7 +14,7 @@ import {setUser} from "../../../../../store/user/userSlice";
 import AuthService from "../../../../../http/services/AuthService";
 import {useNavigate} from "react-router-dom";
 import {EmailErrorType, PasswordErrorType, PasswordErrorEnum} from "./types";
-import UserInterface from "../../../../../types/UserInterface";
+import IUser from "../../../../../types/IUser.ts";
 
 interface YourComponentProps {
     setCurrentForm: React.Dispatch<React.SetStateAction<formState>>;
@@ -43,7 +43,7 @@ const SignIn: React.FC<YourComponentProps> = ({ setCurrentForm }) => {
             const loginResponse = await AuthService.login(email, password)
             localStorage.setItem("token", loginResponse.access_token)
             localStorage.setItem("email", email)
-            const user: UserInterface = await AuthService.me()
+            const user: IUser = await AuthService.me()
             console.log(user)
             dispatch(setUser(user))
             if (user.is_verified) {

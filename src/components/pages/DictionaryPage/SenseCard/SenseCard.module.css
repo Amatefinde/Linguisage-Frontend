@@ -1,0 +1,8 @@
+.mofifyBlock {
+    position: absolute;
+    top: -2px;
+    right: -10px;
+    z-index: 1;
+    display: flex;
+    grid-gap: 5px;
+}

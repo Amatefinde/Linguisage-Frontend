@@ -3,11 +3,11 @@ import DictionarySearch from "./DictionarySearch/DictionarySearch.tsx";
 import Filters from "./Filters/Filters.tsx";
 import classes from "./SearchAndFilters.module.css"
 
-const SearchAndFilters = () => {
+const SearchAndFilters = ({setIsAddWordOpen}) => {
     return (
         <div className={classes.wrapper}>
             <DictionarySearch/>
-            <Filters/>
+            <Filters setIsAddWordOpen={setIsAddWordOpen}/>
         </div>
     );
 };

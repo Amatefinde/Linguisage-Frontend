@@ -7,10 +7,13 @@ import SenseCardList from "./SenseCardList/SenseCardList.tsx";
 import WordService from "../../../http/services/WordService.ts";
 import {IUserSenses} from "../../../types/UserSensesInterface.ts";
 import ImageCarousel from "./SenseCard/ImageCarousel/ImageCarousel.tsx";
+import AddWord from "../../blocks/AddWord/AddWord";
+import ModalJoyStyled from "../../ui/ModalJoyStyled/ModalJoyStyled";
 
 const DictionaryPage = () => {
     const [senses, setSenses] = useState<IUserSenses | null>(null)
     const [isloading, setIsloading] = useState<boolean>(true)
+    const [isAddWordOpen, setIsAddWordOpen] = useState<boolean>(false)
 
     useEffect(() => {
         try {
@@ -18,6 +21,7 @@ const DictionaryPage = () => {
                 const fetchedSense = await WordService.getMySenses()
                 setSenses(fetchedSense)
             }
+
             fetchSense()
         } catch (e) {
             console.log("Во время фетча словаря пользователя произошла ошибка:", e)
@@ -27,10 +31,13 @@ const DictionaryPage = () => {
 
     return (
         <>
+            <ModalJoyStyled open={isAddWordOpen} onClose={() => setIsAddWordOpen(false)}>
+                <AddWord onClose={() => setIsAddWordOpen(false)}/>
+            </ModalJoyStyled>
             <Header/>
             <div className={classes.container}>
-                <SearchAndFilters/>
-                <SenseCardList senses={senses}/>
+                <SearchAndFilters setIsAddWordOpen={setIsAddWordOpen}/>
+                <SenseCardList senses={senses} />
             </div>
         </>
     );

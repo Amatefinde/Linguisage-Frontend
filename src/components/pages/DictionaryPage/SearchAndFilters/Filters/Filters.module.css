@@ -1,4 +1,15 @@
-.filters {
+.component {
     display: flex;
     grid-gap: 20px;
+    justify-content: space-between;
+}
+
+.addButtons {
+    display: flex;
+    grid-gap: 10px;
+}
+
+.filters {
+    display: flex;
+    grid-gap: 15px;
 }

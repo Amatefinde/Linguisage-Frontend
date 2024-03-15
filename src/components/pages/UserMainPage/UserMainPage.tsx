@@ -4,9 +4,14 @@ import LastBook from "./LastBook/LastBook";
 import UploadBooks from "./UploadBooks/UploadBooks";
 import TrainCard from "./TrainCard/TrainCard";
 import AddWordBlock from "./AddWordBlock/AddWordBlock.tsx";
+import Button from "@mui/joy/Button";
+import useAutoAuth from "../../../hooks/useAutoAuth";
 
 
 const UserMainPage = () => {
+
+    useAutoAuth()
+
     const content = <div
         className={[
             classes.parent,
