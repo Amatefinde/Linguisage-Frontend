@@ -1,3 +1,3 @@
 
 
-export const API_URL: string = "http://linguisage.ru:9300/api/v1/";
+export const API_URL: string = "https://linguisage.ru:9300/api/v1/";
