@@ -1,1 +1,1 @@
-Prototype version - http//linguisage.ru
+Prototype version - https//linguisage.ru
