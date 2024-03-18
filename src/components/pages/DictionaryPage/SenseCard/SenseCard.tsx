@@ -2,12 +2,10 @@ import React, {useEffect, useRef, useState} from 'react';
 import {IUserSense} from "../../../../types/UserSensesInterface.ts";
 import Divider from '@mui/joy/Divider';
 import Typography from "@mui/joy/Typography";
-import {Card, IconButton, List} from "@mui/joy";
-import ListItem from '@mui/joy/ListItem';
+import {Card, IconButton, List, ListItem} from "@mui/joy";
 import Sheet from "@mui/joy/Sheet";
 import ImageCarousel from "./ImageCarousel/ImageCarousel.tsx";
 import ChipSheet from "./ChipSheet/ChipSheet";
-import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import classes from "./SenseCard.module.css"
 
@@ -43,7 +41,9 @@ const SenseCard: React.FC<SenseCardInterface> = ({sense}) => {
                     <Divider inset="none"/>
                     <List size="sm" sx={{mx: '10px'}}>
                         {sense.examples.slice(0, 3).map(example =>
-                                <div key={sense.id} dangerouslySetInnerHTML={{__html: example.html_example}}></div>
+                            <ListItem key={sense.id}>
+                                <div dangerouslySetInnerHTML={{__html: example.html_example}}></div>
+                            </ListItem>
                         )}
                     </List>
                 </Card>
@@ -52,7 +52,6 @@ const SenseCard: React.FC<SenseCardInterface> = ({sense}) => {
                 </div>
                 <div className={classes.mofifyBlock}>
                     <IconButton size={"sm"}><MoreVertRoundedIcon/></IconButton>
-
                 </div>
             </Sheet>
         </Card>
