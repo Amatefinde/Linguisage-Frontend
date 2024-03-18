@@ -9,9 +9,15 @@ import {IUserSenses} from "../../../types/UserSensesInterface.ts";
 import ImageCarousel from "./SenseCard/ImageCarousel/ImageCarousel.tsx";
 import AddWord from "../../blocks/AddWord/AddWord";
 import ModalJoyStyled from "../../ui/ModalJoyStyled/ModalJoyStyled";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "../../../store";
+import {setUserSenses} from "../../../store/userSenses/userSensesSlice";
 
 const DictionaryPage = () => {
-    const [senses, setSenses] = useState<IUserSenses | null>(null)
+
+    const dispatch = useDispatch<AppDispatch>();
+
+    const senses = useSelector((state: RootState) => state.userSense.senses)
     const [isloading, setIsloading] = useState<boolean>(true)
     const [isAddWordOpen, setIsAddWordOpen] = useState<boolean>(false)
 
@@ -19,7 +25,7 @@ const DictionaryPage = () => {
         try {
             async function fetchSense() {
                 const fetchedSense = await WordService.getMySenses()
-                setSenses(fetchedSense)
+                dispatch(setUserSenses(fetchedSense))
             }
 
             fetchSense()

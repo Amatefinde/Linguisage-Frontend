@@ -48,4 +48,18 @@ export default class WordService {
       console.error(error);
     }
   }
+
+  static async deleteSense(senseId: number): Promise<void> {
+    try {
+
+      // if (literature_id) {
+      //   data["literature_id"] = literature_id
+      // }
+
+      const response = await $api.delete(`senses/${senseId}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

@@ -8,16 +8,26 @@ import ImageCarousel from "./ImageCarousel/ImageCarousel.tsx";
 import ChipSheet from "./ChipSheet/ChipSheet";
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import classes from "./SenseCard.module.css"
+import MenuButton from "@mui/joy/MenuButton";
+import Menu from "@mui/joy/Menu";
+import MenuItem from "@mui/joy/MenuItem";
+import Dropdown from "@mui/joy/Dropdown";
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import WordService from "../../../../http/services/WordService.ts";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "../../../../store";
+import {removeUserSense} from "../../../../store/userSenses/userSensesSlice.ts";
+
 
 interface SenseCardInterface {
     sense: IUserSense;
 }
 
-
-
 const SenseCard: React.FC<SenseCardInterface> = ({sense}) => {
     const componentRef = useRef(null);
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+    const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
         if (componentRef.current) {
@@ -25,6 +35,11 @@ const SenseCard: React.FC<SenseCardInterface> = ({sense}) => {
             setDimensions({ width, height });
         }
     }, []);
+
+    function removeSense() {
+        WordService.deleteSense(sense.id)
+        dispatch(removeUserSense(sense.id))
+    }
 
     return (
         <Card size="lg" variant="soft" sx={{borderRadius: 20, position: "relative"}}>
@@ -51,7 +66,36 @@ const SenseCard: React.FC<SenseCardInterface> = ({sense}) => {
                 <ImageCarousel images={sense.word_images} height={dimensions.height}/>
                 </div>
                 <div className={classes.mofifyBlock}>
-                    <IconButton size={"sm"}><MoreVertRoundedIcon/></IconButton>
+                    <Dropdown>
+                        <MenuButton
+                            variant="plain"
+                            size="sm"
+                            sx={{ maxWidth: '32px', maxHeight: '32px', borderRadius: 10 }}
+                        >
+                            <IconButton size={"sm"} sx={{borderRadius: 10}} variant={"plain"}><MoreVertRoundedIcon/></IconButton>
+                        </MenuButton>
+                        <Menu
+                            placement="bottom-end"
+                            size="sm"
+                            variant={"soft"}
+                            sx={{
+                                zIndex: '99999',
+                                p: 0.7,
+                                gap: 0,
+                                '--ListItem-radius': '7px',
+                                borderRadius: "10px"
+                            }}
+                        >
+                            <MenuItem>
+                                <EditRoundedIcon />
+                                Edit
+                            </MenuItem>
+                            <MenuItem onClick={removeSense}>
+                                <DeleteRoundedIcon />
+                                Remove
+                            </MenuItem>
+                        </Menu>
+                    </Dropdown>
                 </div>
             </Sheet>
         </Card>

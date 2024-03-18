@@ -1,15 +1,15 @@
 import React from 'react';
-import {IUserSenses} from "../../../../types/UserSensesInterface.ts";
+import {IUserSense} from "../../../../types/UserSensesInterface.ts";
 import SenseCard from "../SenseCard/SenseCard.tsx";
 import classes from "./SenseCardList.module.css"
 
 interface SenseCardListInterface {
-    senses: IUserSenses | null;
+    senses: IUserSense[];
 }
 
 const SenseCardList: React.FC<SenseCardListInterface> = ({senses}) => {
     return (
-        senses && senses.senses.map(sense => <div className={classes.senseWrapper}><SenseCard key={sense.id} sense={sense}/></div>)
+        senses && senses.map(sense => <div className={classes.senseWrapper} key={sense.id}><SenseCard sense={sense}/></div>)
     );
 };
 
