@@ -12,6 +12,8 @@ import ConfirmEmailRequest from "./components/pages/RequestConfirmEmail/RequestC
 import ConfirmEmail from "./components/pages/ConfirmEmail/ConfirmEmail";
 import AddWord from "./components/blocks/AddWord/AddWord";
 import DictionaryPage from "./components/pages/DictionaryPage/DictionaryPage.tsx";
+import VerticalTrainWordCard from "./components/blocks/TrainWordCard/VerticalTrainWordCard/VerticalTrainWordCard.tsx";
+import TrainPage from "./components/pages/TrainPage/TrainPage.tsx";
 
 
 const router = createBrowserRouter([
@@ -35,6 +37,10 @@ const router = createBrowserRouter([
     {
         path: "/dictionary",
         element: <DictionaryPage/>
+    },
+    {
+        path: "/quick-training",
+        element: <TrainPage/>
     }
 ]);
 

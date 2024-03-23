@@ -34,3 +34,6 @@ export interface IUserSenses {
     senses: IUserSense[];
 }
 
+export interface IUserTrainContent {
+    senses: IUserSense[];
+}

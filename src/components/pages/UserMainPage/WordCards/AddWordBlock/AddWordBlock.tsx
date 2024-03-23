@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import OneSizeBlock from "../OneSizeBlock/OneSizeBlock.tsx";
 import classes from "./AddWordBlock.module.css"
-import ModalJoyStyled from "../../../ui/ModalJoyStyled/ModalJoyStyled.tsx";
-import AddWord from "../../../blocks/AddWord/AddWord.tsx";
+import ModalJoyStyled from "../../../../ui/ModalJoyStyled/ModalJoyStyled.tsx";
+import AddWord from "../../../../blocks/AddWord/AddWord.tsx";
 
 const AddWordBlock = () => {
     const [isAddWordOpen, setIsAddWordOpen] = useState<boolean>(false)

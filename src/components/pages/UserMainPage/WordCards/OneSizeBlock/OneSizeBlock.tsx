@@ -1,5 +1,6 @@
 import classes from "./OneSizeBlock.module.css"
 import React from "react";
+import {Card} from "@mui/joy";
 
 interface OneSizeBlockInterface {
     children: React.ReactNode;
@@ -7,9 +8,9 @@ interface OneSizeBlockInterface {
 
 const OneSizeBlock: React.FC<OneSizeBlockInterface> = ({children}) => {
     return (
-        <div className={classes.OneSizeBlock}>
+        <Card sx={{borderRadius: 20, height: 285, width: 285, padding: 2.5 }} variant={"plain"} >
             {children}
-        </div>
+        </Card>
     );
 };
 

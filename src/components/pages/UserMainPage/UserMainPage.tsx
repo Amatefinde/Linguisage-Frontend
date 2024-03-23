@@ -6,6 +6,7 @@ import TrainCard from "./TrainCard/TrainCard";
 import AddWordBlock from "./AddWordBlock/AddWordBlock.tsx";
 import Button from "@mui/joy/Button";
 import useAutoAuth from "../../../hooks/useAutoAuth";
+import WordCards from "./WordCards/WordCards.tsx";
 
 
 const UserMainPage = () => {
@@ -29,8 +30,7 @@ const UserMainPage = () => {
                 <div className={classes.StartTrain}>
                     <TrainCard/>
                 </div>
-                {/*{problemWords.map(e => <WordCard key={e.id} sense={e}/>)}*/}
-                <AddWordBlock/>
+                <WordCards/>
             </section>
             <div className={classes.otherContent}>
                 {/*<MotivationBlock>*/}
