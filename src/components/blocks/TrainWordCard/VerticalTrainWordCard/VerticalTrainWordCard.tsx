@@ -1,31 +1,32 @@
 import React from 'react';
-import AspectRatio from '@mui/joy/AspectRatio';
-import Button from '@mui/joy/Button';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import CardOverflow from '@mui/joy/CardOverflow';
 import Typography from '@mui/joy/Typography';
 import {IUserSense} from "../../../../types/UserSensesInterface.ts";
+import Divider from "@mui/joy/Divider";
 
 
 interface VerticalTrainWordCardInterface {
     sense: IUserSense;
+    imageUrl?: string;
 }
 
-const VerticalTrainWordCard: React.FC<VerticalTrainWordCardInterface> = ({sense}) => {
-
+const VerticalTrainWordCard: React.FC<VerticalTrainWordCardInterface> = ({sense, imageUrl}) => {
     return (
         <Card
             size="lg"
             variant="plain"
             orientation="horizontal"
             sx={{
+
+                boxShadow: 'lg',
                 textAlign: 'center',
                 height: 430,
-                width: 690,
-                // to make the demo resizable
+                maxWidth: 900,
+                minWidth: 800,
                 resize: 'horizontal',
-                overflow: 'auto',
+                overflow: "hidden"
             }}
         >
             <CardOverflow
@@ -39,37 +40,32 @@ const VerticalTrainWordCard: React.FC<VerticalTrainWordCardInterface> = ({sense}
                     px: 'var(--Card-padding)',
                     padding: 0,
                 }}
-                // src={sense.word_images.pop()}
             >
-                <img style={{height: "100%"}} src={"https://linguisage.ru:9100/static/word_images/nurture_6.jpg"} alt={""}/>
-                {/*<Typography fontSize="xl4" fontWeight="xl" textColor="#fff">*/}
-                {/*    89*/}
-                {/*</Typography>*/}
-                {/*<Typography textColor="primary.200">*/}
-                {/*    FAQs answered, see if yours is one of them.*/}
-                {/*</Typography>*/}
+                <img style={{height: "100%"}} src={imageUrl} alt={""}/>
             </CardOverflow>
-            <CardContent sx={{ gap: 1.5, minWidth: 200 }}>
-
+            <CardContent>
                 <CardContent>
-                    <Typography level="title-lg" fontSize={"xl2"}>{sense?.definition}</Typography>
-                    <Typography fontSize="sm" sx={{ mt: 0.5 }}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor.
-                    </Typography>
+                    <Typography level="title-lg" sx={{textAlign: "start"}} textColor={"#92AFFA"}
+                                fontSize={"xl3"}>Definition</Typography>
+                    <Typography level="body-sm" sx={{textAlign: "start"}}
+                                fontSize={"xl"}>{sense?.definition}</Typography>
+                    {!!sense.examples.length && <>
+                        <Divider/>
+                        <Typography level="title-lg" sx={{textAlign: "start"}} textColor={"#92AFFA"}
+                                    fontSize={"xl3"}>Examples</Typography>
+                        <Typography level="body-sm" sx={{
+                            textAlign: "start", overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                        }} fontSize={"xl"}>
+
+                            {sense?.examples?.slice(0,5)?.map(example =>
+                                <div dangerouslySetInnerHTML={{__html: example.html_example}}></div>
+                            )}
+                        </Typography>
+                    </>}
+
                 </CardContent>
-                <Button
-                    variant="outlined"
-                    color="primary"
-                    sx={{
-                        '--variant-borderWidth': '2px',
-                        borderRadius: 40,
-                        borderColor: 'primary.500',
-                        mx: 'auto',
-                    }}
-                >
-                    See FAQ
-                </Button>
+
             </CardContent>
         </Card>
     );
