@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import classes from "./TrainCard.module.css"
 import YellowButton from "../../../ui/Buttons/YellowButton/YellowButton";
+import {useNavigate} from "react-router-dom";
 
 
 const TrainCard = () => {
@@ -17,6 +18,9 @@ const TrainCard = () => {
         setTextColor("#929292")
     }
 
+    const navigate = useNavigate();
+
+
     return (
         <section className={classes.UploadBooks}
                  onMouseEnter={handleMouseEnter}
@@ -27,7 +31,7 @@ const TrainCard = () => {
                     <div className={classes.Title}>Immersive training</div>
                     <div className={classes.SubTitle}>Time to flex your English muscles</div>
                 </div>
-                <YellowButton>Let's go!</YellowButton>
+                <YellowButton onClick={() => navigate("/quick-training")}>Let's go!</YellowButton>
             </div>
         </section>
     );

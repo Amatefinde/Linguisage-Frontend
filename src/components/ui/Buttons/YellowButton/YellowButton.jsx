@@ -2,9 +2,9 @@ import React from 'react';
 import classes from "./Yellow.module.css";
 
 
-const YellowButton = ({children}) => {
+const YellowButton = ({children, ...props}) => {
     return (
-        <button className={classes.Button}>{children}</button>
+        <button {...props} className={classes.Button}>{children}</button>
     );
 };
 
