@@ -4,13 +4,23 @@ import classes from "./AddWordBlock.module.css"
 import ModalJoyStyled from "../../../../ui/ModalJoyStyled/ModalJoyStyled.tsx";
 import AddWord from "../../../../blocks/AddWord/AddWord.tsx";
 
-const AddWordBlock = () => {
+
+interface IAddWordBlockProps {
+    setRerenderWordBlock: (value: (value: boolean) => boolean) => void;
+}
+
+const AddWordBlock: React.FC<IAddWordBlockProps> = ({setRerenderWordBlock}) => {
     const [isAddWordOpen, setIsAddWordOpen] = useState<boolean>(false)
+
+    function onClose() {
+        setIsAddWordOpen(false)
+        setRerenderWordBlock(e => !e)
+    }
 
     return (
         <>
-            <ModalJoyStyled open={isAddWordOpen} onClose={() => setIsAddWordOpen(false)}>
-                <AddWord onClose={() => setIsAddWordOpen(false)}/>
+            <ModalJoyStyled open={isAddWordOpen} onClose={onClose}>
+                <AddWord onClose={onClose}/>
             </ModalJoyStyled>
         <OneSizeBlock>
         <div onClick={() => {setIsAddWordOpen(true)}} className={classes.addWordBlock}>

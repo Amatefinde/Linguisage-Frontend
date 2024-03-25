@@ -11,6 +11,8 @@ interface IWordCardProps {
 
 const WordCards: React.FC<IWordCardProps> = ({setIsWordCardsLoading}) => {
     const [cardSenses, setCardSenses] = useState<IUserSense[] | []>([])
+    const [rerenderWordBlock, setRerenderWordBlock] = useState<boolean>(false)
+
     useEffect(() => {
         async function fetchTrain() {
             try {
@@ -25,12 +27,24 @@ const WordCards: React.FC<IWordCardProps> = ({setIsWordCardsLoading}) => {
             setIsWordCardsLoading(false)
         }
         fetchTrain()
-
     }, []);
 
-    const cards = [<AddWordBlock/>, ...cardSenses.map(sense => <WordCard sense={sense}/>)]
+    useEffect(() => {
+        async function silentFetchTrain() {
+            try {
+                const fetchedCardSenses = await TrainService.getTrain(3)
+                setCardSenses(fetchedCardSenses.senses)
+                console.log(fetchedCardSenses)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        silentFetchTrain()
+    }, [rerenderWordBlock]);
+
+    const cards = [<AddWordBlock setRerenderWordBlock={setRerenderWordBlock}/>, ...cardSenses.map(sense => <WordCard sense={sense}/>)]
     while (cards.length < 4) {
-        cards.unshift(<AddWordBlock/>)
+        cards.unshift(<AddWordBlock setRerenderWordBlock={setRerenderWordBlock}/>)
     }
     return (
         <>
