@@ -51,7 +51,7 @@ const VerticalTrainWordCard: React.FC<VerticalTrainWordCardInterface> = ({sense,
                                 fontSize={"xl"}>{sense?.definition}</Typography>
                     {!!sense.examples.length && <>
                         <Divider/>
-                        <Typography level="title-lg" sx={{textAlign: "start"}} textColor={"#92AFFA"}
+                        <Typography level="title-md" sx={{textAlign: "start"}} textColor={"#92AFFA"}
                                     fontSize={"xl3"}>Examples</Typography>
                         <Typography level="body-sm" sx={{
                             textAlign: "start", overflow: 'hidden',
