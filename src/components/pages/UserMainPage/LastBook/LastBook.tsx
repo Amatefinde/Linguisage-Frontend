@@ -1,36 +1,41 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import classes from "./LastBook.module.css";
-// import {useNavigate} from "react-router-dom";
 import BookInterface from "../../../../types/BookInterface";
 import SkeletonButton from "../../../ui/Buttons/SkeletonButton/SkeletonButton";
 import BookService from "../../../../http/services/BookService";
 import ProgressCircle from "../../../blocks/ProgresCircle/ProgressCircle";
 
 
-const LastBook = () => {
+interface ILastBookProps {
+    setIsLastBookLoading: (value: boolean) => void;
+}
+
+const LastBook: React.FC<ILastBookProps> = ({setIsLastBookLoading}) => {
     const mockFieldMixin = {
         wordLearned: 30,
         wordInProcess: 15,
         wordInQueue: 65,
         wordTotal: 110,
     }
-    
     const [book, setBook] = useState<BookInterface | undefined | null>(undefined)
     useEffect(() => {
+        setIsLastBookLoading(true)
         BookService.get_last_book()
-            .then(book => setBook({...book, ...mockFieldMixin})).catch()
+        .then(book => setBook({...book, ...mockFieldMixin}))
+        .catch()
+        .finally(() => setIsLastBookLoading(false))
     }, []);
-  
-  
+
+
     const read = `Прочитано:\n${60}/${240}`;
-    
-    
+
+
     // const navigate = useNavigate()
     const openBook = () => {
         // localStorage.setItem("currentLiteratureID", String(book.id))
         // navigate("/reader")
     }
-    
+
     const component = (
         <>
             <section className={classes.ReadSection}>
@@ -55,7 +60,7 @@ const LastBook = () => {
                     </div>
                 </div>
             </section>
-            
+
             <section className={classes.TrainSection}>
                 <ProgressCircle
                     success={book?.wordLearned}
@@ -97,7 +102,7 @@ const LastBook = () => {
             </section>
         </>
     );
-    
+
     return book && <section className={classes.LastBook}>{component}</section>;
 };
 

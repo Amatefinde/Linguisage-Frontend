@@ -1,0 +1,9 @@
+.component {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.loadingText {
+    font-size: 35px;
+}

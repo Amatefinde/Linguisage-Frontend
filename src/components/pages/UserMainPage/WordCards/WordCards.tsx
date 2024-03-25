@@ -4,17 +4,25 @@ import TrainService from "../../../../http/services/TrainService.ts";
 import {IUserSense} from "../../../../types/UserSensesInterface.ts";
 import WordCard from "./WordCard/WordCard.tsx";
 
-const WordCards = () => {
+
+interface IWordCardProps {
+    setIsWordCardsLoading: (value: boolean) => void;
+}
+
+const WordCards: React.FC<IWordCardProps> = ({setIsWordCardsLoading}) => {
     const [cardSenses, setCardSenses] = useState<IUserSense[] | []>([])
     useEffect(() => {
         async function fetchTrain() {
             try {
+                setIsWordCardsLoading(true)
                 const fetchedCardSenses = await TrainService.getTrain(3)
                 setCardSenses(fetchedCardSenses.senses)
                 console.log(fetchedCardSenses)
             } catch (e) {
                 console.log(e)
+
             }
+            setIsWordCardsLoading(false)
         }
         fetchTrain()
 
