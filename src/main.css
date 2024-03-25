@@ -5,3 +5,21 @@ body {
     box-sizing: border-box;
     font-family: 'Gilroy', sans-serif;
 }
+
+
+@keyframes smoothAppearAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+.smoothAppear {
+    overflow: hidden;
+    animation-name: smoothAppearAnimation;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}

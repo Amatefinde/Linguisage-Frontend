@@ -26,7 +26,6 @@ const Profile = () => {
     }
 
     const user = useSelector((state: RootState) => state.user.userData)
-    console.log(user)
 
     return (
         <div>

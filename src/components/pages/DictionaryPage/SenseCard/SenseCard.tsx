@@ -56,7 +56,7 @@ const SenseCard: React.FC<SenseCardInterface> = ({sense}) => {
                     <Divider inset="none"/>
                     <List size="sm" sx={{mx: '10px'}}>
                         {sense.examples.slice(0, 3).map(example =>
-                            <ListItem key={sense.id}>
+                            <ListItem key={example.id}>
                                 <div dangerouslySetInnerHTML={{__html: example.html_example}}></div>
                             </ListItem>
                         )}

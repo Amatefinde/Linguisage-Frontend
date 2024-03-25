@@ -12,6 +12,7 @@ import ModalJoyStyled from "../../ui/ModalJoyStyled/ModalJoyStyled";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../../store";
 import {setUserSenses} from "../../../store/userSenses/userSensesSlice";
+import LoaderForPage from "../../ui/LoaderForPage/LoaderForPage.tsx";
 
 const DictionaryPage = () => {
 
@@ -23,11 +24,16 @@ const DictionaryPage = () => {
 
     useEffect(() => {
         try {
+            setIsloading(true)
             async function fetchSense() {
-                const fetchedSense = await WordService.getMySenses()
-                dispatch(setUserSenses(fetchedSense))
-            }
+                try {
+                    const fetchedSense = await WordService.getMySenses()
+                    dispatch(setUserSenses(fetchedSense))
+                } catch (e) {
 
+                }
+                setIsloading(false)
+            }
             fetchSense()
         } catch (e) {
             console.log("Во время фетча словаря пользователя произошла ошибка:", e)
@@ -43,7 +49,7 @@ const DictionaryPage = () => {
             <Header/>
             <div className={classes.container}>
                 <SearchAndFilters setIsAddWordOpen={setIsAddWordOpen}/>
-                <SenseCardList senses={senses} />
+                {isloading ? <LoaderForPage/> : <div className={"smoothAppear"}><SenseCardList senses={senses} /></div>}
             </div>
         </>
     );

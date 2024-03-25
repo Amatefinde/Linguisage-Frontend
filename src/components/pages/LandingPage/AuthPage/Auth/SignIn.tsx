@@ -44,7 +44,6 @@ const SignIn: React.FC<YourComponentProps> = ({ setCurrentForm }) => {
             localStorage.setItem("token", loginResponse.access_token)
             localStorage.setItem("email", email)
             const user: IUser = await AuthService.me()
-            console.log(user)
             dispatch(setUser(user))
             if (user.is_verified) {
                 navigate("/home")

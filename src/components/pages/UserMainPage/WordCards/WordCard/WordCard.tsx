@@ -28,11 +28,11 @@ const WordCard: React.FC<WordCardInterface> = ({sense}) => {
             <Typography level="h2">{sense.word.word}</Typography>
             <Divider inset="none" />
             {sense.definition}
-            {sense.definition.length < 100 && !!sense.examples.length && sense.examples.pop()?.example?.length + sense.definition.length < 147 && (
+            {sense.definition.length < 100 && !!sense.examples.length && sense.examples?.[0]?.example?.length + sense.definition.length < 147 && (
                 <>
                     <Divider inset="none" />
                     {/*<WrapText>*/}
-                    <div dangerouslySetInnerHTML={{__html: sense.examples.pop()?.html_example}}></div>
+                    <div dangerouslySetInnerHTML={{__html: sense.examples?.[0]?.html_example}}></div>
                     {/*</WrapText>*/}
                 </>
             )}

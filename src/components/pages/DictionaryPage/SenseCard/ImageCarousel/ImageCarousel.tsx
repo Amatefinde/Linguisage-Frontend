@@ -29,7 +29,7 @@ const ImageCarousel: React.FC<SwiperExampleInterface> = ({images, height}) => {
         >
             {images.map(image =>
                 <SwiperSlide key={image.f_image_id} className={classes.carouselSlide}>
-                    <img key={image.f_image_id} style={{height: "100%", borderRadius: 20}} src={image.img} alt=""/>
+                    <img style={{height: "100%", borderRadius: 20}} src={image.img} alt=""/>
                 </SwiperSlide>
             )}
         </Swiper>

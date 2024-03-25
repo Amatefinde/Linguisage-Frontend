@@ -14,6 +14,7 @@ import AddWord from "./components/blocks/AddWord/AddWord";
 import DictionaryPage from "./components/pages/DictionaryPage/DictionaryPage.tsx";
 import VerticalTrainWordCard from "./components/blocks/TrainWordCard/VerticalTrainWordCard/VerticalTrainWordCard.tsx";
 import TrainPage from "./components/pages/TrainPage/TrainPage.tsx";
+import PrivateRoute from "./components/PrivateRoute.tsx";
 
 
 const router = createBrowserRouter([
@@ -24,23 +25,23 @@ const router = createBrowserRouter([
     },
     {
         path: "/home",
-        element: <App/>,
+        element: <PrivateRoute ><App/></PrivateRoute>,
     },
     {
         path: "/confirm-email-request",
-        element: <ConfirmEmailRequest/>,
+        element: <PrivateRoute ><ConfirmEmailRequest/></PrivateRoute>,
     },
     {
         path: "/auth",
-        element: <ConfirmEmail/>
+        element: <PrivateRoute ><ConfirmEmail/></PrivateRoute>
     },
     {
         path: "/dictionary",
-        element: <DictionaryPage/>
+        element: <PrivateRoute ><DictionaryPage/></PrivateRoute>
     },
     {
         path: "/quick-training",
-        element: <TrainPage/>
+        element: <PrivateRoute ><TrainPage/></PrivateRoute>
     }
 ]);
 
