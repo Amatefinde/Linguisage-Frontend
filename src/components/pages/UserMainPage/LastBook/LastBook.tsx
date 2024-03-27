@@ -20,7 +20,7 @@ const LastBook: React.FC<ILastBookProps> = ({setIsLastBookLoading}) => {
     const [book, setBook] = useState<BookInterface | undefined | null>(undefined)
     useEffect(() => {
         setIsLastBookLoading(true)
-        BookService.get_last_book()
+        BookService.getLastBook()
         .then(book => setBook({...book, ...mockFieldMixin}))
         .catch()
         .finally(() => setIsLastBookLoading(false))

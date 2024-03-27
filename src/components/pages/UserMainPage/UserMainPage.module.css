@@ -61,7 +61,7 @@
     transition: height;
     opacity: 0;
     background: #5f8eed;
-    min-height: calc(100dvh - 100px);
+    min-height: calc(100dvh - 80px);
 }
 
 

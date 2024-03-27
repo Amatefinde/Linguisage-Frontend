@@ -41,6 +41,7 @@
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.603px;
+    transform: translateY(-1px);
 }
 
 
@@ -52,7 +53,7 @@
     border-right: 0;
     justify-content: center;
     align-items: center;
-    height: 100px;
+    height: 80px;
     background: white;
     width: 100%;
     z-index: 2;
@@ -120,5 +121,6 @@
 
 .navGeneralBar {
     display: flex;
+    justify-content: space-between;
 
 }

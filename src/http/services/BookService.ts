@@ -1,15 +1,16 @@
 import $api from "../index";
 import BookInterface from "../../types/BookInterface";
+import IBookList from "../../types/IBookList.ts";
 
 export default class BookService {
-    static async get_last_book(): Promise<BookInterface> {
+    static async getLastBook(): Promise<BookInterface> {
         return $api.get("/literature/last").then((response) => response.data);
     }
     
     
-    static async add_book(book: File,
-                          filename: string,
-                          setFileLoadPercent: (value: number) => void,
+    static async addBook(book: File,
+                         filename: string,
+                         setFileLoadPercent: (value: number) => void,
     ) {
         const formData = new FormData();
         formData.append("book", book);
@@ -23,10 +24,10 @@ export default class BookService {
             },
         }).then((response) => response.data);
     }
-    //
-    // static async get_book_list(book) {
-    //     return $api.get("/literature/list").then((response) => response.data);
-    // }
+
+    static async getBooks(): Promise<IBookList> {
+        return $api.get("/literature").then((response) => response.data);
+    }
     //
     // static async get_book(id, start_page = 1, end_page = 0) {
     //     const config = {params: {literature_id: id, start_page, end_page}};

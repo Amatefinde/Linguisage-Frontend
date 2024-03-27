@@ -46,7 +46,7 @@ const PopUpUpload: React.FC<PopUpUploadProps> = ({
     
     async function upload_book() {
         setIsModalActive(false)
-        await BookService.add_book(file, fileName, setFileLoadPercent)
+        await BookService.addBook(file, fileName, setFileLoadPercent)
         setFileLoadPercent(null)
     }
     

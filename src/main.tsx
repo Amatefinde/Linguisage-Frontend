@@ -15,6 +15,8 @@ import DictionaryPage from "./components/pages/DictionaryPage/DictionaryPage.tsx
 import VerticalTrainWordCard from "./components/blocks/TrainWordCard/VerticalTrainWordCard/VerticalTrainWordCard.tsx";
 import TrainPage from "./components/pages/TrainPage/TrainPage.tsx";
 import PrivateRoute from "./components/PrivateRoute.tsx";
+import PreTrainPage from "./components/pages/PreTrainPage/PreTrainPage.tsx";
+import LiteraturePage from "./components/pages/LiteraturePage/LiteraturePage.tsx";
 
 
 const router = createBrowserRouter([
@@ -36,12 +38,20 @@ const router = createBrowserRouter([
         element: <PrivateRoute ><ConfirmEmail/></PrivateRoute>
     },
     {
+        path: "/literature",
+        element: <PrivateRoute ><LiteraturePage/></PrivateRoute>
+    },
+    {
         path: "/dictionary",
         element: <PrivateRoute ><DictionaryPage/></PrivateRoute>
     },
     {
         path: "/quick-training",
         element: <PrivateRoute ><TrainPage/></PrivateRoute>
+    },
+    {
+        path: "/pre-training",
+        element: <PrivateRoute ><PreTrainPage/></PrivateRoute>
     }
 ]);
 
