@@ -31,7 +31,7 @@ const TrainCard = () => {
                     <div className={classes.Title}>Immersive training</div>
                     <div className={classes.SubTitle}>Time to flex your English muscles</div>
                 </div>
-                <YellowButton onClick={() => navigate("/quick-training")}>Let's go!</YellowButton>
+                <YellowButton onClick={() => navigate("/training")}>Let's go!</YellowButton>
             </div>
         </section>
     );

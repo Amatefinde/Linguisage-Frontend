@@ -2,15 +2,12 @@ import React from 'react';
 import Chip from "@mui/joy/Chip";
 import Typography from "@mui/joy/Typography";
 import Divider from "@mui/joy/Divider";
-import List from "@mui/joy/List";
-import ListItem from "@mui/joy/ListItem";
-import ListItemDecorator from "@mui/joy/ListItemDecorator";
-import Check from "@mui/icons-material/Check";
 import CardActions from "@mui/joy/CardActions";
 import Button from "@mui/joy/Button";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import Card from "@mui/joy/Card";
-import {IconButton, Slider, ToggleButtonGroup} from "@mui/joy";
+import {Slider, ToggleButtonGroup} from "@mui/joy";
+import CardContent from "@mui/joy/CardContent";
 
 const RandomWords = () => {
     const [value, setValue] = React.useState(['a2', 'b1']);
@@ -18,10 +15,11 @@ const RandomWords = () => {
     return (
         <Card sx={{borderRadius: 20, width: 590, height: 295}} size="lg" variant="outlined">
             <Chip size="sm" variant="outlined" color="neutral">
-                BASIC
+                SURPRISE VOCAB
             </Chip>
             <Typography level="h2">Random words</Typography>
             <Divider inset="none"/>
+            <CardContent orientation={"horizontal"}>
             <ToggleButtonGroup
                 value={value}
                 onChange={(event, newValue) => {
@@ -35,6 +33,8 @@ const RandomWords = () => {
                 <Button value="c1">C1</Button>
                 <Button value="c2">C2</Button>
             </ToggleButtonGroup>
+
+            </CardContent>
             <Divider inset="none"/>
             <CardActions sx={{gap: 5}}>
                 <div>

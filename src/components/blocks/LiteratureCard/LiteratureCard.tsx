@@ -8,6 +8,13 @@ import Typography from '@mui/joy/Typography';
 import BookInterface from "../../../types/BookInterface.ts";
 import {LinearProgress} from "@mui/joy";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import Dropdown from "@mui/joy/Dropdown";
+import MenuButton from "@mui/joy/MenuButton";
+import Menu from "@mui/joy/Menu";
+import MenuItem from "@mui/joy/MenuItem";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
+import LiteratureCardDropdown from "./LiteratureCardDropdown.tsx";
 
 
 interface ILiteratureCardProps {
@@ -39,15 +46,7 @@ const LiteratureCard: React.FC<ILiteratureCardProps> = ({book}) => {
             <div>
                 <Typography level="title-lg">{book.title}</Typography>
                 <Typography level="body-sm">{formatDateRange(book.created_at, book.last_opened_at)}</Typography>
-                <IconButton
-                    aria-label="bookmark Bahamas Islands"
-                    variant="plain"
-                    color="neutral"
-                    size="sm"
-                    sx={{ position: 'absolute', top: '0.875rem', right: '0.5rem' }}
-                >
-                    <DeleteRoundedIcon />
-                </IconButton>
+                <LiteratureCardDropdown/>
             </div>
             <AspectRatio minHeight="240px" maxHeight="400px" >
                 <img

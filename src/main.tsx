@@ -46,7 +46,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute ><DictionaryPage/></PrivateRoute>
     },
     {
-        path: "/quick-training",
+        path: "/training",
         element: <PrivateRoute ><TrainPage/></PrivateRoute>
     },
     {
