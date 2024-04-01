@@ -8,9 +8,7 @@ interface SenseCardListInterface {
 }
 
 const SenseCardList: React.FC<SenseCardListInterface> = ({senses}) => {
-    return (
-        senses && senses.map(sense => <div className={classes.senseWrapper} key={sense.id}><SenseCard sense={sense}/></div>)
-    );
+    return senses && senses.map(sense => <div className={classes.senseWrapper} key={sense.id}><SenseCard sense={sense}/></div>);
 };
 
 export default SenseCardList;

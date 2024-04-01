@@ -18,7 +18,7 @@ const HorizontalTrainWordCard: React.FC<HorizontalTrainWordCardInterface> = ({se
             size="lg"
             variant="plain"
             orientation="horizontal"
-            sx={{background: "white", width: 800, display: "flex", alignItems: "center", gap: 6}}
+            sx={{background: "white", width: 800, display: "flex", alignItems: "center", gap: 6, padding: 0}}
         >
             <Card
                 variant={"soft"}
@@ -52,15 +52,12 @@ const HorizontalTrainWordCard: React.FC<HorizontalTrainWordCardInterface> = ({se
                     {!!sense.examples.length && <>
                         <Typography level="title-lg" sx={{textAlign: "start"}} textColor={"#92AFFA"}  fontSize={"xl3"}>Examples</Typography>
                         <Typography level="body-sm" sx={{textAlign: "start"}} fontSize={"xl"}>
-
                             {sense?.examples?.slice(0, 4)?.map(example =>
-                                <div dangerouslySetInnerHTML={{__html: example.html_example}}></div>
+                                <span key={example.id} dangerouslySetInnerHTML={{__html: example.html_example}}></span>
                             )}
                         </Typography>
                     </>}
-
                 </CardContent>
-
             </CardContent>
         </Card>
     );

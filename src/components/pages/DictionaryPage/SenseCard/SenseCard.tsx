@@ -22,9 +22,10 @@ import {removeUserSense} from "../../../../store/userSenses/userSensesSlice.ts";
 
 interface SenseCardInterface {
     sense: IUserSense;
+    forTraining?: boolean;
 }
 
-const SenseCard: React.FC<SenseCardInterface> = ({sense}) => {
+const SenseCard: React.FC<SenseCardInterface> = ({sense, forTraining}) => {
     const componentRef = useRef(null);
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
     const dispatch = useDispatch<AppDispatch>();
@@ -55,7 +56,7 @@ const SenseCard: React.FC<SenseCardInterface> = ({sense}) => {
                     </Typography>
                     <Divider inset="none"/>
                     <List size="sm" sx={{mx: '10px'}}>
-                        {sense.examples.slice(0, 3).map(example =>
+                        {sense.examples.slice(0, forTraining ? 6: 3).map(example =>
                             <ListItem key={example.id}>
                                 <div dangerouslySetInnerHTML={{__html: example.html_example}}></div>
                             </ListItem>
@@ -66,6 +67,7 @@ const SenseCard: React.FC<SenseCardInterface> = ({sense}) => {
                 <ImageCarousel images={sense.word_images} height={dimensions.height}/>
                 </div>
                 <div className={classes.mofifyBlock}>
+                    {forTraining ||
                     <Dropdown>
                         <MenuButton
                             variant="plain"
@@ -95,7 +97,7 @@ const SenseCard: React.FC<SenseCardInterface> = ({sense}) => {
                                 Remove
                             </MenuItem>
                         </Menu>
-                    </Dropdown>
+                    </Dropdown>}
                 </div>
             </Sheet>
         </Card>
