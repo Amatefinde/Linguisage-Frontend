@@ -1,4 +1,4 @@
-import Chip from "@mui/joy/Chip";
+import Chip, {ChipPropsColorOverrides} from "@mui/joy/Chip";
 import {VolumeUpRounded} from "@mui/icons-material";
 import Sheet from "@mui/joy/Sheet";
 import React from "react";
@@ -6,7 +6,7 @@ import {IUserSense} from "../../../../../types/UserSensesInterface";
 import classes from "./ChipSheet.module.css"
 import {IconButton} from "@mui/joy";
 import {OverridableStringUnion} from "@mui/types";
-import {VariantProp} from "@mui/joy/styles/types";
+import {ColorPaletteProp, VariantProp} from "@mui/joy/styles/types";
 import {SheetPropsVariantOverrides} from "@mui/joy/Sheet/SheetProps";
 
 interface ChipSheetInterface {
@@ -18,6 +18,16 @@ const ChipSheet: React.FC<ChipSheetInterface> = ({sense, variant = "soft"}) => {
         const audio = new Audio(soundUrl);
         audio.play();
     };
+
+    let statusColor: OverridableStringUnion<ColorPaletteProp, ChipPropsColorOverrides>;
+    if (sense.status === "in_process") {
+        statusColor = "warning";
+    } else if (sense.status === "complete") {
+        statusColor = "success";
+    } else {
+        statusColor = "neutral";
+    }
+
     return (
         <Sheet variant={variant} className={classes.chips}>
             {sense.word.sound_us && <Chip onClick={() => playAudio(sense.word.sound_us)} size="sm" variant="soft" color="primary" startDecorator={<VolumeUpRounded/>}>
@@ -32,6 +42,9 @@ const ChipSheet: React.FC<ChipSheetInterface> = ({sense, variant = "soft"}) => {
             {sense.lvl && <Chip size="sm" variant={variant == "plain" ? "soft" : "plain"} color={variant == "plain" ? "neutral" : "primary"}>
                 {sense.lvl}
             </Chip>}
+            <Chip size="sm" variant={"solid"} color={statusColor}>
+                {sense.status}
+            </Chip>
         </Sheet>
     );
 };

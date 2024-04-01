@@ -8,6 +8,7 @@ import TrainingComplete from "./TrainingComplete/TrainingComplete.tsx";
 import EmptyDictionary from "./EmptyDictionary/EmptyDictionary.tsx";
 import WriteWordExercise from "./Exercises/WriteWordExercise/WriteWordExercise";
 import BuildSentenceExercise from "./Exercises/BuildSentenceExercise/BuildSentenceExercise.tsx";
+import shuffleArray from "../../../utils/shuffleArray.ts";
 
 export type trainStageType = "default" | "buildSentence" | "reviewSentence"
 
@@ -38,7 +39,7 @@ const TrainPage = () => {
                     totalAmountOfWords,
                     percentOfStudiedWords
                 );
-                setTrainSenses(fetchedCardSenses.senses);
+                setTrainSenses(shuffleArray(fetchedCardSenses.senses));
             } catch (e) {
                 console.log(e);
             }

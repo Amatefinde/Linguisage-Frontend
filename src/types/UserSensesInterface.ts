@@ -19,6 +19,7 @@ interface Word {
 
 export interface IUserSense {
     id: number;
+    status: "complete" | "in_process" | "in_queue"
     short_cut: null | string;
     part_of_speech: string;
     lvl: null | string;
