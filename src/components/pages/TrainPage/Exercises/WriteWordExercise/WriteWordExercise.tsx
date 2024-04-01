@@ -10,6 +10,7 @@ import classes from "./WriteWordExercise.module.css"
 import TrainService from "../../../../../http/services/TrainService.ts";
 import {keyframes} from "@emotion/react";
 import {trainStageType} from "../../TrainPage.tsx";
+import {maskWordInExample} from "../../../../../utils/maskWordInExample.ts";
 
 
 interface IBuildSentenceExerciseProps {
@@ -22,6 +23,7 @@ interface IBuildSentenceExerciseProps {
 const WriteWordExercise: React.FC<IBuildSentenceExerciseProps> = ({sense, setStage, setCurrentSenseIndex, progressBarValue}) => {
         const [userInput, setUserInput] = useState<string>("");
         const [isCorrect, setIsCorrect] = useState<boolean>(true);
+        const senseWithMaskedExamples = maskWordInExample(sense)
         const handleCheck = () => {
 
             const currentWord = sense.word.word;
@@ -64,7 +66,7 @@ const WriteWordExercise: React.FC<IBuildSentenceExerciseProps> = ({sense, setSta
 
         return (
             <div className={classes.component}>
-                <TrainWordCard sense={sense}/>
+                <TrainWordCard sense={senseWithMaskedExamples}/>
                 <Sheet
                     sx={{
                         display: "flex",
