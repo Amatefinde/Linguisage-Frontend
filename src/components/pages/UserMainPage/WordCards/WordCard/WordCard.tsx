@@ -4,6 +4,7 @@ import {IUserSense} from "../../../../../types/UserSensesInterface";
 import Typography from "@mui/joy/Typography";
 import Divider from '@mui/joy/Divider';
 import ChipSheet from "../../../DictionaryPage/SenseCard/ChipSheet/ChipSheet.tsx";
+import WordSoundBlock from "../../../../blocks/WordSoundBlock/WordSoundBlock.tsx";
 
 interface WordCardInterface {
     sense: IUserSense;
@@ -12,7 +13,8 @@ interface WordCardInterface {
 const WordCard: React.FC<WordCardInterface> = ({sense}) => {
     return (
         <OneSizeBlock>
-            <ChipSheet sense={sense} variant={"plain"}/>
+
+            <WordSoundBlock sense={sense}/>
             <Typography level="h2">{sense.word.word}</Typography>
             <Divider inset="none" />
             {sense.definition}
