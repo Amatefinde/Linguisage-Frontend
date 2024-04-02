@@ -41,6 +41,7 @@ const SignUp: React.FC<YourComponentProps> = ({ setCurrentForm }) => {
         setUsernameError(validateUsername(username))
         
         if (validateEmail(email) || validatePassword(password) || validateUsername(username)) {
+            setIsResponseWaiting(false)
             return
         }
         
