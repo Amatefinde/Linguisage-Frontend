@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import MenuButton from "@mui/joy/MenuButton";
 import IconButton from "@mui/joy/IconButton";
 import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
@@ -7,8 +7,25 @@ import MenuItem from "@mui/joy/MenuItem";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import Dropdown from "@mui/joy/Dropdown";
+import IBook from "../../../types/IBook.ts";
+import BookService from "../../../http/services/BookService.ts";
 
-const LiteratureCardDropdown = () => {
+interface ILiteratureCardDropdownProps {
+    book: IBook;
+    setBooks: React.Dispatch<React.SetStateAction<IBook[]>>;
+}
+
+const LiteratureCardDropdown: React.FC<ILiteratureCardDropdownProps> = ({book, setBooks}) => {
+
+    async function removeBook() {
+        try {
+            await BookService.deleteBook(book.id)
+            setBooks(books => books.filter(candidateBook => candidateBook.id !== book.id))
+        } catch (e) {
+            console.log("Произошла ошибка при удалении книги")
+        }
+    }
+
     return (
         <Dropdown>
             <MenuButton
@@ -34,7 +51,7 @@ const LiteratureCardDropdown = () => {
                     <EditRoundedIcon />
                     Edit
                 </MenuItem>
-                <MenuItem>
+                <MenuItem onClick={removeBook}>
                     <DeleteRoundedIcon />
                     Remove
                 </MenuItem>

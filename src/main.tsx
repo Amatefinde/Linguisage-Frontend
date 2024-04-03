@@ -17,6 +17,7 @@ import TrainPage from "./components/pages/TrainPage/TrainPage.tsx";
 import PrivateRoute from "./components/PrivateRoute.tsx";
 import PreTrainPage from "./components/pages/PreTrainPage/PreTrainPage.tsx";
 import LiteraturePage from "./components/pages/LiteraturePage/LiteraturePage.tsx";
+import BookReaderPage from "./components/pages/BookReaderPage/BookReaderPage.tsx";
 
 
 const router = createBrowserRouter([
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
     {
         path: "/training",
         element: <PrivateRoute ><TrainPage/></PrivateRoute>
+    },
+    {
+        path: "/book-reader",
+        element: <PrivateRoute ><BookReaderPage/></PrivateRoute>
     },
     {
         path: "/pre-training",

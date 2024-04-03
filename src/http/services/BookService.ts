@@ -1,9 +1,9 @@
 import $api from "../index";
-import BookInterface from "../../types/BookInterface";
+import IBook from "../../types/IBook.ts";
 import IBookList from "../../types/IBookList.ts";
 
 export default class BookService {
-    static async getLastBook(): Promise<BookInterface> {
+    static async getLastBook(): Promise<IBook> {
         return $api.get("/literature/last").then((response) => response.data);
     }
     
@@ -28,14 +28,9 @@ export default class BookService {
     static async getBooks(): Promise<IBookList> {
         return $api.get("/literature").then((response) => response.data);
     }
-    //
-    // static async get_book(id, start_page = 1, end_page = 0) {
-    //     const config = {params: {literature_id: id, start_page, end_page}};
-    //     return $api.get("/literature", config).then((response) => response.data);
-    // }
-    //
-    // static async delete_book(id) {
-    //     const config = {params: {literature_id: id}};
-    //     return $api.delete("/literature", config).then((response) => response.data);
-    // }
+
+    static async deleteBook(bookId: number): Promise<void> {
+        return $api.delete(`/literature/${bookId}`).then((response) => response.data);
+    }
+
 }

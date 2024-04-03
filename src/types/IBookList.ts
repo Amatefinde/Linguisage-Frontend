@@ -1,5 +1,5 @@
-import BookInterface from "./BookInterface.ts";
+import IBook from "./IBook.ts";
 
 export default interface IBookList {
-    books: BookInterface[];
+    books: IBook[];
 }

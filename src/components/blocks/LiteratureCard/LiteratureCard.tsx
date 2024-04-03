@@ -5,7 +5,7 @@ import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
-import BookInterface from "../../../types/BookInterface.ts";
+import IBook from "../../../types/IBook.ts";
 import {LinearProgress} from "@mui/joy";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import Dropdown from "@mui/joy/Dropdown";
@@ -18,7 +18,8 @@ import LiteratureCardDropdown from "./LiteratureCardDropdown.tsx";
 
 
 interface ILiteratureCardProps {
-    book: BookInterface
+    book: IBook;
+    setBooks: React.Dispatch<React.SetStateAction<IBook[]>>
 }
 
 function formatDateRange(startDate: string | Date, endDate: string | Date): string {
@@ -40,18 +41,18 @@ function formatDateRange(startDate: string | Date, endDate: string | Date): stri
 
     return formattedDate;
 }
-const LiteratureCard: React.FC<ILiteratureCardProps> = ({book}) => {
+
+const LiteratureCard: React.FC<ILiteratureCardProps> = ({book, setBooks}) => {
     return (
-        <Card sx={{ width: 220 }}>
+        <Card sx={{width: 220}} variant={"soft"}>
             <div>
                 <Typography level="title-lg">{book.title}</Typography>
                 <Typography level="body-sm">{formatDateRange(book.created_at, book.last_opened_at)}</Typography>
-                <LiteratureCardDropdown/>
+                <LiteratureCardDropdown setBooks={setBooks} book={book}/>
             </div>
-            <AspectRatio minHeight="240px" maxHeight="400px" >
+            <AspectRatio minHeight="240px" maxHeight="400px">
                 <img
                     src={book.cover}
-                    srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
                     loading="lazy"
                     alt=""
                 />
@@ -59,14 +60,14 @@ const LiteratureCard: React.FC<ILiteratureCardProps> = ({book}) => {
             <CardContent orientation="horizontal">
                 <div style={{width: "300px"}}>
                     <Typography level="body-sm">Total readed:</Typography>
-                    <LinearProgress determinate value={25} />
+                    <LinearProgress determinate value={25} variant={"solid"}/>
                 </div>
                 <Button
                     variant="solid"
                     size="md"
                     color="primary"
                     aria-label="Explore Bahamas Islands"
-                    sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
+                    sx={{ml: 'auto', alignSelf: 'center', fontWeight: 600}}
                 >
                     Read
                 </Button>

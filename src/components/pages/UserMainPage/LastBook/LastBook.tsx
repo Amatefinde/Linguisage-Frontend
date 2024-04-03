@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import classes from "./LastBook.module.css";
-import BookInterface from "../../../../types/BookInterface";
+import IBook from "../../../../types/IBook.ts";
 import SkeletonButton from "../../../ui/Buttons/SkeletonButton/SkeletonButton";
 import BookService from "../../../../http/services/BookService";
 import ProgressCircle from "../../../blocks/ProgresCircle/ProgressCircle";
@@ -17,7 +17,7 @@ const LastBook: React.FC<ILastBookProps> = ({setIsLastBookLoading}) => {
         wordInQueue: 65,
         wordTotal: 110,
     }
-    const [book, setBook] = useState<BookInterface | undefined | null>(undefined)
+    const [book, setBook] = useState<IBook | undefined | null>(undefined)
     useEffect(() => {
         setIsLastBookLoading(true)
         BookService.getLastBook()

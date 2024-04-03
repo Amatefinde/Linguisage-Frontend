@@ -1,4 +1,4 @@
-export default interface BookInterface {
+export default interface IBook {
     cover: string;
     created_at: Date;
     id: number;

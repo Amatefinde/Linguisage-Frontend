@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import Header from "../../blocks/Header/Header.tsx";
 import LiteratureCard from "../../blocks/LiteratureCard/LiteratureCard.tsx";
 import BookService from "../../../http/services/BookService.ts";
-import BookInterface from "../../../types/BookInterface.ts";
+import IBook from "../../../types/IBook.ts";
 import classes from "./LiteraturePage.module.css"
 import {Stack} from "@mui/joy";
 import LoaderForPage from "../../ui/LoaderForPage/LoaderForPage.tsx";
 
 const LiteraturePage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
-    const [books, setBooks] = useState<BookInterface[] | null>(null)
+    const [books, setBooks] = useState<IBook[] | null>(null)
     console.log(books)
     useEffect(() => {
         async function fetchLiterature() {
@@ -31,7 +31,7 @@ const LiteraturePage = () => {
         <div className={"smoothAppear"}>
         <div className={classes.container}>
             <Stack spacing={2} direction="row" flexWrap="wrap" useFlexGap>
-                {books && books.map(book => <LiteratureCard key={book.id} book={book}/>)}
+                {books && books.map(book => <LiteratureCard setBooks={setBooks} key={book.id} book={book}/>)}
             </Stack>
         </div>
         </div>
