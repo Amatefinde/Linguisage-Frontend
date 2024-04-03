@@ -7,20 +7,18 @@ import Search, {TWordError} from "./Search/Search";
 import ImageList from "./ImageListStyled/ImageList";
 import Pronunciation from "./Pronunciation/Pronunciation";
 import CircularProgress from '@mui/joy/CircularProgress';
-import ButtonGroup from "@mui/joy/ButtonGroup";
-import Button from "@mui/joy/Button";
-import {Tooltip} from "@mui/joy";
 import ManageBlock from "./ManageBlock/ManageBlock.tsx";
 import {AddErrorType} from "./AddErrorEnum.ts";
 
 
 interface AddWordInterface {
-    defaultQuery?: string;
+    setSelections?: React.Dispatch<React.SetStateAction<string>>;
+    selections?: string;
     onClose: () => void;
 }
 
 
-const AddWord: React.FC<AddWordInterface> = ({onClose, defaultQuery = ""}) => {
+const AddWord: React.FC<AddWordInterface> = ({onClose, selections, setSelections}) => {
     const [wordError, setWordError] = useState<TWordError>(null)
     const [wordData, setWordData] = useState<IWordData | null>(null)
     const [pickedFSenseId, setPickedFSenseId] = useState<number | null>(null)
@@ -40,9 +38,10 @@ const AddWord: React.FC<AddWordInterface> = ({onClose, defaultQuery = ""}) => {
             }}>
                 <Search
                     setWordData={setWordData}
-                    defaultQuery={defaultQuery}
                     setWordError={setWordError}
                     setIsLoading={setIsLoading}
+                    selections={selections}
+                    setSelections={setSelections}
                 />
 
                 {wordData?.word && !isLoading &&

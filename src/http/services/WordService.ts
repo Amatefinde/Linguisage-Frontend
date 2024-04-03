@@ -11,7 +11,7 @@ interface SearchWordParams {
 export default class WordService {
   static async searchWord(word: string, context: string = ""): Promise<IWordData> {
     const params: SearchWordParams = {
-      query: word,
+      query: word.trim().toLowerCase(),
     };
 
     if (!!context) {

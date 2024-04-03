@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { IWordData } from '../../../../types/WordInterface.ts';
+import React, {useEffect, useState} from 'react';
+import {IWordData} from '../../../../types/WordInterface.ts';
 import WordService from '../../../../http/services/WordService.ts';
 import StyledInput from './StyledInput';
 import SearchIcon from '@mui/icons-material/Search';
@@ -11,19 +11,25 @@ interface SearchInterface {
     setWordData: (value: IWordData | null) => void;
     setWordError: (value: TWordError) => void;
     setIsLoading: (value: boolean) => void;
-    defaultQuery: string;
+    setSelections?: React.Dispatch<React.SetStateAction<string>>;
+    selections?: string;
 }
 
 const Search: React.FC<SearchInterface> = ({
-                                               setWordData,
-                                               defaultQuery,
-                                               setWordError,
-                                               setIsLoading,
-                                           }) => {
-    const [query, setQuery] = useState<string>(defaultQuery);
+    setWordData,
+    setWordError,
+    setIsLoading,
+    setSelections, selections,
+}) => {
+    let [query, setQuery] = useState<string>("");
     const [isTyping, setIsTyping] = useState<boolean>(false);
-
     let timerId: NodeJS.Timeout;
+    query = selections ? selections : query
+    setQuery = setSelections ? setSelections : setQuery
+
+    useEffect(() => {
+        fetchWord()
+    }, [selections]);
 
     async function fetchWord() {
         if (query === '') {
@@ -73,7 +79,7 @@ const Search: React.FC<SearchInterface> = ({
                     clearTimeout(timerId);
                     setIsTyping(false);
                 }}
-                icon={<SearchIcon />} // Передача значка (иконки) в качестве пропса
+                icon={<SearchIcon/>} // Передача значка (иконки) в качестве пропса
             />
         </>
     );
