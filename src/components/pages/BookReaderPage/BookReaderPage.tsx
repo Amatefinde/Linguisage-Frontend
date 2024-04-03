@@ -34,12 +34,15 @@ const BookReaderPage: React.FC = () => {
     return (
         <>
             <Header/>
-            <div style={{height: 'calc(100vh - 80px)'}}>
+            <div style={{height: 'calc(100vh - 75px)' }}>
                 <ReactReader
+                    epubOptions={{spread: 'none'}}
                     url={bookUrl}
                     location={bookLocation}
                     locationChanged={(epubcfi: string) => setBookLocation(epubcfi)}
                     getRendition={(_rendition: Rendition) => {
+                        _rendition.themes.fontSize("140%")
+
                         setRendition(_rendition)
                     }}
                 />

@@ -15,6 +15,7 @@ import MenuItem from "@mui/joy/MenuItem";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
 import LiteratureCardDropdown from "./LiteratureCardDropdown.tsx";
+import {useNavigate} from "react-router-dom";
 
 
 interface ILiteratureCardProps {
@@ -45,6 +46,13 @@ function formatDateRange(startDate: string | Date, endDate: string | Date): stri
 const LiteratureCard: React.FC<ILiteratureCardProps> = ({book, setBooks}) => {
 
     const slicedTitle = book.title.length > 35 ? book.title.slice(0, 35) + "..." : book.title
+    const navigate = useNavigate()
+
+    function openBook() {
+        // @ts-ignore
+        const queryParams = new URLSearchParams({bookUrl: book?.original_file}).toString();
+        navigate(`/book-reader?${queryParams}`);
+    }
 
     return (
         <Card sx={{width: 220}} variant={"soft"}>
@@ -66,6 +74,8 @@ const LiteratureCard: React.FC<ILiteratureCardProps> = ({book, setBooks}) => {
                     <LinearProgress determinate value={25} variant={"solid"}/>
                 </div>
                 <Button
+                    disabled={!book.is_processed}
+                    onClick={openBook}
                     variant="solid"
                     size="md"
                     color="primary"
