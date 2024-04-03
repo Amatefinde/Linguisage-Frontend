@@ -9,6 +9,7 @@ import ButtonGroup from "@mui/joy/ButtonGroup";
 import ePub, {Book} from "epubjs";
 import BookService from "../../../../../http/services/BookService";
 import ImageWithSmoothLoading from "../../../../ui/ImageWithLoadPlaceholder/ImageWithSmoothLoading";
+import removeFilenameExtension from "../../../../../utils/removeFilenameExtension.ts";
 
 interface PopUpUploadProps {
     file: File;
@@ -16,7 +17,7 @@ interface PopUpUploadProps {
     setFileName: (value: string) => void;
     hiddenFileInput: React.RefObject<HTMLInputElement>;
     setIsModalActive: (value: boolean) => void;
-    setFileLoadPercent: (value: number | null) => void;
+    setFileLoadPercent: React.Dispatch<React.SetStateAction<number | "uploaded">>
 }
 
 const PopUpUpload: React.FC<PopUpUploadProps> = ({
@@ -39,15 +40,15 @@ const PopUpUpload: React.FC<PopUpUploadProps> = ({
         book.coverUrl().then((cover) => setCoverUrl(cover)).catch(() => setCoverUrl(null));
         image = coverUrl && <ImageWithSmoothLoading src={coverUrl} alt={"Here should be cover, but something went wrong"}/>
     }
-    
+
     const handleFileNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setFileName(e.target.value);
+        setFileName(removeFilenameExtension(e.target.value));
     };
     
     async function upload_book() {
         setIsModalActive(false)
         await BookService.addBook(file, fileName, setFileLoadPercent)
-        setFileLoadPercent(null)
+        setFileLoadPercent("uploaded")
     }
     
     

@@ -31,7 +31,7 @@ const UploadBooksContainer = () => {
                 />
             </ModalJoyStyled>
 
-            {fileLoadPercent ? (
+            {typeof fileLoadPercent == "number" ? (
                 <BookLoading fileLoadPercent={fileLoadPercent}/>
             ) : (
                 <UploadWidget

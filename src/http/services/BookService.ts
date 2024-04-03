@@ -20,7 +20,6 @@ export default class BookService {
             onUploadProgress: (progressEvent) => {
                 const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
                 setFileLoadPercent(percentCompleted)
-                console.log(percentCompleted)
             },
         }).then((response) => response.data);
     }

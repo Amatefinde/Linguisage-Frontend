@@ -19,7 +19,7 @@ import LiteratureCardDropdown from "./LiteratureCardDropdown.tsx";
 
 interface ILiteratureCardProps {
     book: IBook;
-    setBooks: React.Dispatch<React.SetStateAction<IBook[]>>
+    setBooks: React.Dispatch<React.SetStateAction<IBook[] | undefined>>
 }
 
 function formatDateRange(startDate: string | Date, endDate: string | Date): string {
@@ -43,10 +43,13 @@ function formatDateRange(startDate: string | Date, endDate: string | Date): stri
 }
 
 const LiteratureCard: React.FC<ILiteratureCardProps> = ({book, setBooks}) => {
+
+    const slicedTitle = book.title.length > 35 ? book.title.slice(0, 35) + "..." : book.title
+
     return (
         <Card sx={{width: 220}} variant={"soft"}>
-            <div>
-                <Typography level="title-lg">{book.title}</Typography>
+            <div style={{height: 60}}>
+                <Typography sx={{marginRight: 3, overflow: "hidden"}} level="title-lg">{slicedTitle}</Typography>
                 <Typography level="body-sm">{formatDateRange(book.created_at, book.last_opened_at)}</Typography>
                 <LiteratureCardDropdown setBooks={setBooks} book={book}/>
             </div>
