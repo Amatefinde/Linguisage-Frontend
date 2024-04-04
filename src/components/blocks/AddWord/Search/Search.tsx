@@ -28,7 +28,10 @@ const Search: React.FC<SearchInterface> = ({
     setQuery = setSelections ? setSelections : setQuery
 
     useEffect(() => {
-        fetchWord()
+        if (!isTyping) {
+            fetchWord()
+        }
+
     }, [selections]);
 
     async function fetchWord() {

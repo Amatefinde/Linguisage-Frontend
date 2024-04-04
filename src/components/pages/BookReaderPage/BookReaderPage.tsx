@@ -29,7 +29,7 @@ const BookReaderPage: React.FC = () => {
                     //     "text": rendition.getRange(cfiRange).toString(),
                     //     "context": contents.content?.innerText
                     // })
-                    setSelections(rendition.getRange(cfiRange).toString())
+                    setSelections(rendition.getRange(cfiRange).toString().trim())
                 }
             }
 
