@@ -13,7 +13,6 @@ interface WordCardInterface {
 const WordCard: React.FC<WordCardInterface> = ({sense}) => {
     return (
         <OneSizeBlock>
-
             <WordSoundBlock sense={sense}/>
             <Typography level="h2">{sense.word.word}</Typography>
             <Divider inset="none" />

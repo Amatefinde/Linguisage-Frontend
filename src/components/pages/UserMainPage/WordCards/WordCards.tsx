@@ -34,7 +34,6 @@ const WordCards: React.FC<IWordCardProps> = ({setIsWordCardsLoading}) => {
             try {
                 const fetchedCardSenses = await TrainService.getTrain(3)
                 setCardSenses(fetchedCardSenses.senses)
-                console.log(fetchedCardSenses)
             } catch (e) {
                 console.log(e)
             }
