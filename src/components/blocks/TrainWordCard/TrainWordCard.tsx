@@ -28,7 +28,7 @@ const TrainWordCard: React.FC<TrainWordCardInterface> = ({sense}) => {
     image.onload = function () {
         const width = this.width;
         const height = this.height;
-        if (width > height * 1.25 && sense.examples.length != 0) {
+        if (width > height * 1.25 || sense.examples.length == 0) {
             setImageType("horizontal");
         } else {
             setImageType("vertical");

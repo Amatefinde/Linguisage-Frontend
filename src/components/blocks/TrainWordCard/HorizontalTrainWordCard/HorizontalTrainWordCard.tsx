@@ -18,7 +18,15 @@ const HorizontalTrainWordCard: React.FC<HorizontalTrainWordCardInterface> = ({se
             size="lg"
             variant="plain"
             orientation="horizontal"
-            sx={{background: "white", width: 800, display: "flex", alignItems: "center", gap: 6, padding: 0}}
+            sx={{
+                background: "white",
+                width: 800,
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                padding: 0,
+                justifyContent: "center"
+            }}
         >
             <Card
                 variant={"soft"}
@@ -27,7 +35,7 @@ const HorizontalTrainWordCard: React.FC<HorizontalTrainWordCardInterface> = ({se
                     borderRadius: 20,
                     boxShadow: 'md',
                     textAlign: 'center',
-                    width: 308,
+                    width: sense.examples.length == 0 ? 600 : 308,
                     minWidth: 308,
                     resize: 'horizontal',
                     overflow: "hidden"
@@ -47,18 +55,20 @@ const HorizontalTrainWordCard: React.FC<HorizontalTrainWordCardInterface> = ({se
                 </CardOverflow>
                 <Typography level="body-sm" sx={{textAlign: "start"}} fontSize={"xl"}>{sense?.definition}</Typography>
             </Card>
-            <CardContent>
+            {!!sense.examples.length && <>
                 <CardContent>
-                    {!!sense.examples.length && <>
-                        <Typography level="title-lg" sx={{textAlign: "start"}} textColor={"#92AFFA"}  fontSize={"xl3"}>Examples</Typography>
+                    <CardContent>
+
+                        <Typography level="title-lg" sx={{textAlign: "start"}} textColor={"#92AFFA"}
+                                    fontSize={"xl3"}>Examples</Typography>
                         <Typography level="body-sm" sx={{textAlign: "start"}} fontSize={"xl"}>
                             {sense?.examples?.slice(0, 4)?.map(example =>
                                 <span key={example.id} dangerouslySetInnerHTML={{__html: example.html_example}}></span>
                             )}
                         </Typography>
-                    </>}
+                    </CardContent>
                 </CardContent>
-            </CardContent>
+            </>}
         </Card>
     );
 };
