@@ -19,26 +19,24 @@ const DictionaryPage = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const senses = useSelector((state: RootState) => state.userSense.senses)
-    const [isloading, setIsloading] = useState<boolean>(true)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
     const [isAddWordOpen, setIsAddWordOpen] = useState<boolean>(false)
 
     useEffect(() => {
         try {
-            setIsloading(true)
+            setIsLoading(true)
             async function fetchSense() {
                 try {
                     const fetchedSense = await WordService.getMySenses()
                     dispatch(setUserSenses(fetchedSense))
                 } catch (e) {
-
                 }
-                setIsloading(false)
+                setIsLoading(false)
             }
             fetchSense()
         } catch (e) {
             console.log("Во время фетча словаря пользователя произошла ошибка:", e)
         }
-
     }, []);
 
     return (
@@ -49,7 +47,7 @@ const DictionaryPage = () => {
             <Header/>
             <div className={classes.container}>
                 <SearchAndFilters setIsAddWordOpen={setIsAddWordOpen}/>
-                {isloading ? <LoaderForPage/> : <div className={"smoothAppear"}><SenseCardList senses={senses} /></div>}
+                {isLoading ? <LoaderForPage/> : <div className={"smoothAppear"}><SenseCardList senses={senses} /></div>}
             </div>
         </>
     );

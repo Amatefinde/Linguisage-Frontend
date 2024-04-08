@@ -21,6 +21,7 @@ const RandomWords = () => {
             <Divider inset="none"/>
             <CardContent orientation={"horizontal"}>
             <ToggleButtonGroup
+                sx={{borderRadius: 15}}
                 value={value}
                 onChange={(event, newValue) => {
                     setValue(newValue);
