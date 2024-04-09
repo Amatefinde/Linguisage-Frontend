@@ -9,32 +9,13 @@ import {setUserSenses} from "../../../../../store/userSenses/userSensesSlice.ts"
 import useDebouncing from "../../../../../hooks/useDebouncing.ts";
 
 interface IDictionarySearchProps {
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+    fetchSense: Function;
+    querySearch: string;
+    setQuerySearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const DictionarySearch: React.FC<IDictionarySearchProps> = ({setIsLoading}) => {
-    const [querySearch, setQuerySearch] = useState<string>("")
-    const dispatch = useDispatch<AppDispatch>();
+const DictionarySearch: React.FC<IDictionarySearchProps> = ({fetchSense, querySearch, setQuerySearch}) => {
     const [isTyping, setIsTyping] = useState<boolean>(false)
-
-    async function fetchSense() {
-        setIsLoading(true)
-        try {
-            const fetchedSense = await WordService.getMySenses(querySearch)
-            dispatch(setUserSenses(fetchedSense))
-        } catch (e) {
-        }
-        setIsLoading(false)
-    }
-
-    useEffect(() => {
-        try {
-            fetchSense()
-        } catch (e) {
-            console.log("Во время фетча словаря пользователя произошла ошибка:", e)
-        }
-    }, []);
-
     const timerId = useDebouncing(fetchSense, isTyping, setIsTyping, querySearch)
 
     return (

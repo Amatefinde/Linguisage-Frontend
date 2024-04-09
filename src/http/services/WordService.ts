@@ -1,7 +1,8 @@
 import $api from "../index.js";
 import {IWordData} from "../../types/WordInterface.ts";
 import {IUserSenses} from "../../types/UserSensesInterface.ts";
-
+import {IWordStatus} from "../../types/IWordStatus.ts";
+import qs from 'qs';
 
 interface SearchWordParams {
   query: string;
@@ -24,14 +25,21 @@ export default class WordService {
     });
   }
 
-  static async getMySenses(search_query?: string): Promise<IUserSenses> {
-    const params = {query: search_query}
+  static async getMySenses(search_query?: string, wordStatusFilter?: IWordStatus[]): Promise<IUserSenses> {
+    const params = {
+      query: search_query?.length == 0 ? undefined : search_query,
+      sense_status: wordStatusFilter
+    };
 
-    return $api.get("senses", { params }).then((response) => {
+    const options = {
+      params,
+      paramsSerializer: params => qs.stringify(params, { arrayFormat: 'repeat' })
+    };
+
+    return $api.get("senses", options).then((response) => {
       return response.data;
     });
   }
-
   static async addPublicSenseToMe(fSenseId: number, fWordImageIds: number[], fSenseImageIds: number[] = []) {
     try {
       const data = {

@@ -1,3 +1,5 @@
+import {IWordStatus} from "./IWordStatus.ts";
+
 interface WordImage {
     img: string;
     is_public: boolean;
@@ -19,7 +21,7 @@ interface Word {
 
 export interface IUserSense {
     id: number;
-    status: "complete" | "in_process" | "in_queue"
+    status: IWordStatus
     short_cut: null | string;
     part_of_speech: string;
     lvl: null | string;
