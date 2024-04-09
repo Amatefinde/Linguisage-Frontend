@@ -16,28 +16,15 @@ import LoaderForPage from "../../ui/LoaderForPage/LoaderForPage.tsx";
 
 const DictionaryPage = () => {
 
-    const dispatch = useDispatch<AppDispatch>();
 
     const senses = useSelector((state: RootState) => state.userSense.senses)
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [isAddWordOpen, setIsAddWordOpen] = useState<boolean>(false)
 
-    useEffect(() => {
-        try {
-            setIsLoading(true)
-            async function fetchSense() {
-                try {
-                    const fetchedSense = await WordService.getMySenses()
-                    dispatch(setUserSenses(fetchedSense))
-                } catch (e) {
-                }
-                setIsLoading(false)
-            }
-            fetchSense()
-        } catch (e) {
-            console.log("Во время фетча словаря пользователя произошла ошибка:", e)
-        }
-    }, []);
+
+
+
+
 
     return (
         <>
@@ -46,7 +33,7 @@ const DictionaryPage = () => {
             </ModalJoyStyled>
             <Header/>
             <div className={classes.container}>
-                <SearchAndFilters setIsAddWordOpen={setIsAddWordOpen}/>
+                <SearchAndFilters setIsAddWordOpen={setIsAddWordOpen} setIsLoading={setIsLoading}/>
                 {isLoading ? <LoaderForPage/> : <div className={"smoothAppear"}><SenseCardList senses={senses} /></div>}
             </div>
         </>

@@ -4,6 +4,7 @@ import WordService from '../../../../http/services/WordService.ts';
 import StyledInput from './StyledInput';
 import SearchIcon from '@mui/icons-material/Search';
 import RoundedInput from "../../../ui/RoundedInput/RoundedInput.tsx";
+import useDebouncing from "../../../../hooks/useDebouncing.ts";
 
 export type TWordError = null | 'NOT_FOUND' | 'OTHER';
 
@@ -23,7 +24,6 @@ const Search: React.FC<SearchInterface> = ({
 }) => {
     let [query, setQuery] = useState<string>("");
     const [isTyping, setIsTyping] = useState<boolean>(false);
-    let timerId: NodeJS.Timeout;
     query = selections ? selections : query
     setQuery = setSelections ? setSelections : setQuery
 
@@ -57,17 +57,9 @@ const Search: React.FC<SearchInterface> = ({
         setIsLoading(false);
     }
 
-    useEffect(() => {
-        if (isTyping) {
-            timerId = setTimeout(() => {
-                fetchWord();
-                setIsTyping(false);
-            }, 500);
-        }
-        return () => {
-            clearTimeout(timerId);
-        };
-    }, [isTyping, query]);
+    let timerId = useDebouncing(fetchWord, isTyping, setIsTyping, query)
+
+
 
     return (
         <>

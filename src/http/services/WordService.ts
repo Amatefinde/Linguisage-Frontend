@@ -24,8 +24,10 @@ export default class WordService {
     });
   }
 
-  static async getMySenses(): Promise<IUserSenses> {
-    return $api.get("senses").then((response) => {
+  static async getMySenses(search_query?: string): Promise<IUserSenses> {
+    const params = {query: search_query}
+
+    return $api.get("senses", { params }).then((response) => {
       return response.data;
     });
   }
