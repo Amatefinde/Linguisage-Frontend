@@ -36,7 +36,6 @@ const RandomWords = () => {
             </ToggleButtonGroup>
 
             </CardContent>
-            <Divider inset="none"/>
             <CardActions sx={{gap: 5}}>
                 <div>
                     <Typography level="title-lg" fontSize={16}>Number of words</Typography>

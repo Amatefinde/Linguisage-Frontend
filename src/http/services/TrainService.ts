@@ -1,5 +1,5 @@
 import $api from "../index.js";
-import {IUserSense, IUserTrainContent} from "../../types/UserSensesInterface";
+import {IUserSense, IUserSenses} from "../../types/UserSensesInterface";
 import IReview from "../../types/IReview.ts";
 
 export default class TrainService {
@@ -13,7 +13,7 @@ export default class TrainService {
     //   });
     // }
 
-    static async getTrain(totalAmountOfWords: number, percentOfStudiedWords: number): Promise<IUserTrainContent> {
+    static async getTrain(totalAmountOfWords: number, percentOfStudiedWords: number): Promise<IUserSenses> {
         const params = {
             total_amount_of_words: totalAmountOfWords,
             percent_of_studied_words: percentOfStudiedWords
@@ -30,7 +30,7 @@ export default class TrainService {
         });
     }
 
-    static async calculate(){
+    static async calculate(): Promise<IUserSenses> {
         return $api.post("/training/calculate").then((response) => {
             return response.data;
         });

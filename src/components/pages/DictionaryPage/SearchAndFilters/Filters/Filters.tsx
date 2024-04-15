@@ -1,25 +1,37 @@
-import React from 'react';
+import React, {useMemo, useState} from 'react';
 import Select from "@mui/joy/Select";
 import Option from '@mui/joy/Option';
 import classes from "./Filters.module.css"
-import { ToggleButtonGroup, Tooltip} from "@mui/joy";
+import {ToggleButtonGroup, Tooltip} from "@mui/joy";
 import Button from "@mui/joy/Button";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import {IWordStatus} from "../../../../../types/IWordStatus.ts";
+import {IUserSense} from "../../../../../types/UserSensesInterface.ts";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../../../store";
+import ISenseFilter from "../../../../../types/ISenseFilter.ts";
 
 
 interface IFiltersProps {
     setIsAddWordOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    setWordStatusFilter:  React.Dispatch<React.SetStateAction<IWordStatus[]>>;
+    setWordStatusFilter: React.Dispatch<React.SetStateAction<IWordStatus[]>>;
     wordStatusFilter: IWordStatus[];
+    filter: ISenseFilter;
+    setFilter: React.Dispatch<React.SetStateAction<ISenseFilter>>;
 }
 
-const Filters: React.FC<IFiltersProps> = ({setIsAddWordOpen, setWordStatusFilter, wordStatusFilter}) => {
+const Filters: React.FC<IFiltersProps> = ({
+    setIsAddWordOpen,
+    setWordStatusFilter, 
+    wordStatusFilter,
+    setFilter, filter,
+}) => {
     const sx = {
         width: 160,
         borderRadius: 25,
     }
-
+    const [dateSort, setDateSort] = useState<"new" | "old">("new")
+    
     return (
         <div className={classes.component}>
             <div className={classes.filters}>
@@ -29,7 +41,9 @@ const Filters: React.FC<IFiltersProps> = ({setIsAddWordOpen, setWordStatusFilter
                             borderRadius: '15px',
                         },
                     },
-                }} variant={"outlined"} sx={sx} defaultValue="new">
+                }} variant={"soft"} sx={sx} value={filter.created_at} onChange={(e, newValue) => setFilter({
+                    ...filter, "created_at": newValue
+                })}>
                     <Option value="new">New ones first</Option>
                     <Option value="old">Old ones first</Option>
                 </Select>

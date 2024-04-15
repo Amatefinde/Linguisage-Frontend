@@ -31,12 +31,9 @@ export interface IUserSense {
     sense_images: any[]; // Assuming the type of sense_images is an array of any
     word: Word;
     examples: Example[];
+    created_at: Date;
 }
 
 export interface IUserSenses {
-    senses: IUserSense[];
-}
-
-export interface IUserTrainContent {
     senses: IUserSense[];
 }

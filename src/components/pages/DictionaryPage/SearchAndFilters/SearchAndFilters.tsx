@@ -7,15 +7,20 @@ import {AppDispatch} from "../../../../store";
 import WordService from "../../../../http/services/WordService.ts";
 import {setUserSenses} from "../../../../store/userSenses/userSensesSlice.ts";
 import {IWordStatus} from "../../../../types/IWordStatus.ts";
+import ISenseFilter from "../../../../types/ISenseFilter.ts";
 
-
-
-
-const SearchAndFilters = ({setIsAddWordOpen, setIsLoading}) => {
-
+interface ISearchAndFiltersProps {
+    filter: ISenseFilter;
+    setFilter: React.Dispatch<React.SetStateAction<ISenseFilter>>;
+    setIsAddWordOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const SearchAndFilters: React.FC<ISearchAndFiltersProps> = ({setIsAddWordOpen, setIsLoading, filter, setFilter}) => {
     const dispatch = useDispatch<AppDispatch>();
     const [querySearch, setQuerySearch] = useState<string>("")
     const [wordStatusFilter, setWordStatusFilter] = React.useState<IWordStatus[]>(["in_queue", "in_process"]);
+
+
     async function fetchSense() {
         setIsLoading(true)
         try {
@@ -37,7 +42,7 @@ const SearchAndFilters = ({setIsAddWordOpen, setIsLoading}) => {
     return (
         <div className={classes.wrapper}>
             <DictionarySearch setQuerySearch={setQuerySearch} querySearch={querySearch} fetchSense={fetchSense}/>
-            <Filters setIsAddWordOpen={setIsAddWordOpen} wordStatusFilter={wordStatusFilter} setWordStatusFilter={setWordStatusFilter}/>
+            <Filters filter={filter} setFilter={setFilter} setIsAddWordOpen={setIsAddWordOpen} wordStatusFilter={wordStatusFilter} setWordStatusFilter={setWordStatusFilter}/>
         </div>
     );
 };

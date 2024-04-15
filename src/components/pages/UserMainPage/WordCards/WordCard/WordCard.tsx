@@ -5,14 +5,18 @@ import Typography from "@mui/joy/Typography";
 import Divider from '@mui/joy/Divider';
 import ChipSheet from "../../../DictionaryPage/SenseCard/ChipSheet/ChipSheet.tsx";
 import WordSoundBlock from "../../../../blocks/WordSoundBlock/WordSoundBlock.tsx";
+import {OverridableStringUnion} from "@mui/types";
+import {VariantProp} from "@mui/joy/styles/types";
+import {CardPropsVariantOverrides} from "@mui/joy/Card/CardProps";
 
 interface WordCardInterface {
     sense: IUserSense;
+    variant?: OverridableStringUnion<VariantProp, CardPropsVariantOverrides>;
 }
 
-const WordCard: React.FC<WordCardInterface> = ({sense}) => {
+const WordCard: React.FC<WordCardInterface> = ({sense, variant = "plain"}) => {
     return (
-        <OneSizeBlock>
+        <OneSizeBlock variant={variant}>
             <WordSoundBlock sense={sense}/>
             <Typography level="h2">{sense.word.word}</Typography>
             <Divider inset="none" />
