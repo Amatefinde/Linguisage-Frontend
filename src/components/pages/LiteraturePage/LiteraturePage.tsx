@@ -7,6 +7,7 @@ import classes from "./LiteraturePage.module.css"
 import {Stack} from "@mui/joy";
 import LoaderForPage from "../../ui/LoaderForPage/LoaderForPage.tsx";
 import NoLiterature from "./NoLiterature/NoLiterature.tsx";
+import UploadBooksLiteratureVersion from "./UploadBooksLiteratureVersion/UploadBooksLiteratureVersion.tsx";
 
 const LiteraturePage: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -42,6 +43,7 @@ const LiteraturePage: React.FC = () => {
             <div className={classes.container}>
                 <Stack spacing={2} direction="row" flexWrap="wrap" useFlexGap>
                     {books && books.map(book => <LiteratureCard setBooks={setBooks} key={book.id} book={book}/>)}
+                    <UploadBooksLiteratureVersion/>
                 </Stack>
             </div>
         </div>
