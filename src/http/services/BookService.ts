@@ -1,9 +1,9 @@
 import $api from "../index";
-import IBook from "../../types/IBook.ts";
 import IBookList from "../../types/IBookList.ts";
+import IBookWithStats from "../../types/IBookWithStats.ts";
 
 export default class BookService {
-    static async getLastBook(): Promise<IBook> {
+    static async getLastBook(): Promise<IBookWithStats> {
         return $api.get("/literature/last").then((response) => response.data);
     }
     
