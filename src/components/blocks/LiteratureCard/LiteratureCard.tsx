@@ -50,7 +50,7 @@ const LiteratureCard: React.FC<ILiteratureCardProps> = ({book, setBooks}) => {
 
     function openBook() {
         // @ts-ignore
-        const queryParams = new URLSearchParams({bookUrl: book?.original_file}).toString();
+        const queryParams = new URLSearchParams({bookUrl: book?.original_file, literatureId: book?.id}).toString();
         navigate(`/book-reader?${queryParams}`);
     }
 

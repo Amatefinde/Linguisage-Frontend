@@ -40,17 +40,14 @@ export default class WordService {
       return response.data;
     });
   }
-  static async addPublicSenseToMe(fSenseId: number, fWordImageIds: number[], fSenseImageIds: number[] = []) {
+  static async addPublicSenseToMe(fSenseId: number, fWordImageIds: number[], fSenseImageIds: number[] = [], literature_id: number | undefined = undefined) {
     try {
       const data = {
         f_sense_id: fSenseId,
         f_word_image_ids: fWordImageIds,
         f_sense_image_ids: fSenseImageIds,
+        literature_id: literature_id
       };
-
-      // if (literature_id) {
-      //   data["literature_id"] = literature_id
-      // }
 
       const response = await $api.post("senses/public", data);
       return response.data;

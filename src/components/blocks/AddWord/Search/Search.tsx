@@ -27,6 +27,7 @@ const Search: React.FC<SearchInterface> = ({
     query = selections ? selections : query
     setQuery = setSelections ? setSelections : setQuery
 
+
     useEffect(() => {
         if (!isTyping) {
             fetchWord()

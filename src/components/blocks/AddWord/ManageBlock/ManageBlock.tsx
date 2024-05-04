@@ -17,15 +17,16 @@ interface ManageBlockInterface {
 }
 
 const ManageBlock: React.FC<ManageBlockInterface> = ({pickedFSenseId, pickedFImageIds, onClose, addError, setAddError, setWordData}) => {
-
     const [isLoading, setIsLoading] = useState<boolean>(false)
-
+    const queryParams = new URLSearchParams(location.search);
+    const literatureId = queryParams.get("literatureId");
     function addPublicSenseToMe() {
         try {
             async function addSense() {
                 setIsLoading(true)
 
-                await WordService.addPublicSenseToMe(pickedFSenseId, pickedFImageIds)
+                await WordService.addPublicSenseToMe(pickedFSenseId, pickedFImageIds, [], literatureId)
+
                 setWordData(wordData => {
                     return {
                         ...wordData,
