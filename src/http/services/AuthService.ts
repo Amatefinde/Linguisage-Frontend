@@ -1,9 +1,9 @@
-import $api from "../index.js";
+import $api from "../index.ts";
 import IUser from "../../types/IUser.ts";
 
 
 interface LoginResponse {
-    access_token: "icOGhsqHi-7pklxHTatP4VvDwcrzi68oiBHUQPXMtT0",
+    access_token: string,
     token_type: "bearer"
 }
 
