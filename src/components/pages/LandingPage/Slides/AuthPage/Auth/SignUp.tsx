@@ -6,13 +6,13 @@ import FormHelperText from "@mui/joy/FormHelperText";
 import Button from "@mui/joy/Button";
 import Link from "@mui/joy/Link";
 import React, {useState} from "react";
-import {formState} from "./authWidget";
-import {EmailErrorEnum, EmailErrorType, PasswordErrorType, UsernameErrorType} from "./types";
+import {formState} from "./authWidget.tsx";
+import {EmailErrorEnum, EmailErrorType, PasswordErrorType, UsernameErrorType} from "./types.ts";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {validateEmail, validatePassword, validateUsername} from "./validations";
-import AuthService from "../../../../../http/services/AuthService";
-import {setUser} from "../../../../../store/user/userSlice";
+import {validateEmail, validatePassword, validateUsername} from "./validations.ts";
+import AuthService from "../../../../../../http/services/AuthService.ts";
+import {setUser} from "../../../../../../store/user/userSlice.ts";
 import {AxiosError} from "axios";
 
 

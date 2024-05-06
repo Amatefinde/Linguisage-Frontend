@@ -6,15 +6,15 @@ import FormHelperText from "@mui/joy/FormHelperText";
 import Button from "@mui/joy/Button";
 import Link from "@mui/joy/Link";
 import React, {useState} from "react";
-import {formState} from "./authWidget";
-import {validateEmail, validatePassword} from "./validations";
+import {formState} from "./authWidget.tsx";
+import {validateEmail, validatePassword} from "./validations.ts";
 import {AxiosError} from "axios";
 import {useDispatch} from "react-redux";
-import {setUser} from "../../../../../store/user/userSlice";
-import AuthService from "../../../../../http/services/AuthService";
+import {setUser} from "../../../../../../store/user/userSlice.ts";
+import AuthService from "../../../../../../http/services/AuthService.ts";
 import {useNavigate} from "react-router-dom";
-import {EmailErrorType, PasswordErrorType, PasswordErrorEnum} from "./types";
-import IUser from "../../../../../types/IUser.ts";
+import {EmailErrorType, PasswordErrorType, PasswordErrorEnum} from "./types.ts";
+import IUser from "../../../../../../types/IUser.ts";
 
 interface YourComponentProps {
     setCurrentForm: React.Dispatch<React.SetStateAction<formState>>;

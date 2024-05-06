@@ -25,7 +25,7 @@ const TagLine = () => {
                         y: "-6dvh",
                         rotateX: 90,
                         stagger: 0.015,
-                    }, index === titles.length - 1 ? ">Infinity" : "<2");
+                    }, index === titles.length - 1 ? ">Infinity" : "<3");
             })
         }, container)
 

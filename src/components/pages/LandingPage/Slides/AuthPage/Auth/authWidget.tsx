@@ -1,7 +1,7 @@
 import Sheet from '@mui/joy/Sheet';
-import SignIn from "./SignIn";
+import SignIn from "./SignIn.tsx";
 import {useState} from "react";
-import SignUp from "./SignUp";
+import SignUp from "./SignUp.tsx";
 
 export type formState = "signIn" | "signUp" | "restore";
 

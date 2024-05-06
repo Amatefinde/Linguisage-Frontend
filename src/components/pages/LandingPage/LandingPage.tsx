@@ -2,9 +2,11 @@ import {lazy, Suspense, useState, useEffect} from 'react';
 // @ts-ignore
 import Fullpage, {FullpageSection, FullPageSections, FullpageNavigation} from '@ap.cx/react-fullpage';
 import useAutoAuth from "../../../hooks/useAutoAuth.ts";
+import LoaderForPage from "../../ui/LoaderForPage/LoaderForPage.tsx";
 
-const HelloPage = lazy(() => import('./HelloPage/HelloPage'));
-const AuthPage = lazy(() => import('./AuthPage'));
+const HelloPage = lazy(() => import('./Slides/HelloPage/HelloPage'));
+const WhatIsIt = lazy(() => import("./Slides/WhatIsIt.tsx"));
+const AuthPage = lazy(() => import('./Slides/AuthPage'));
 
 const LandingPage = () => {
     useAutoAuth()
@@ -20,39 +22,29 @@ const LandingPage = () => {
         margin: '20px',
     };
 
-    const [scrolling, setScrolling] = useState(false);
+    const [scrolledDown, setScrolledDown] = useState(false);
 
-    const handleScroll = () => {
-        setScrolling(true);
-        // Отписываемся от обработчика прокрутки после первого срабатывания
-        window.removeEventListener('scroll', handleScroll);
-    };
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        // Отписываемся от обработчика прокрутки при размонтировании компонента
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
 
     return (
+        <div id='scrollable-zone'>
         <Fullpage>
-
             <FullPageSections>
                 <FullpageSection style={sectionStyle}>
                     <HelloPage/>
                 </FullpageSection>
                 <FullpageSection style={sectionStyle}>
-                    {scrolling && (
-                        <Suspense fallback={<div>Loading...</div>}>
-                            <AuthPage/>
+                    <WhatIsIt scrolledDown={scrolledDown} setScrolledDown={setScrolledDown}/>
+                </FullpageSection>
+                <FullpageSection style={sectionStyle}>
+                    {scrolledDown && (
+                        <Suspense fallback={<LoaderForPage/>} >
+                            <AuthPage />
                         </Suspense>
                     )}
                 </FullpageSection>
             </FullPageSections>
             <FullpageNavigation style={navigationStyle}/>
-        </Fullpage>
+        </Fullpage></div>
     );
 };
 

@@ -5,7 +5,7 @@ import {
     PasswordErrorType,
     UsernameErrorEnum,
     UsernameErrorType
-} from "./types";
+} from "./types.ts";
 
 export function validatePassword(password: string): PasswordErrorType {
     if (password.length === 0) {
