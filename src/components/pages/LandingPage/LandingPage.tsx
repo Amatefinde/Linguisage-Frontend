@@ -25,6 +25,7 @@ const LandingPage = () => {
     const [scrolledDown, setScrolledDown] = useState(false);
 
 
+
     return (
         <div id='scrollable-zone'>
         <Fullpage>

@@ -28,7 +28,17 @@ const WhatIsIt: React.FC<IWhatIsItProps> = ({scrolledDown, setScrolledDown}) => 
 
     const handleGetStarted = () => {
         let targetElement = document.getElementById('scrollable-zone');
-        targetElement.scrollTop -= 1000
+        const keyDownEvent = new KeyboardEvent('keydown', {
+            key: 'ArrowDown',
+            code: 'ArrowDown',
+            keyCode: 40,
+            charCode: 0,
+            bubbles: true
+        });
+        if (targetElement) {
+            targetElement.dispatchEvent(keyDownEvent);
+        }
+        setScrolledDown(true);
     }
 
 
@@ -37,6 +47,20 @@ const WhatIsIt: React.FC<IWhatIsItProps> = ({scrolledDown, setScrolledDown}) => 
         // Отписываемся от обработчика прокрутки при размонтировании компонента
         return () => {
             window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'ArrowDown') {
+                // setScrolledDown(true)
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
         };
     }, []);
 
