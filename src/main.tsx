@@ -1,10 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import "./main.css"
-import {Provider} from "react-redux";
-import {store} from "./store";
-import {CssVarsProvider} from "@mui/joy/styles";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./main.css";
+import { Provider } from "react-redux";
+import { store } from "./store";
+import { CssVarsProvider } from "@mui/joy/styles";
 import theme from "./config/theme";
 import LandingPage from "./components/pages/LandingPage/LandingPage";
 import App from "./App";
@@ -18,53 +18,85 @@ import PrivateRoute from "./components/PrivateRoute.tsx";
 import PreTrainPage from "./components/pages/PreTrainPage/PreTrainPage.tsx";
 import LiteraturePage from "./components/pages/LiteraturePage/LiteraturePage.tsx";
 import BookReaderPage from "./components/pages/BookReaderPage/BookReaderPage.tsx";
-
+import { isMobile } from "react-device-detect";
+import MobilePage from "./components/pages/MobilePage/MobilePage.tsx";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <LandingPage/>,
-        errorElement: <h1>Not found 404</h1>
+        element: <LandingPage />,
+        errorElement: <h1>Not found 404</h1>,
     },
     {
         path: "/home",
-        element: <PrivateRoute ><App/></PrivateRoute>,
+        element: (
+            <PrivateRoute>
+                <App />
+            </PrivateRoute>
+        ),
     },
     {
         path: "/confirm-email-request",
-        element: <PrivateRoute ><ConfirmEmailRequest/></PrivateRoute>,
+        element: (
+            <PrivateRoute>
+                <ConfirmEmailRequest />
+            </PrivateRoute>
+        ),
     },
     {
         path: "/auth",
-        element: <PrivateRoute ><ConfirmEmail/></PrivateRoute>
+        element: (
+            <PrivateRoute>
+                <ConfirmEmail />
+            </PrivateRoute>
+        ),
     },
     {
         path: "/literature",
-        element: <PrivateRoute ><LiteraturePage/></PrivateRoute>
+        element: (
+            <PrivateRoute>
+                <LiteraturePage />
+            </PrivateRoute>
+        ),
     },
     {
         path: "/dictionary",
-        element: <PrivateRoute ><DictionaryPage/></PrivateRoute>
+        element: (
+            <PrivateRoute>
+                <DictionaryPage />
+            </PrivateRoute>
+        ),
     },
     {
         path: "/training",
-        element: <PrivateRoute ><TrainPage/></PrivateRoute>
+        element: (
+            <PrivateRoute>
+                <TrainPage />
+            </PrivateRoute>
+        ),
     },
     {
         path: "/book-reader",
-        element: <PrivateRoute ><BookReaderPage/></PrivateRoute>
+        element: (
+            <PrivateRoute>
+                <BookReaderPage />
+            </PrivateRoute>
+        ),
     },
     {
         path: "/pre-training",
-        element: <PrivateRoute ><PreTrainPage/></PrivateRoute>
-    }
+        element: (
+            <PrivateRoute>
+                <PreTrainPage />
+            </PrivateRoute>
+        ),
+    },
 ]);
 
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-        <Provider store={store}>
-            <CssVarsProvider theme={theme} defaultMode={'light'}>
-                <RouterProvider router={router}/>
-            </CssVarsProvider>
-        </Provider>
-)
+ReactDOM.createRoot(document.getElementById("root")!).render(
+    <Provider store={store}>
+        <CssVarsProvider theme={theme} defaultMode={"light"}>
+            {isMobile ? <MobilePage /> : <RouterProvider router={router} />}
+        </CssVarsProvider>
+    </Provider>,
+);
