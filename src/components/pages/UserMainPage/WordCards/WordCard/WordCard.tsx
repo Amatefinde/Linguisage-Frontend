@@ -49,7 +49,7 @@ const WordCard: React.FC<WordCardInterface> = ({ sense, variant = "plain" }) => 
                     {/* Use Box component to apply sx styles to the container of dangerouslySetInnerHTML */}
                     {/* Apply ellipsis to example (e.g., max 2 lines) */}
                     <Box
-                        sx={ellipsisStyles(2)} // Apply styles here
+                        sx={ellipsisStyles(3)} // Apply styles here
                         dangerouslySetInnerHTML={{ __html: sense.examples?.[0]?.html_example }}
                     />
                 </>
