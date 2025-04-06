@@ -38,14 +38,14 @@ const WordCard: React.FC<WordCardInterface> = ({ sense, variant = "plain" }) => 
             <Divider inset="none" />
 
             {/* Apply ellipsis to definition (e.g., max 3 lines) */}
-            <Typography sx={{  mt: 1 }}> {/* Added margin-top */}
+            <Typography sx={{  }}> {/* Added margin-top */}
                 {sense.definition}
             </Typography>
 
             {/* Conditional rendering for the example */}
             {sense.definition.length < 100 && !!sense.examples.length && sense.examples?.[0]?.example?.length + sense.definition.length < 147 && (
                 <>
-                    <Divider inset="none" sx={{ my: 1 }} /> {/* Added margin top/bottom */}
+                    <Divider inset="none" sx={{  }} /> {/* Added margin top/bottom */}
                     {/* Use Box component to apply sx styles to the container of dangerouslySetInnerHTML */}
                     {/* Apply ellipsis to example (e.g., max 2 lines) */}
                     <Box
