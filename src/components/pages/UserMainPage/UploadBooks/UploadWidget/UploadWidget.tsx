@@ -67,7 +67,7 @@ const UploadWidget: React.FC<UploadWidgetProps> = ({
         </div>
         <input
             type="file"
-            accept=".epub, .fb2"
+            accept=".epub, .fb2, .docx, .pdf,"
             onChange={handleChange}
             ref={hiddenFileInput}
             style={{ display: "none" }}
